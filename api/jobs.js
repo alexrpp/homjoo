@@ -67,6 +67,16 @@ export default async function handler(req, res) {
         let desc = (j.description || '').replace(/\s+/g, ' ').trim();
         if (desc.length > 220) desc = desc.slice(0, 220).trim() + '…';
 
+        // Formatto il tipo contratto in modo leggibile:
+        //   "full_time" -> "Full-time"
+        //   "part_time" -> "Part-time"
+        //   "permanent" -> "Permanent"
+        //   "contract"  -> "Contract"
+        const rawTipo = j.contract_time || j.contract_type || null;
+        const tipo = rawTipo
+          ? rawTipo.charAt(0).toUpperCase() + rawTipo.slice(1).replace('_', '-')
+          : '—';
+
         return {
           id:      'adz_' + j.id,
           type:    'job',
@@ -78,7 +88,7 @@ export default async function handler(req, res) {
           lat:     j.latitude,
           desc:    desc || 'Nessuna descrizione disponibile.',
           meta: {
-            'Tipo':       j.contract_time || j.contract_type || '—',
+            'Tipo':       tipo,
             'Categoria':  (j.category && j.category.label) || '—',
             'Zona':       (j.location && j.location.display_name) || 'Sydney',
             'Pubblicato': j.created

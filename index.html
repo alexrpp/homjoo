@@ -750,6 +750,8 @@
 
   // ============ HELPERS ============
   function formatPrice(item) {
+    // Se manca lo stipendio (Adzuna non sempre lo fornisce), mostra un trattino
+    if (item.price == null) return '—';
     if (item.type === 'job') {
       if (item.unit === 'AUD/h') return '$' + item.price + '/h';
       if (item.unit === 'AUD/anno') return '$' + (item.price / 1000).toFixed(0) + 'k';
@@ -855,7 +857,9 @@
     document.getElementById('panelSub').innerHTML =
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> ' + item.company;
     document.getElementById('panelPrice').innerHTML =
-      formatPrice(item) + ' <span class="panel-price-unit">' + item.unit.replace('AUD/', '/') + '</span>';
+      item.price == null
+        ? '<span class="panel-price-unit">Stipendio non specificato</span>'
+        : formatPrice(item) + ' <span class="panel-price-unit">' + item.unit.replace('AUD/', '/') + '</span>';
     document.getElementById('panelDesc').textContent = item.desc;
     document.getElementById('panelSource').textContent = 'Fonte: ' + item.source;
 
