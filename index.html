@@ -689,32 +689,10 @@
   }
 
   // ============ DATI ============
-  // Coordinate REALI verificate da Google Places per ogni quartiere/posto di Sydney
+  // I LAVORI (type: 'job') vengono caricati a runtime dall'endpoint /api/jobs,
+  // che chiama l'API di Adzuna lato server (le chiavi sono in env vars su Vercel).
+  // Le CASE (type: 'home') restano per ora mock — Fase 2b: form per proprietari.
   const data = [
-    { id: 'j1', type: 'job', title: 'Cameriere/a — The Rocks', company: 'Harbour Café', price: 32, unit: 'AUD/h', lng: 151.2080, lat: -33.8590,
-      desc: 'Caffetteria storica vicino al porto, turni serali, no esperienza richiesta. Ottimo per Working Holiday Visa.',
-      meta: { 'Tipo': 'Part-time', 'Lingua': 'Inglese base', 'Visa': 'WHV ok', 'Inizio': 'Subito' }, source: 'Adzuna' },
-    { id: 'j2', type: 'job', title: 'Software Engineer (mid)', company: 'Atlassian', price: 120000, unit: 'AUD/anno', lng: 151.2065, lat: -33.8672,
-      desc: 'Team backend in Java/Kotlin. Hybrid 3 giorni a settimana, sponsorship visa disponibile.',
-      meta: { 'Tipo': 'Full-time', 'Hybrid': 'Sì', 'Visa': 'Sponsor', 'Esperienza': '3+ anni' }, source: 'JSearch' },
-    { id: 'j3', type: 'job', title: 'Barista — Surry Hills', company: 'Single O Coffee', price: 30, unit: 'AUD/h', lng: 151.2140, lat: -33.8851,
-      desc: 'Specialty coffee shop, turni mattina presto. Esperienza espresso preferita.',
-      meta: { 'Tipo': 'Part-time', 'Turni': 'Mattina', 'Visa': 'WHV ok', 'Mance': 'Sì' }, source: 'Jora' },
-    { id: 'j4', type: 'job', title: 'Magazziniere — Alexandria', company: 'Kogan Logistics', price: 28, unit: 'AUD/h', lng: 151.1903, lat: -33.9080,
-      desc: 'Centro logistico, turni flessibili, no richiesta lingua avanzata. Bus diretto da City.',
-      meta: { 'Tipo': 'Full-time', 'Turni': 'Flessibili', 'Visa': 'WHV ok', 'Inglese': 'Base' }, source: 'SEEK' },
-    { id: 'j5', type: 'job', title: 'Receptionist hotel — Bondi', company: 'Bondi Beach Hotel', price: 29, unit: 'AUD/h', lng: 151.2745, lat: -33.8908,
-      desc: 'Hotel boutique fronte spiaggia. Turni mattina/sera. Inglese conversazionale richiesto.',
-      meta: { 'Tipo': 'Full-time', 'Turni': 'Rotanti', 'Visa': 'WHV ok', 'Inglese': 'Buono' }, source: 'Adzuna' },
-    { id: 'j6', type: 'job', title: 'Sviluppatore Frontend (React)', company: 'Canva', price: 110000, unit: 'AUD/anno', lng: 151.2114, lat: -33.8854,
-      desc: 'Team prodotto. React, TypeScript, sistema di design proprietario. Sponsorship 482 visa possibile.',
-      meta: { 'Tipo': 'Full-time', 'Hybrid': 'Sì', 'Visa': 'Sponsor', 'Stack': 'React/TS' }, source: 'JSearch' },
-    { id: 'j7', type: 'job', title: 'Cuoco di linea — Newtown', company: "Mary's Pizza", price: 33, unit: 'AUD/h', lng: 151.1785, lat: -33.8978,
-      desc: 'Pizzeria iconica, atmosfera rock. Esperienza in cucina richiesta. Turni serali.',
-      meta: { 'Tipo': 'Full-time', 'Turni': 'Sera', 'Visa': 'WHV ok', 'Esperienza': '1+ anno' }, source: 'Jora' },
-    { id: 'j8', type: 'job', title: 'Insegnante italiano L2', company: 'Italian Cultural Institute', price: 45, unit: 'AUD/h', lng: 151.2262, lat: -33.8850,
-      desc: 'Lezioni private e di gruppo. Madrelingua italiani. Part-time, orari serali.',
-      meta: { 'Tipo': 'Part-time', 'Lingua': 'Italiano L1', 'Visa': 'Vari', 'Sede': 'Paddington' }, source: 'The Muse' },
     { id: 'h1', type: 'home', title: 'Stanza singola — Surry Hills', company: 'Casa condivisa, 4 inquilini', price: 380, unit: 'AUD/sett', lng: 151.2155, lat: -33.8862,
       desc: 'Stanza luminosa in casa condivisa con altri 3 expat. Wi-Fi, lavatrice, 5 min dalla metro Central.',
       meta: { 'Camere': '1 singola', 'Bagno': 'Condiviso', 'Bills': 'Inclusi', 'Min stay': '3 mesi' }, source: 'Flatmates' },
@@ -793,8 +771,9 @@
   // Anchor 'center' tiene il pin centrato sulla coordinata (più stabile di 'bottom').
   const markers = [];
 
-  function createPins() {
-    data.forEach(item => {
+  // Aggiunge alla mappa una lista di item (case o lavori) creando un pin per ognuno.
+  function addItemsToMap(items) {
+    items.forEach(item => {
       const el = document.createElement('div');
       el.className = 'pin ' + item.type;
       el.innerHTML =
@@ -814,18 +793,52 @@
 
       markers.push({ marker: marker, el: el, item: item });
     });
+  }
 
-    // Aggiorno conteggi
-    const jobCount = data.filter(d => d.type === 'job').length;
+  // Aggiorna i contatori in alto (Lavori / Case) in base ai dati attualmente caricati
+  function updateCounts() {
+    const jobCount  = data.filter(d => d.type === 'job').length;
     const homeCount = data.filter(d => d.type === 'home').length;
-    document.getElementById('jobCount').textContent = String(jobCount).padStart(2, '0');
+    document.getElementById('jobCount').textContent  = String(jobCount).padStart(2, '0');
     document.getElementById('homeCount').textContent = String(homeCount).padStart(2, '0');
   }
 
+  // Carica i lavori veri da /api/jobs (che dietro le quinte chiama Adzuna)
+  async function loadJobs() {
+    try {
+      const res = await fetch('/api/jobs');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const payload = await res.json();
+      const jobs = (payload && payload.jobs) || [];
+
+      if (jobs.length === 0) {
+        console.warn('[homjoo] /api/jobs ha restituito 0 lavori.');
+        return;
+      }
+
+      // Aggiungo i lavori al dataset, alla mappa, e aggiorno il contatore
+      jobs.forEach(j => data.push(j));
+      addItemsToMap(jobs);
+      updateCounts();
+      console.log('[homjoo] Caricati ' + jobs.length + ' lavori da Adzuna.');
+    } catch (err) {
+      console.error('[homjoo] Errore caricamento lavori:', err);
+      // Fallback silenzioso: la mappa rimane con sole case + contatore "—"
+    }
+  }
+
+  // Quando la mappa è pronta: prima creo i pin delle case (subito disponibili),
+  // poi avvio il caricamento asincrono dei lavori da Adzuna.
+  function onMapReady() {
+    addItemsToMap(data);   // tutte le case
+    updateCounts();        // jobCount resta "00" finché non arriva la risposta
+    loadJobs();            // fetch /api/jobs (asincrono, non blocca la mappa)
+  }
+
   if (map.loaded()) {
-    createPins();
+    onMapReady();
   } else {
-    map.on('load', createPins);
+    map.on('load', onMapReady);
   }
 
   // ============ PANNELLO DETTAGLIO ============
@@ -863,8 +876,15 @@
     });
 
     const ctaText = (item.type === 'job' ? 'Candidati su ' : 'Vedi su ') + item.source;
-    document.getElementById('panelCta').innerHTML =
+    const cta = document.getElementById('panelCta');
+    cta.innerHTML =
       '<span>' + ctaText + '</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+    // Se l'item ha un URL (es. lavori Adzuna), il bottone apre la pagina originale.
+    cta.onclick = function() {
+      if (item.url) window.open(item.url, '_blank', 'noopener,noreferrer');
+    };
+    cta.style.cursor = item.url ? 'pointer' : 'not-allowed';
+    cta.style.opacity = item.url ? '1' : '0.55';
 
     panel.classList.add('open');
 
