@@ -26,8 +26,10 @@
     --line: rgba(10,10,10,0.08);
     --accent: #ff5a3c;
     --accent-soft: #fff0ec;
-    --job: #1f6feb;
-    --home: #16a34a;
+    /* Colori coerenti con il logo:
+       lavori = verde (valigetta), case = blu (casetta) */
+    --job: #16a34a;
+    --home: #1f6feb;
     --shadow-sm: 0 1px 2px rgba(10,10,10,0.04), 0 1px 3px rgba(10,10,10,0.06);
     --shadow-md: 0 4px 12px rgba(10,10,10,0.06), 0 2px 4px rgba(10,10,10,0.04);
     --shadow-lg: 0 24px 60px rgba(10,10,10,0.12), 0 8px 24px rgba(10,10,10,0.08);
@@ -265,6 +267,158 @@
     color: white;
     transform: scale(1.08);
   }
+
+  /* PIN CLUSTER (raggruppamento) */
+  .pin.cluster .pin-inner {
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    justify-content: center;
+    background: var(--ink);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(10,10,10,0.25), 0 0 0 4px rgba(255,255,255,0.85);
+  }
+  .pin.cluster.job-cluster .pin-inner   { background: var(--job); }
+  .pin.cluster.home-cluster .pin-inner  { background: var(--home); }
+  .pin.cluster.mixed-cluster .pin-inner { background: var(--ink); }
+  .pin.cluster:hover .pin-inner {
+    transform: scale(1.1);
+    box-shadow: 0 6px 22px rgba(10,10,10,0.30), 0 0 0 5px rgba(255,255,255,0.9);
+  }
+
+  /* PANNELLO LISTA (sinistra) */
+  .listpanel {
+    position: fixed;
+    top: 80px;
+    left: 16px;
+    bottom: 80px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    background: var(--bg-elev);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 17;
+    transform: translateX(-420px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s;
+  }
+  .listpanel.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+
+  .listpanel-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .listpanel-title {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+  .listpanel-count {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .listpanel-close {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .listpanel-close:hover { background: var(--line); }
+
+  .listpanel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .listpanel-empty {
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+
+  .listitem {
+    display: flex;
+    gap: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.12s;
+  }
+  .listitem:last-child { border-bottom: 0; }
+  .listitem:hover { background: var(--bg); }
+
+  .listitem-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .listitem-icon.job  { background: var(--job); }
+  .listitem-icon.home { background: var(--home); }
+
+  .listitem-body { flex: 1; min-width: 0; }
+  .listitem-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .listitem-sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 0 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .listitem-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .listitem-price-empty {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* La stat-card diventa cliccabile */
+  .stat-card {
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .stat-card:active { transform: translateY(0); }
 
   /* PANNELLO */
   .panel {
@@ -623,9 +777,9 @@
   </button>
 </div>
 
-<!-- STATS -->
+<!-- STATS (cliccabili: aprono la lista filtrata per tipo) -->
 <div class="stats">
-  <div class="stat-card">
+  <div class="stat-card" data-type="job" role="button" tabindex="0" aria-label="Mostra lista lavori">
     <div class="stat-icon job">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
     </div>
@@ -634,7 +788,7 @@
       <span class="stat-label">lavori a Sydney</span>
     </div>
   </div>
-  <div class="stat-card">
+  <div class="stat-card" data-type="home" role="button" tabindex="0" aria-label="Mostra lista case">
     <div class="stat-icon home">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
     </div>
@@ -643,6 +797,20 @@
       <span class="stat-label">case disponibili</span>
     </div>
   </div>
+</div>
+
+<!-- PANNELLO LISTA (a sinistra) -->
+<div class="listpanel" id="listpanel">
+  <div class="listpanel-header">
+    <div>
+      <h3 class="listpanel-title" id="listpanelTitle">Annunci</h3>
+      <div class="listpanel-count" id="listpanelCount"></div>
+    </div>
+    <button class="listpanel-close" id="listpanelClose" aria-label="Chiudi lista">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="listpanel-body" id="listpanelBody"></div>
 </div>
 
 <!-- PANNELLO DETTAGLIO -->
@@ -771,29 +939,97 @@
   // Struttura: wrapper esterno (.pin) + contenuto interno (.pin-inner).
   // MapLibre posiziona il wrapper con transform; lo stile sta sull'inner.
   // Anchor 'center' tiene il pin centrato sulla coordinata (più stabile di 'bottom').
-  const markers = [];
+  let markers = [];
+  let currentFilter = 'all';
 
-  // Aggiunge alla mappa una lista di item (case o lavori) creando un pin per ognuno.
-  function addItemsToMap(items) {
+  // Raggruppa gli item per "cella" di coordinate, in modo che pin con coordinate
+  // praticamente identiche (es. tutti i lavori Adzuna localizzati su "Sydney CBD")
+  // diventino UN pin "cluster" che mostra il numero — invece di accavallarsi.
+  // Precisione: toFixed(3) corrisponde a circa 100 metri.
+  function groupByCoord(items) {
+    const groups = {};
     items.forEach(item => {
-      const el = document.createElement('div');
-      el.className = 'pin ' + item.type;
-      el.innerHTML =
-        '<div class="pin-inner">' +
-          '<span class="icon">' + (item.type === 'job' ? jobIcon() : homeIcon()) + '</span>' +
-          '<span>' + formatPrice(item) + '</span>' +
-        '</div>';
+      const key = item.lng.toFixed(3) + ',' + item.lat.toFixed(3);
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(item);
+    });
+    return Object.values(groups);
+  }
 
-      el.addEventListener('click', function(e) {
-        e.stopPropagation();
-        openPanel(item, el);
-      });
+  // Crea un pin singolo (un solo annuncio in quella posizione)
+  function createSinglePin(item) {
+    const el = document.createElement('div');
+    el.className = 'pin ' + item.type;
+    el.innerHTML =
+      '<div class="pin-inner">' +
+        '<span class="icon">' + (item.type === 'job' ? jobIcon() : homeIcon()) + '</span>' +
+        '<span>' + formatPrice(item) + '</span>' +
+      '</div>';
 
-      const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
-        .setLngLat([item.lng, item.lat])
-        .addTo(map);
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openPanel(item, el);
+    });
 
-      markers.push({ marker: marker, el: el, item: item });
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat([item.lng, item.lat])
+      .addTo(map);
+
+    markers.push({ marker: marker, el: el, item: item });
+  }
+
+  // Crea un pin "cluster" che rappresenta più annunci nella stessa zona.
+  // Cliccando si apre la lista degli annunci di quella zona.
+  function createClusterPin(group) {
+    const hasJob  = group.some(g => g.type === 'job');
+    const hasHome = group.some(g => g.type === 'home');
+    const mix = hasJob && hasHome ? 'mixed-cluster' : (hasJob ? 'job-cluster' : 'home-cluster');
+
+    const el = document.createElement('div');
+    el.className = 'pin cluster ' + mix;
+    el.innerHTML = '<div class="pin-inner">' + group.length + '</div>';
+
+    // Posizione media del cluster
+    const lng = group.reduce((s, g) => s + g.lng, 0) / group.length;
+    const lat = group.reduce((s, g) => s + g.lat, 0) / group.length;
+
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Apri la lista degli annunci in questa zona
+      const titolo = (hasJob && hasHome)
+        ? 'Annunci in questa zona'
+        : (hasJob ? 'Lavori in questa zona' : 'Case in questa zona');
+      openList(group, titolo);
+    });
+
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat([lng, lat])
+      .addTo(map);
+
+    markers.push({ marker: marker, el: el, item: null, group: group });
+  }
+
+  // Pulisce tutti i markers dalla mappa e li ricrea in base al filtro corrente.
+  // Chiamata ogni volta che cambia il filtro (Tutto/Lavori/Case) o quando
+  // arrivano nuovi dati (es. lavori da Adzuna).
+  function rebuildMap() {
+    // 1) Rimuovi i markers esistenti
+    markers.forEach(m => m.marker.remove());
+    markers = [];
+
+    // 2) Filtra in base alla selezione corrente
+    const visible = currentFilter === 'all'
+      ? data
+      : data.filter(d => d.type === currentFilter);
+
+    // 3) Raggruppa per coordinata e crea singoli o cluster
+    const groups = groupByCoord(visible);
+    groups.forEach(group => {
+      if (group.length === 1) {
+        createSinglePin(group[0]);
+      } else {
+        createClusterPin(group);
+      }
     });
   }
 
@@ -818,9 +1054,9 @@
         return;
       }
 
-      // Aggiungo i lavori al dataset, alla mappa, e aggiorno il contatore
+      // Aggiungo i lavori al dataset e ricostruisco la mappa (con clustering)
       jobs.forEach(j => data.push(j));
-      addItemsToMap(jobs);
+      rebuildMap();
       updateCounts();
       console.log('[homjoo] Caricati ' + jobs.length + ' lavori da Adzuna.');
     } catch (err) {
@@ -832,7 +1068,7 @@
   // Quando la mappa è pronta: prima creo i pin delle case (subito disponibili),
   // poi avvio il caricamento asincrono dei lavori da Adzuna.
   function onMapReady() {
-    addItemsToMap(data);   // tutte le case
+    rebuildMap();          // pin per tutte le case (con clustering)
     updateCounts();        // jobCount resta "00" finché non arriva la risposta
     loadJobs();            // fetch /api/jobs (asincrono, non blocca la mappa)
   }
@@ -850,7 +1086,9 @@
 
   function openPanel(item, el) {
     if (activeEl) activeEl.classList.remove('active');
-    el.classList.add('active');
+    // el può essere null se l'item viene aperto da un cluster
+    // (non c'è un pin singolo da marcare come "active")
+    if (el) el.classList.add('active');
     activeEl = el;
 
     document.getElementById('panelTitle').textContent = item.title;
@@ -868,9 +1106,10 @@
     document.getElementById('panelTagText').textContent = item.type === 'job' ? 'Lavoro' : 'Casa';
 
     const img = document.getElementById('panelImage');
+    // Gradienti coerenti col logo: lavori verde, case blu
     img.style.background = item.type === 'job'
-      ? 'linear-gradient(135deg, #1f6feb, #0d4ec9)'
-      : 'linear-gradient(135deg, #16a34a, #0e7d35)';
+      ? 'linear-gradient(135deg, #16a34a, #0e7d35)'
+      : 'linear-gradient(135deg, #1f6feb, #0d4ec9)';
 
     const metaEl = document.getElementById('panelMeta');
     metaEl.innerHTML = '';
@@ -913,20 +1152,106 @@
   map.on('click', closePanel);
 
   // ============ FILTRI ============
+  // Cambiando filtro ricostruisco la mappa, così il clustering viene
+  // ricalcolato sul subset visibile (utile: con "solo Lavori" certi cluster
+  // potrebbero scomparire o ridursi).
   const chips = document.querySelectorAll('.chip');
   chips.forEach(function(chip) {
     chip.addEventListener('click', function() {
       chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
-      const filter = chip.dataset.filter;
-      markers.forEach(function(m) {
-        if (filter === 'all') {
-          m.el.style.display = '';
-        } else {
-          m.el.style.display = m.item.type === filter ? '' : 'none';
-        }
-      });
+      currentFilter = chip.dataset.filter;
+      rebuildMap();
       closePanel();
+      closeList();
+    });
+  });
+
+  // ============ PANNELLO LISTA ============
+  const listpanel      = document.getElementById('listpanel');
+  const listpanelTitle = document.getElementById('listpanelTitle');
+  const listpanelCount = document.getElementById('listpanelCount');
+  const listpanelBody  = document.getElementById('listpanelBody');
+  const listpanelClose = document.getElementById('listpanelClose');
+
+  // Apre il pannello lista con un insieme di item (es. tutti i lavori, oppure
+  // gli item di un cluster). I click sulla riga aprono il pannello dettaglio.
+  function openList(items, titolo) {
+    listpanelTitle.textContent = titolo || 'Annunci';
+    listpanelCount.textContent = items.length + (items.length === 1 ? ' risultato' : ' risultati');
+
+    if (items.length === 0) {
+      listpanelBody.innerHTML = '<div class="listpanel-empty">Nessun annuncio da mostrare.</div>';
+    } else {
+      // Costruisco l'HTML senza usare innerHTML con dati esterni (evito XSS):
+      // creo nodi DOM e setto textContent.
+      listpanelBody.innerHTML = '';
+      items.forEach(function(item) {
+        const row = document.createElement('div');
+        row.className = 'listitem';
+
+        const iconBox = document.createElement('div');
+        iconBox.className = 'listitem-icon ' + item.type;
+        iconBox.innerHTML = item.type === 'job' ? jobIcon() : homeIcon();
+
+        const body = document.createElement('div');
+        body.className = 'listitem-body';
+
+        const title = document.createElement('p');
+        title.className = 'listitem-title';
+        title.textContent = item.title;
+
+        const sub = document.createElement('p');
+        sub.className = 'listitem-sub';
+        sub.textContent = item.company || '';
+
+        const price = document.createElement('div');
+        if (item.price == null) {
+          price.className = 'listitem-price-empty';
+          price.textContent = 'Stipendio non specificato';
+        } else {
+          price.className = 'listitem-price';
+          price.textContent = formatPrice(item) +
+            (item.unit ? ' ' + item.unit.replace('AUD/', '/') : '');
+        }
+
+        body.appendChild(title);
+        body.appendChild(sub);
+        body.appendChild(price);
+
+        row.appendChild(iconBox);
+        row.appendChild(body);
+
+        row.addEventListener('click', function() {
+          // Quando clicco una riga: chiudo la lista, voli sulla coordinata,
+          // apro il pannello dettaglio. Cerco il marker corrispondente per
+          // marcarlo come "active".
+          closeList();
+          map.flyTo({ center: [item.lng, item.lat], zoom: 15, duration: 700 });
+          const m = markers.find(mk => mk.item && mk.item.id === item.id);
+          openPanel(item, m ? m.el : null);
+        });
+
+        listpanelBody.appendChild(row);
+      });
+    }
+
+    listpanel.classList.add('open');
+  }
+
+  function closeList() {
+    listpanel.classList.remove('open');
+  }
+
+  listpanelClose.addEventListener('click', closeList);
+
+  // Click sui contatori in basso a sinistra → apre la lista filtrata per tipo
+  document.querySelectorAll('.stat-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      const tipo = card.dataset.type;
+      const items = data.filter(d => d.type === tipo);
+      const titolo = tipo === 'job' ? 'Lavori a Sydney' : 'Case disponibili';
+      openList(items, titolo);
     });
   });
 
@@ -939,7 +1264,10 @@
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closePanel();
+    if (e.key === 'Escape') {
+      closePanel();
+      closeList();
+    }
   });
 })();
 </script>
