@@ -921,7 +921,9 @@
   let markers = [];
   let currentFilter = 'all';
 
-  // Crea un pin singolo (un solo annuncio in quella posizione)
+  // Crea un pin singolo (un solo annuncio in quella posizione).
+  // Le coordinate di visualizzazione possono differire da quelle originali
+  // (vedi spreadOverlappingPins) se il pin era sovrapposto ad altri.
   function createSinglePin(item) {
     const el = document.createElement('div');
     el.className = 'pin ' + item.type;
@@ -936,11 +938,47 @@
       openPanel(item, el);
     });
 
+    const lng = item._displayLng != null ? item._displayLng : item.lng;
+    const lat = item._displayLat != null ? item._displayLat : item.lat;
     const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
-      .setLngLat([item.lng, item.lat])
+      .setLngLat([lng, lat])
       .addTo(map);
 
     markers.push({ marker: marker, el: el, item: item });
+  }
+
+  // "Spread" automatico dei pin sovrapposti.
+  // Adzuna spesso restituisce coordinate approssimate della zona invece
+  // dell'indirizzo preciso, quindi molti lavori finiscono sullo stesso punto
+  // e si sovrappongono. Qui, per ogni gruppo di pin con coordinate identiche
+  // (precisione ~10 metri), li dispongo a cerchio attorno al punto originale
+  // con raggio di ~30-40 metri, cosi sono tutti visibili e cliccabili.
+  function spreadOverlappingPins(items) {
+    // 1) Raggruppo per coordinata (4 cifre decimali = ~11 metri)
+    const groups = {};
+    items.forEach(item => {
+      // Reset eventuale spread precedente
+      item._displayLng = null;
+      item._displayLat = null;
+      const key = item.lng.toFixed(4) + ',' + item.lat.toFixed(4);
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(item);
+    });
+
+    // 2) Per ogni gruppo con piu di 1 elemento, dispongo a cerchio
+    Object.values(groups).forEach(group => {
+      if (group.length <= 1) return;
+      // Raggio del cerchio in gradi: ~0.0003 gradi lat ≈ 33 metri.
+      // Per la lng correggo col cos(lat) cosi il cerchio resta circolare.
+      const baseLat   = group[0].lat;
+      const radiusLat = 0.0003;
+      const radiusLng = 0.0003 / Math.cos(baseLat * Math.PI / 180);
+      group.forEach((item, i) => {
+        const angle = (2 * Math.PI * i) / group.length;
+        item._displayLng = item.lng + radiusLng * Math.cos(angle);
+        item._displayLat = item.lat + radiusLat * Math.sin(angle);
+      });
+    });
   }
 
   // Pulisce tutti i markers dalla mappa e li ricrea in base al filtro corrente.
@@ -960,7 +998,10 @@
       ? data
       : data.filter(d => d.type === currentFilter);
 
-    // 3) Crea un pin per ogni item (senza clustering)
+    // 3) Sposta i pin sovrapposti cosi sono tutti visibili
+    spreadOverlappingPins(visible);
+
+    // 4) Crea un pin per ogni item (senza clustering)
     visible.forEach(createSinglePin);
   }
 
@@ -1154,11 +1195,23 @@
         row.appendChild(body);
 
         row.addEventListener('click', function() {
-          // Quando clicco una riga: chiudo la lista, voli sulla coordinata,
+          // Quando clicco una riga: chiudo la lista, voli sulla coordinata
+          // ESATTA del pin (incluso eventuale spread se era sovrapposto),
           // apro il pannello dettaglio. Cerco il marker corrispondente per
           // marcarlo come "active".
           closeList();
-          map.flyTo({ center: [item.lng, item.lat], zoom: 15, duration: 700 });
+          // Uso le coordinate di visualizzazione (post-spread) cosi il volo
+          // centra esattamente il pin che vedi sulla mappa.
+          const flyLng = item._displayLng != null ? item._displayLng : item.lng;
+          const flyLat = item._displayLat != null ? item._displayLat : item.lat;
+          map.flyTo({
+            center:   [flyLng, flyLat],
+            zoom:     16,
+            duration: 800,
+            // Compenso lo spazio del pannello dettaglio (380px a destra)
+            // cosi il pin non finisce nascosto sotto al pannello
+            padding:  { right: 400 }
+          });
           const m = markers.find(mk => mk.item && mk.item.id === item.id);
           openPanel(item, m ? m.el : null);
         });
