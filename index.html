@@ -836,35 +836,12 @@
   }
 
   // ============ DATI ============
-  // I LAVORI (type: 'job') vengono caricati a runtime dall'endpoint /api/jobs,
-  // che chiama l'API di Adzuna lato server (le chiavi sono in env vars su Vercel).
-  // Le CASE (type: 'home') restano per ora mock — Fase 2b: form per proprietari.
-  const data = [
-    { id: 'h1', type: 'home', title: 'Stanza singola — Surry Hills', company: 'Casa condivisa, 4 inquilini', price: 380, unit: 'AUD/sett', lng: 151.2155, lat: -33.8862,
-      desc: 'Stanza luminosa in casa condivisa con altri 3 expat. Wi-Fi, lavatrice, 5 min dalla metro Central.',
-      meta: { 'Camere': '1 singola', 'Bagno': 'Condiviso', 'Bills': 'Inclusi', 'Min stay': '3 mesi' }, source: 'Flatmates' },
-    { id: 'h2', type: 'home', title: 'Studio moderno — CBD', company: 'Appartamento intero', price: 620, unit: 'AUD/sett', lng: 151.2085, lat: -33.8706,
-      desc: 'Studio al 18° piano con vista parziale Opera House. Ammobiliato. Palestra e piscina nel building.',
-      meta: { 'Tipo': 'Studio', 'Mobili': 'Sì', 'Bills': 'Esclusi', 'Min stay': '6 mesi' }, source: 'Domain' },
-    { id: 'h3', type: 'home', title: 'Stanza doppia — Bondi Junction', company: 'Casa condivisa, 5 inquilini', price: 320, unit: 'AUD/sett', lng: 151.2552, lat: -33.8928,
-      desc: 'Stanza doppia ideale per coppie. Casa internazionale, atmosfera giovane. 10 min a piedi dalla spiaggia.',
-      meta: { 'Camere': '1 doppia', 'Bagno': 'Condiviso', 'Bills': 'Inclusi', 'Min stay': '2 mesi' }, source: 'Flatmates' },
-    { id: 'h4', type: 'home', title: 'Bilocale — Newtown', company: 'Appartamento intero', price: 580, unit: 'AUD/sett', lng: 151.1810, lat: -33.8965,
-      desc: 'Bilocale in tipica casa terrazzata vittoriana. Quartiere artistico, pieno di caffè e locali.',
-      meta: { 'Camere': '1 da letto', 'Mobili': 'Parziale', 'Bills': 'Esclusi', 'Min stay': '12 mesi' }, source: 'Domain' },
-    { id: 'h5', type: 'home', title: 'Stanza singola — Glebe', company: 'Casa condivisa, 3 inquilini', price: 350, unit: 'AUD/sett', lng: 151.1870, lat: -33.8798,
-      desc: "Vicino all'Università di Sydney, perfetto per studenti. Giardino comune, gatto residente friendly.",
-      meta: { 'Camere': '1 singola', 'Bagno': 'Condiviso', 'Bills': 'Inclusi', 'Min stay': '3 mesi' }, source: 'Flatmates' },
-    { id: 'h6', type: 'home', title: 'Loft — Alexandria', company: 'Appartamento intero', price: 690, unit: 'AUD/sett', lng: 151.1925, lat: -33.9090,
-      desc: 'Loft industriale convertito, soffitti alti, mattoni a vista. Quartiere in trasformazione, tanti caffè nuovi.',
-      meta: { 'Tipo': 'Loft', 'Mobili': 'Sì', 'Bills': 'Esclusi', 'Min stay': '6 mesi' }, source: 'Domain' },
-    { id: 'h7', type: 'home', title: 'Stanza singola — Manly', company: 'Casa condivisa, 4 inquilini', price: 410, unit: 'AUD/sett', lng: 151.2840, lat: -33.7967,
-      desc: 'A 8 minuti a piedi dalla spiaggia di Manly. Ferry diretto al CBD ogni 30 min. Stile surf/beach.',
-      meta: { 'Camere': '1 singola', 'Bagno': 'Privato', 'Bills': 'Inclusi', 'Min stay': '3 mesi' }, source: 'Flatmates' },
-    { id: 'h8', type: 'home', title: 'Stanza in appartamento — Chippendale', company: 'Casa condivisa, 2 inquilini', price: 360, unit: 'AUD/sett', lng: 151.1987, lat: -33.8861,
-      desc: 'Appartamento moderno con due ragazze italiane. Vicino Central Park, palestra in edificio, sicuro.',
-      meta: { 'Camere': '1 singola', 'Bagno': 'Condiviso', 'Bills': 'Inclusi', 'Min stay': '4 mesi' }, source: 'Spotahome' }
-  ];
+  // I LAVORI (type: 'job') vengono caricati a runtime dall'endpoint /api/jobs
+  //   che chiama l'API di Adzuna lato server.
+  // Le CASE (type: 'home') vengono caricate da /dati/case.json
+  //   cosi' Ale puo' aggiungerle/modificarle facilmente senza toccare il codice.
+  // Entrambe partono vuote e si popolano dopo i fetch.
+  const data = [];
 
   const SYDNEY_CENTER = [151.2093, -33.8688];
 
@@ -1013,6 +990,35 @@
     document.getElementById('homeCount').textContent = String(homeCount).padStart(2, '0');
   }
 
+  // Carica le case dal file /dati/case.json (file curato manualmente da Ale).
+  // Se il file non c'e' o e' rotto, la mappa mostra solo lavori.
+  async function loadHomes() {
+    try {
+      const res = await fetch('/dati/case.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const payload = await res.json();
+      const homes = (payload && payload.case) || [];
+
+      if (homes.length === 0) {
+        console.warn('[homjoo] /dati/case.json non contiene case.');
+        return;
+      }
+
+      // Aggiungo type:'home' a ogni casa (non e' nel JSON, e' una costante)
+      // e le aggiungo al dataset.
+      homes.forEach(h => {
+        h.type = 'home';
+        data.push(h);
+      });
+      rebuildMap();
+      updateCounts();
+      console.log('[homjoo] Caricate ' + homes.length + ' case dal file JSON.');
+    } catch (err) {
+      console.error('[homjoo] Errore caricamento case:', err);
+      // Fallback silenzioso: la mappa mostra solo lavori
+    }
+  }
+
   // Carica i lavori veri da /api/jobs (che dietro le quinte chiama Adzuna)
   async function loadJobs() {
     try {
@@ -1037,12 +1043,13 @@
     }
   }
 
-  // Quando la mappa è pronta: prima creo i pin delle case (subito disponibili),
-  // poi avvio il caricamento asincrono dei lavori da Adzuna.
+  // Quando la mappa è pronta: avvio in parallelo i due caricamenti asincroni
+  // (case dal file JSON locale, lavori dall'API Adzuna). Ognuno aggiorna la
+  // mappa appena ha finito, senza aspettare l'altro.
   function onMapReady() {
-    rebuildMap();          // pin per tutte le case (con clustering)
-    updateCounts();        // jobCount resta "00" finché non arriva la risposta
-    loadJobs();            // fetch /api/jobs (asincrono, non blocca la mappa)
+    updateCounts();        // i contatori partono da "00"
+    loadHomes();           // fetch /dati/case.json
+    loadJobs();            // fetch /api/jobs
   }
 
   if (map.loaded()) {
