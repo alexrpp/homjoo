@@ -203,6 +203,9 @@
   }
   .search-item:hover { background: var(--bg); }
 
+  /* Icone del dropdown in stile minimal: sfondo bianco con bordo sottile
+     e icona in grigio scuro. Cosi' non competono con i pin colorati della
+     mappa (verde lavori, blu case) e il dropdown resta pulito. */
   .search-item-icon {
     width: 32px; height: 32px;
     border-radius: 8px;
@@ -210,12 +213,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    background: var(--ink-faint);
+    color: var(--ink-soft);
+    background: white;
+    border: 1px solid var(--line);
   }
-  .search-item-icon.neighborhood { background: var(--accent); }
-  .search-item-icon.job          { background: var(--job); }
-  .search-item-icon.home         { background: var(--home); }
 
   .search-item-body { flex: 1; min-width: 0; }
   .search-item-title {
@@ -1333,7 +1334,8 @@
 
         const icon = document.createElement('div');
         icon.className = 'search-item-icon neighborhood';
-        icon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+        // Bussola: icona piu' "esplorativa" che pin (il pin lo usiamo gia' per gli annunci)
+        icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>';
 
         const body = document.createElement('div');
         body.className = 'search-item-body';
