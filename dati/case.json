@@ -153,6 +153,24 @@
       },
       "source": "Spotahome",
       "url": null
+    },
+    {
+      "id": "h9",
+      "title": "Studio mobiliato — Burwood",
+      "company": "Studio mono-locale ammobiliato",
+      "price": 475,
+      "unit": "AUD/sett",
+      "lng": 151.1042,
+      "lat": -33.8775,
+      "desc": "Ottima opportunità per studenti e giovani professionisti. Studio ammobiliato con tutte le utenze (acqua, luce, gas) e internet inclusi.",
+      "meta": {
+        "Tipo": "Studio",
+        "Camere": "1 letto + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Inclusi (anche internet)"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-burwood-2134-P1607861"
     }
   ]
 }
