@@ -142,6 +142,107 @@
 
   .search input::placeholder { color: var(--ink-faint); }
 
+  /* Wrapper che fa da "ancora" al dropdown dei suggerimenti */
+  .search-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-clear {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(10,10,10,0.08);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    margin-right: 4px;
+    transition: background 0.15s;
+  }
+  .search-clear:hover { background: rgba(10,10,10,0.15); color: var(--ink); }
+  .search-wrapper.has-text .search-clear { display: flex; }
+
+  /* Dropdown dei risultati sotto la barra */
+  .search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--line);
+    max-height: 60vh;
+    overflow-y: auto;
+    display: none;
+    z-index: 25;
+  }
+  .search-wrapper.open .search-dropdown { display: block; }
+
+  .search-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 16px 6px;
+  }
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .search-item:hover { background: var(--bg); }
+
+  .search-item-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--ink-faint);
+  }
+  .search-item-icon.neighborhood { background: var(--accent); }
+  .search-item-icon.job          { background: var(--job); }
+  .search-item-icon.home         { background: var(--home); }
+
+  .search-item-body { flex: 1; min-width: 0; }
+  .search-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .search-item-sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 2px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .search-empty {
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 13px;
+  }
+
   .city-pill {
     font-size: 12px;
     font-weight: 500;
@@ -730,7 +831,13 @@
   </div>
   <div class="search">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="text" placeholder="Cerca lavori, quartieri, case…">
+    <div class="search-wrapper" id="searchWrapper">
+      <input type="text" id="searchInput" placeholder="Cerca lavori, quartieri, case…" autocomplete="off">
+      <button class="search-clear" id="searchClear" aria-label="Cancella ricerca" type="button">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
     <span class="city-pill">📍 Sydney</span>
   </div>
   <button class="btn-pro">Passa a Pro</button>
@@ -1130,6 +1237,215 @@
   panelClose.addEventListener('click', closePanel);
   map.on('click', closePanel);
 
+  // ============ RICERCA ============
+  // Dataset dei quartieri principali di Sydney: nome + coordinate del centro
+  // del quartiere + zoom consigliato per vederlo bene.
+  // Sono usati per la ricerca per quartiere (es. "Bondi" → vola su Bondi).
+  // Includo anche varianti/alias comuni per essere piu' tolleranti agli errori
+  // di battitura ("CBD", "city centre", ecc.).
+  const NEIGHBORHOODS = [
+    { name: 'Sydney CBD',     aliases: ['cbd', 'city', 'centro', 'downtown'],            lng: 151.2093, lat: -33.8688, zoom: 14.5 },
+    { name: 'Bondi',          aliases: ['bondi beach'],                                  lng: 151.2767, lat: -33.8914, zoom: 14.5 },
+    { name: 'Bondi Junction', aliases: ['bondi jct'],                                    lng: 151.2552, lat: -33.8928, zoom: 14.5 },
+    { name: 'Surry Hills',    aliases: ['surryhills', 'surry'],                          lng: 151.2120, lat: -33.8843, zoom: 14.5 },
+    { name: 'Newtown',        aliases: [],                                               lng: 151.1797, lat: -33.8983, zoom: 14.5 },
+    { name: 'Glebe',          aliases: [],                                               lng: 151.1870, lat: -33.8798, zoom: 14.5 },
+    { name: 'Manly',          aliases: ['manly beach'],                                  lng: 151.2841, lat: -33.7969, zoom: 14.5 },
+    { name: 'Alexandria',     aliases: [],                                               lng: 151.1925, lat: -33.9090, zoom: 14.5 },
+    { name: 'Chippendale',    aliases: [],                                               lng: 151.1987, lat: -33.8861, zoom: 14.5 },
+    { name: 'Paddington',     aliases: ['paddo'],                                        lng: 151.2310, lat: -33.8845, zoom: 14.5 },
+    { name: 'Darlinghurst',   aliases: ['darlo'],                                        lng: 151.2188, lat: -33.8800, zoom: 14.5 },
+    { name: 'Pyrmont',        aliases: [],                                               lng: 151.1942, lat: -33.8702, zoom: 14.5 },
+    { name: 'Redfern',        aliases: [],                                               lng: 151.2020, lat: -33.8930, zoom: 14.5 },
+    { name: 'Potts Point',    aliases: ['kings cross'],                                  lng: 151.2253, lat: -33.8702, zoom: 14.5 },
+    { name: 'Coogee',         aliases: ['coogee beach'],                                 lng: 151.2580, lat: -33.9203, zoom: 14.5 }
+  ];
+
+  const searchInput    = document.getElementById('searchInput');
+  const searchWrapper  = document.getElementById('searchWrapper');
+  const searchDropdown = document.getElementById('searchDropdown');
+  const searchClear    = document.getElementById('searchClear');
+
+  // Normalizza una stringa: minuscolo + senza accenti (per match piu' tollerante)
+  function normalize(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  // Cerca i quartieri che matchano il testo
+  function findNeighborhoods(query) {
+    const q = normalize(query);
+    if (!q) return [];
+    return NEIGHBORHOODS.filter(n => {
+      if (normalize(n.name).includes(q)) return true;
+      return n.aliases.some(a => normalize(a).includes(q));
+    });
+  }
+
+  // Cerca gli annunci (lavori + case) che matchano il testo
+  // Controlla: titolo, azienda/descrizione, zona, categoria
+  function findItems(query) {
+    const q = normalize(query);
+    if (!q) return [];
+    return data.filter(item => {
+      if (normalize(item.title).includes(q)) return true;
+      if (normalize(item.company).includes(q)) return true;
+      if (normalize(item.desc).includes(q)) return true;
+      if (item.meta) {
+        for (const k in item.meta) {
+          if (normalize(item.meta[k]).includes(q)) return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  // Costruisce e mostra il dropdown dei risultati
+  function renderSearchDropdown(query) {
+    searchDropdown.innerHTML = '';
+    const trimmed = (query || '').trim();
+    if (!trimmed) {
+      searchWrapper.classList.remove('open');
+      return;
+    }
+
+    const neighborhoods = findNeighborhoods(trimmed);
+    const items         = findItems(trimmed);
+
+    if (neighborhoods.length === 0 && items.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'search-empty';
+      empty.textContent = 'Nessun risultato per "' + trimmed + '"';
+      searchDropdown.appendChild(empty);
+      searchWrapper.classList.add('open');
+      return;
+    }
+
+    // Sezione QUARTIERI
+    if (neighborhoods.length > 0) {
+      const title = document.createElement('div');
+      title.className = 'search-section-title';
+      title.textContent = 'Quartieri';
+      searchDropdown.appendChild(title);
+
+      neighborhoods.forEach(n => {
+        const row = document.createElement('div');
+        row.className = 'search-item';
+
+        const icon = document.createElement('div');
+        icon.className = 'search-item-icon neighborhood';
+        icon.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+        const body = document.createElement('div');
+        body.className = 'search-item-body';
+        const t = document.createElement('p');
+        t.className = 'search-item-title';
+        t.textContent = n.name;
+        const s = document.createElement('p');
+        s.className = 'search-item-sub';
+        s.textContent = 'Quartiere di Sydney';
+        body.appendChild(t);
+        body.appendChild(s);
+
+        row.appendChild(icon);
+        row.appendChild(body);
+
+        row.addEventListener('click', function() {
+          map.flyTo({ center: [n.lng, n.lat], zoom: n.zoom, duration: 800 });
+          closeSearch();
+        });
+
+        searchDropdown.appendChild(row);
+      });
+    }
+
+    // Sezione ANNUNCI (max 8)
+    if (items.length > 0) {
+      const title = document.createElement('div');
+      title.className = 'search-section-title';
+      title.textContent = 'Annunci (' + items.length + ')';
+      searchDropdown.appendChild(title);
+
+      items.slice(0, 8).forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'search-item';
+
+        const icon = document.createElement('div');
+        icon.className = 'search-item-icon ' + item.type;
+        icon.innerHTML = item.type === 'job' ? jobIcon() : homeIcon();
+
+        const body = document.createElement('div');
+        body.className = 'search-item-body';
+        const t = document.createElement('p');
+        t.className = 'search-item-title';
+        t.textContent = item.title;
+        const s = document.createElement('p');
+        s.className = 'search-item-sub';
+        s.textContent = item.company || '';
+        body.appendChild(t);
+        body.appendChild(s);
+
+        row.appendChild(icon);
+        row.appendChild(body);
+
+        row.addEventListener('click', function() {
+          // Stessa logica del click sulla lista a sinistra
+          const flyLng = item._displayLng != null ? item._displayLng : item.lng;
+          const flyLat = item._displayLat != null ? item._displayLat : item.lat;
+          map.flyTo({
+            center: [flyLng, flyLat],
+            zoom: 16,
+            duration: 800,
+            padding: { right: 400 }
+          });
+          const m = markers.find(mk => mk.item && mk.item.id === item.id);
+          openPanel(item, m ? m.el : null);
+          closeSearch();
+        });
+
+        searchDropdown.appendChild(row);
+      });
+
+      // Se ci sono piu' di 8 risultati, mostro un suggerimento
+      if (items.length > 8) {
+        const more = document.createElement('div');
+        more.className = 'search-empty';
+        more.textContent = '+' + (items.length - 8) + ' altri annunci. Affina la ricerca per vederli.';
+        searchDropdown.appendChild(more);
+      }
+    }
+
+    searchWrapper.classList.add('open');
+  }
+
+  function closeSearch() {
+    searchWrapper.classList.remove('open');
+  }
+
+  function clearSearch() {
+    searchInput.value = '';
+    searchWrapper.classList.remove('has-text');
+    closeSearch();
+  }
+
+  // EVENTI
+  searchInput.addEventListener('input', function() {
+    const v = searchInput.value;
+    if (v.trim()) searchWrapper.classList.add('has-text');
+    else          searchWrapper.classList.remove('has-text');
+    renderSearchDropdown(v);
+  });
+
+  searchInput.addEventListener('focus', function() {
+    if (searchInput.value.trim()) renderSearchDropdown(searchInput.value);
+  });
+
+  // Chiudo il dropdown se l'utente clicca fuori dalla barra di ricerca
+  document.addEventListener('click', function(e) {
+    if (!searchWrapper.contains(e.target)) closeSearch();
+  });
+
+  searchClear.addEventListener('click', clearSearch);
+
   // ============ FILTRI ============
   // Cambiando filtro ricostruisco la mappa, così il clustering viene
   // ricalcolato sul subset visibile (utile: con "solo Lavori" certi cluster
@@ -1258,6 +1574,7 @@
     if (e.key === 'Escape') {
       closePanel();
       closeList();
+      closeSearch();
     }
   });
 })();
