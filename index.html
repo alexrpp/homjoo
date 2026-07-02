@@ -965,6 +965,47 @@
   }
   .auth-toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* Password: occhio + barra robustezza */
+  .pass-wrap { position: relative; }
+  .pass-wrap input { padding-right: 44px; }
+  .pass-eye {
+    position: absolute;
+    top: 50%; right: 8px;
+    transform: translateY(-50%);
+    width: 32px; height: 32px;
+    border: 0; background: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+  }
+  .pass-eye:hover { color: var(--ink); background: var(--bg); }
+  .pass-meter {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 8px;
+  }
+  .pass-meter-track {
+    flex: 1;
+    height: 5px;
+    background: var(--line);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .pass-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: #e5484d;
+    border-radius: 100px;
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+  .pass-meter-label {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    min-width: 58px;
+    text-align: right;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1110,7 +1151,17 @@
     </div>
     <div class="auth-field">
       <label for="authPass">Password</label>
-      <input type="password" id="authPass" placeholder="Minimo 6 caratteri" autocomplete="current-password">
+      <div class="pass-wrap">
+        <input type="password" id="authPass" placeholder="Minimo 6 caratteri" autocomplete="current-password">
+        <button type="button" class="pass-eye" id="passEye" aria-label="Mostra password" title="Mostra/nascondi password">
+          <svg id="eyeOpen" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg id="eyeClosed" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.4 10.4 0 0 1 12 5c6.5 0 10 7 10 7a13.2 13.2 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.5 13.5 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.39-1.61"/><path d="m2 2 20 20"/></svg>
+        </button>
+      </div>
+      <div class="pass-meter" id="passMeter" style="display:none">
+        <div class="pass-meter-track"><div class="pass-meter-fill" id="passMeterFill"></div></div>
+        <span class="pass-meter-label" id="passMeterLabel"></span>
+      </div>
     </div>
     <button class="auth-submit" id="authSubmit">Accedi</button>
     <button class="auth-switch" id="authSwitch" type="button">Non hai un account? <b>Registrati gratis</b></button>
@@ -1863,6 +1914,8 @@
       ? 'Accedi al tuo account homjoo.'
       : 'Gratis. Ti serve solo una email.';
     $('authNameField').style.display = m === 'login' ? 'none' : 'block';
+    $('passMeter').style.display = m === 'login' ? 'none' : 'flex';
+    aggiornaBarra();
     $('authSubmit').textContent = m === 'login' ? 'Accedi' : 'Registrati gratis';
     $('authSwitch').innerHTML = m === 'login'
       ? 'Non hai un account? <b>Registrati gratis</b>'
@@ -1897,6 +1950,48 @@
     $(id).addEventListener('keydown', function(e) {
       if (e.key === 'Enter') $('authSubmit').click();
     });
+  });
+
+  // --- Mostra/nascondi password ---
+  $('passEye').addEventListener('click', function() {
+    var inp = $('authPass');
+    var nascosta = inp.type === 'password';
+    inp.type = nascosta ? 'text' : 'password';
+    $('eyeOpen').style.display = nascosta ? 'none' : 'block';
+    $('eyeClosed').style.display = nascosta ? 'block' : 'none';
+    inp.focus();
+  });
+
+  // --- Barra robustezza password (solo in registrazione) ---
+  function robustezza(p) {
+    var score = 0;
+    if (p.length >= 6) score++;
+    if (p.length >= 10) score++;
+    if (/[a-z]/.test(p) && /[A-Z]/.test(p)) score++;
+    if (/[0-9]/.test(p)) score++;
+    if (/[^a-zA-Z0-9]/.test(p)) score++;
+    return score; // 0-5
+  }
+  function aggiornaBarra() {
+    var fill = $('passMeterFill'), label = $('passMeterLabel');
+    var p = $('authPass').value;
+    if (!p) { fill.style.width = '0%'; label.textContent = ''; return; }
+    var s = robustezza(p);
+    var livelli = [
+      { w: '15%',  c: '#e5484d', t: 'Debole' },
+      { w: '15%',  c: '#e5484d', t: 'Debole' },
+      { w: '40%',  c: '#f76b15', t: 'Così così' },
+      { w: '65%',  c: '#ffb224', t: 'Buona' },
+      { w: '85%',  c: '#46a758', t: 'Ottima' },
+      { w: '100%', c: '#16a34a', t: 'Eccellente' }
+    ];
+    fill.style.width = livelli[s].w;
+    fill.style.background = livelli[s].c;
+    label.textContent = livelli[s].t;
+    label.style.color = livelli[s].c;
+  }
+  $('authPass').addEventListener('input', function() {
+    if (mode === 'signup') aggiornaBarra();
   });
 
   $('authSubmit').addEventListener('click', function() {
