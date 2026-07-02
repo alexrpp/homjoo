@@ -11,6 +11,7 @@
 <!-- MapLibre da cdnjs (Cloudflare) - il CDN più affidabile -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -806,6 +807,164 @@
     cursor: pointer;
   }
 
+  /* ============ LOGIN (Fase 3a — Supabase) ============ */
+  .btn-auth {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-auth:hover { background: var(--accent-soft); transform: scale(1.02); }
+  .btn-auth .auth-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--job);
+    display: none;
+  }
+  .btn-auth.logged .auth-dot { display: block; }
+
+  .auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .auth-overlay.open { display: flex; animation: authFade 0.18s ease; }
+  @keyframes authFade { from { opacity: 0; } to { opacity: 1; } }
+
+  .auth-modal {
+    background: var(--bg-elev);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: min(400px, 100%);
+    padding: 32px 28px;
+    position: relative;
+    animation: authPop 0.22s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes authPop { from { transform: scale(0.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .auth-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--bg);
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .auth-close:hover { color: var(--ink); }
+
+  .auth-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .auth-sub { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 20px; line-height: 1.5; }
+
+  .auth-field { margin-bottom: 12px; }
+  .auth-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    margin-bottom: 5px;
+  }
+  .auth-field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    background: var(--bg);
+    outline: none;
+    transition: border 0.15s, background 0.15s;
+  }
+  .auth-field input:focus { border-color: var(--accent); background: var(--bg-elev); }
+
+  .auth-submit {
+    width: 100%;
+    margin-top: 8px;
+    padding: 13px;
+    background: var(--accent);
+    color: white;
+    border: 0;
+    border-radius: 100px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.2s;
+  }
+  .auth-submit:hover { filter: brightness(1.06); transform: scale(1.01); }
+  .auth-submit:disabled { opacity: 0.6; cursor: wait; }
+
+  .auth-switch {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    background: none; border: 0;
+    font-family: var(--font-ui);
+    width: 100%;
+  }
+  .auth-switch b { color: var(--accent); font-weight: 600; }
+  .auth-switch:hover b { text-decoration: underline; }
+
+  .auth-msg {
+    display: none;
+    margin-top: 12px;
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .auth-msg.show { display: block; }
+  .auth-msg.ok { background: #ecfdf3; color: #157347; }
+  .auth-msg.err { background: var(--accent-soft); color: #c2371d; }
+
+  .auth-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(90px);
+    background: var(--ink);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 100px;
+    font-size: 13.5px;
+    font-weight: 500;
+    z-index: 200;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    max-width: calc(100vw - 32px);
+    text-align: center;
+  }
+  .auth-toast.show { transform: translateX(-50%) translateY(0); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -841,6 +1000,7 @@
     </div>
     <span class="city-pill">📍 Sydney</span>
   </div>
+  <button class="btn-auth" id="authBtn"><span class="auth-dot"></span><span id="authBtnText">Accedi</span></button>
   <button class="btn-pro">Passa a Pro</button>
 </div>
 
@@ -931,6 +1091,33 @@
     <button onclick="location.reload()">Riprova</button>
   </div>
 </div>
+
+<!-- LOGIN / REGISTRAZIONE (Fase 3a — Supabase) -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <button class="auth-close" id="authClose" aria-label="Chiudi">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h2 class="auth-title" id="authTitle">Bentornato</h2>
+    <p class="auth-sub" id="authSub">Accedi al tuo account homjoo.</p>
+    <div class="auth-field" id="authNameField" style="display:none">
+      <label for="authName">Nome</label>
+      <input type="text" id="authName" placeholder="Il tuo nome" autocomplete="name">
+    </div>
+    <div class="auth-field">
+      <label for="authEmail">Email</label>
+      <input type="email" id="authEmail" placeholder="tu@esempio.com" autocomplete="email">
+    </div>
+    <div class="auth-field">
+      <label for="authPass">Password</label>
+      <input type="password" id="authPass" placeholder="Minimo 6 caratteri" autocomplete="current-password">
+    </div>
+    <button class="auth-submit" id="authSubmit">Accedi</button>
+    <button class="auth-switch" id="authSwitch" type="button">Non hai un account? <b>Registrati gratis</b></button>
+    <div class="auth-msg" id="authMsg"></div>
+  </div>
+</div>
+<div class="auth-toast" id="authToast"></div>
 
 <script>
 (function() {
@@ -1181,10 +1368,19 @@
     document.getElementById('panelTitle').textContent = item.title;
     document.getElementById('panelSub').innerHTML =
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> ' + item.company;
-    document.getElementById('panelPrice').innerHTML =
-      item.price == null
-        ? '<span class="panel-price-unit">Stipendio non specificato</span>'
-        : formatPrice(item) + ' <span class="panel-price-unit">' + item.unit.replace('AUD/', '/') + '</span>';
+    // Stessa logica della lista: evito duplicati tipo "$475/sett /sett".
+    let priceHTML;
+    if (item.price == null) {
+      priceHTML = '<span class="panel-price-unit">Stipendio non specificato</span>';
+    } else {
+      const priced    = formatPrice(item);
+      const needsUnit = !priced.includes('/');
+      const unitText  = (needsUnit && item.unit)
+        ? item.unit.replace('AUD/', '/')
+        : '';
+      priceHTML = priced + (unitText ? ' <span class="panel-price-unit">' + unitText + '</span>' : '');
+    }
+    document.getElementById('panelPrice').innerHTML = priceHTML;
     document.getElementById('panelDesc').textContent = item.desc;
     document.getElementById('panelSource').textContent = 'Fonte: ' + item.source;
 
@@ -1193,10 +1389,23 @@
     document.getElementById('panelTagText').textContent = item.type === 'job' ? 'Lavoro' : 'Casa';
 
     const img = document.getElementById('panelImage');
-    // Gradienti coerenti col logo: lavori verde, case blu
-    img.style.background = item.type === 'job'
+    // Se l'item ha una foto (item.image), la uso come sfondo del rettangolo
+    // in alto al pannello. Altrimenti fallback al gradient colorato.
+    // Il gradient resta anche come "backup" sotto la foto, cosi' se la foto
+    // non carica (link rotto, hotlink bloccato) l'utente vede comunque il colore.
+    const fallbackGradient = item.type === 'job'
       ? 'linear-gradient(135deg, #16a34a, #0e7d35)'
       : 'linear-gradient(135deg, #1f6feb, #0d4ec9)';
+    if (item.image) {
+      img.style.background         = fallbackGradient;
+      img.style.backgroundImage    = 'url("' + item.image + '"), ' + fallbackGradient;
+      img.style.backgroundSize     = 'cover';
+      img.style.backgroundPosition = 'center';
+      img.style.backgroundRepeat   = 'no-repeat';
+    } else {
+      img.style.backgroundImage = 'none';
+      img.style.background      = fallbackGradient;
+    }
 
     const metaEl = document.getElementById('panelMeta');
     metaEl.innerHTML = '';
@@ -1508,8 +1717,15 @@
           price.textContent = 'Stipendio non specificato';
         } else {
           price.className = 'listitem-price';
-          price.textContent = formatPrice(item) +
-            (item.unit ? ' ' + item.unit.replace('AUD/', '/') : '');
+          // formatPrice puo' gia' includere l'unita' (es. "$475/sett", "$32/h").
+          // Aggiungo l'unit dal campo solo se NON e' gia' incluso, per evitare
+          // duplicati tipo "$475/sett /sett".
+          const priced    = formatPrice(item);
+          const needsUnit = !priced.includes('/');
+          const unitSuffix = (needsUnit && item.unit)
+            ? ' ' + item.unit.replace('AUD/', '/')
+            : '';
+          price.textContent = priced + unitSuffix;
         }
 
         body.appendChild(title);
@@ -1580,6 +1796,173 @@
     }
   });
 })();
+</script>
+
+<script>
+// ============================================================
+//  homjoo — Fase 3a: Login con Supabase
+// ------------------------------------------------------------
+//  L'URL del progetto e la publishable key sono PENSATI per
+//  stare nel frontend (Supabase protegge i dati con le regole
+//  RLS lato server). La SECRET key invece non va MAI qui.
+// ============================================================
+(function() {
+  'use strict';
+
+  var SUPABASE_URL = 'https://ongtlirhhaxabsgkwqlk.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_OO3Xf6Eu0fG_mp9Pf0X_Ig_Vnqz-DLt'; // sb_publishable_...
+
+  var $ = function(id) { return document.getElementById(id); };
+  var authBtn = $('authBtn'), authBtnText = $('authBtnText');
+  var overlay = $('authOverlay'), msg = $('authMsg');
+  var mode = 'login'; // 'login' | 'signup'
+  var supa = null, currentUser = null;
+
+  function toast(t) {
+    var el = $('authToast');
+    el.textContent = t;
+    el.classList.add('show');
+    clearTimeout(el._h);
+    el._h = setTimeout(function() { el.classList.remove('show'); }, 3200);
+  }
+
+  function showMsg(text, ok) {
+    msg.textContent = text;
+    msg.className = 'auth-msg show ' + (ok ? 'ok' : 'err');
+  }
+  function hideMsg() { msg.className = 'auth-msg'; }
+
+  // Client Supabase (solo se SDK caricato e key configurata)
+  if (window.supabase && SUPABASE_KEY.indexOf('sb_') === 0) {
+    supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+
+  function displayName(user) {
+    return (user.user_metadata && user.user_metadata.name) ||
+           (user.email ? user.email.split('@')[0] : 'utente');
+  }
+
+  function updateUI(user) {
+    currentUser = user;
+    if (user) {
+      authBtn.classList.add('logged');
+      authBtnText.textContent = displayName(user);
+      authBtn.title = 'Sei connesso come ' + user.email + ' — clicca per uscire';
+    } else {
+      authBtn.classList.remove('logged');
+      authBtnText.textContent = 'Accedi';
+      authBtn.title = '';
+    }
+  }
+
+  function setMode(m) {
+    mode = m;
+    hideMsg();
+    $('authTitle').textContent = m === 'login' ? 'Bentornato' : 'Crea il tuo account';
+    $('authSub').textContent = m === 'login'
+      ? 'Accedi al tuo account homjoo.'
+      : 'Gratis. Ti serve solo una email.';
+    $('authNameField').style.display = m === 'login' ? 'none' : 'block';
+    $('authSubmit').textContent = m === 'login' ? 'Accedi' : 'Registrati gratis';
+    $('authSwitch').innerHTML = m === 'login'
+      ? 'Non hai un account? <b>Registrati gratis</b>'
+      : 'Hai già un account? <b>Accedi</b>';
+  }
+
+  function openModal() { setMode('login'); overlay.classList.add('open'); $('authEmail').focus(); }
+  function closeModal() { overlay.classList.remove('open'); hideMsg(); }
+
+  authBtn.addEventListener('click', function() {
+    if (!supa) {
+      toast('Login non ancora configurato: manca la publishable key di Supabase.');
+      return;
+    }
+    if (currentUser) {
+      // Logout diretto con conferma
+      if (window.confirm('Vuoi uscire dal tuo account?')) {
+        supa.auth.signOut().then(function() { toast('Sei uscito. A presto! 👋'); });
+      }
+    } else {
+      openModal();
+    }
+  });
+
+  $('authClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  $('authSwitch').addEventListener('click', function() { setMode(mode === 'login' ? 'signup' : 'login'); });
+
+  // Invio con tasto Enter dentro i campi
+  ['authName', 'authEmail', 'authPass'].forEach(function(id) {
+    $(id).addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') $('authSubmit').click();
+    });
+  });
+
+  $('authSubmit').addEventListener('click', function() {
+    if (!supa) return;
+    var email = $('authEmail').value.trim();
+    var pass = $('authPass').value;
+    if (!email || email.indexOf('@') < 1) { showMsg('Inserisci una email valida.', false); return; }
+    if (pass.length < 6) { showMsg('La password deve avere almeno 6 caratteri.', false); return; }
+
+    var btn = $('authSubmit');
+    btn.disabled = true;
+    hideMsg();
+
+    if (mode === 'signup') {
+      var name = $('authName').value.trim();
+      supa.auth.signUp({
+        email: email,
+        password: pass,
+        options: { data: { name: name || email.split('@')[0] } }
+      }).then(function(res) {
+        btn.disabled = false;
+        if (res.error) {
+          showMsg(traduci(res.error.message), false);
+        } else if (res.data.user && !res.data.session) {
+          // Conferma email attiva: Supabase ha inviato il link
+          showMsg('✓ Quasi fatto! Ti abbiamo inviato una email: clicca il link per confermare l\'account, poi torna qui e accedi.', true);
+        } else {
+          closeModal();
+          toast('Benvenuto su homjoo! 🎉');
+        }
+      });
+    } else {
+      supa.auth.signInWithPassword({ email: email, password: pass }).then(function(res) {
+        btn.disabled = false;
+        if (res.error) {
+          showMsg(traduci(res.error.message), false);
+        } else {
+          closeModal();
+          toast('Bentornato! 👋');
+        }
+      });
+    }
+  });
+
+  // Traduzione dei messaggi di errore piu' comuni di Supabase
+  function traduci(m) {
+    if (!m) return 'Errore sconosciuto. Riprova.';
+    if (m.indexOf('Invalid login credentials') >= 0) return 'Email o password sbagliata.';
+    if (m.indexOf('already registered') >= 0) return 'Questa email è già registrata. Prova ad accedere.';
+    if (m.indexOf('Email not confirmed') >= 0) return 'Devi prima confermare l\'email: controlla la posta (anche lo spam).';
+    if (m.indexOf('rate limit') >= 0 || m.indexOf('Too many') >= 0) return 'Troppi tentativi: aspetta un minuto e riprova.';
+    if (m.indexOf('at least 6 characters') >= 0) return 'La password deve avere almeno 6 caratteri.';
+    return m;
+  }
+
+  // Sessione: ripristino al caricamento + ascolto cambiamenti
+  if (supa) {
+    supa.auth.getSession().then(function(res) {
+      updateUI(res.data.session ? res.data.session.user : null);
+    });
+    supa.auth.onAuthStateChange(function(event, session) {
+      updateUI(session ? session.user : null);
+    });
+  }
+})();
+
 </script>
 
 </body>
