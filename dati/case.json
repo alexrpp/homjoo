@@ -7,6 +7,7 @@
     "lng = longitudine, lat = latitudine. Le trovi su https://www.latlong.net (digiti l'indirizzo).",
     "unit puo essere 'AUD/sett' o 'AUD/mese'.",
     "url e' il link all'annuncio originale (Flatmates, Domain, Facebook). Se non c'e', metti null.",
+    "image (facoltativo) e' l'URL di una foto della casa. Sul sito di Flatmates: tasto destro sulla foto -> Copia indirizzo immagine. Se non lo metti, il pannello mostra lo sfondo colorato di default.",
     "Se sbagli la sintassi JSON il sito non carichera le case. In caso, prova https://jsonlint.com per controllare."
   ],
   "case": [
