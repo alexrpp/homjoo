@@ -1519,6 +1519,24 @@
         if (!beforeId && l.type === 'symbol') beforeId = l.id;
       }
       if (!srcId) return;
+
+      // Luce di scena: più intensa = lati degli edifici più ombreggiati,
+      // che è ciò che dà profondità (stile Apple Maps).
+      try {
+        map.setLight({ anchor: 'viewport', color: '#ffffff', intensity: 0.55, position: [1.2, 200, 40] });
+      } catch (eL) {}
+
+      // Nascondo i footprint piatti beige del basemap: sotto agli edifici
+      // 3D creano un effetto "sporco" e tolgono contrasto.
+      for (const l of layers) {
+        if (l.type === 'fill' && l['source-layer'] && /building/i.test(l['source-layer'])) {
+          try { map.setLayoutProperty(l.id, 'visibility', 'none'); } catch (eV) {}
+        }
+      }
+
+      const altezza = ['coalesce', ['get', 'render_height'], ['get', 'height'], 14];
+      const basePiano = ['coalesce', ['get', 'render_min_height'], ['get', 'min_height'], 0];
+
       map.addLayer({
         id: 'homjoo-3d-buildings',
         type: 'fill-extrusion',
@@ -1526,10 +1544,29 @@
         'source-layer': srcLayer,
         minzoom: 14,
         paint: {
-          'fill-extrusion-color': '#dedbd3',
-          'fill-extrusion-height': ['coalesce', ['get', 'render_height'], ['get', 'height'], 12],
-          'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], ['get', 'min_height'], 0],
-          'fill-extrusion-opacity': 0.75
+          // Colore in base all'altezza: edifici bassi caldi e chiari,
+          // grattacieli freddi grigio-azzurri → la città "si legge" subito
+          'fill-extrusion-color': [
+            'interpolate', ['linear'], altezza,
+            0,   '#ece7dc',
+            25,  '#ddd8cd',
+            60,  '#c3cbd6',
+            150, '#a9b8cc'
+          ],
+          // Gli edifici "crescono" da terra mentre zoomi da 14 a 14.8
+          'fill-extrusion-height': [
+            'interpolate', ['linear'], ['zoom'],
+            14, 0,
+            14.8, altezza
+          ],
+          'fill-extrusion-base': [
+            'interpolate', ['linear'], ['zoom'],
+            14, 0,
+            14.8, basePiano
+          ],
+          // Sfumatura verticale: i lati sono più scuri in basso = profondità
+          'fill-extrusion-vertical-gradient': true,
+          'fill-extrusion-opacity': 0.92
         }
       }, beforeId);
       has3D = true;
@@ -1546,10 +1583,10 @@
     btn3d.classList.toggle('on3d', in3D);
     if (in3D) {
       map.flyTo({
-        pitch: 58,
-        bearing: -15,
-        zoom: Math.max(map.getZoom(), 15.3),
-        duration: 1400,
+        pitch: 62,
+        bearing: -17,
+        zoom: Math.max(map.getZoom(), 15.7),
+        duration: 1500,
         essential: true
       });
     } else {
