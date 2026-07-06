@@ -95,6 +95,18 @@ Sito **aggregatore** (no scraping) di **lavori + case** per expat che si trasfer
 
 **Nota della sessione**: creato per errore un secondo sito da zero prima di leggere questa cartella; scartato, si continua su questo. L'iscrizione Adzuna NON va rifatta (chiavi già su Vercel).
 
+### Aggiornamento 02/07/2026 — sera
+
+- ✅ Login Supabase ONLINE e funzionante (Ale ha testato registrazione + accesso)
+- ✅ Campo password: occhio mostra/nascondi + barra robustezza colorata (solo in registrazione)
+- ✅ Creato `PUBBLICA-homjoo.bat`: doppio clic = push automatico su GitHub (niente più upload manuale). Alla prima esecuzione installa/collega Git e chiede login GitHub
+- ✅ Creato `.gitignore` (esclude i backup index.backup-*.html)
+- ✅ SEO: titolo nuovo, meta description, Open Graph, theme-color
+- ✅ Mobile: bottoni topbar compattati sotto i 768px
+- ✅ `api/jobs.js`: da 30 a 50 lavori per pagina (il max di Adzuna)
+- ✅ Bottone "Passa a Pro": ora apre il modal "Pro in arrivo" (alert email, statistiche stipendi, nuove città) che spinge alla registrazione — primo passo Fase 3b
+- Backup: `index.backup-pwd.html`, `index.backup-polish.html`
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

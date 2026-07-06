@@ -25,12 +25,12 @@ export default async function handler(req, res) {
     // Parametri di ricerca
     // - country: au  (Australia)
     // - where:   Sydney
-    // - results_per_page: 30  (max 50)
+    // - results_per_page: 50  (il massimo)
     // - sort_by: date (lavori piu' recenti prima)
     const params = new URLSearchParams({
       app_id:           APP_ID,
       app_key:          APP_KEY,
-      results_per_page: '30',
+      results_per_page: '50',
       where:            'Sydney',
       sort_by:          'date',
       'content-type':   'application/json'
