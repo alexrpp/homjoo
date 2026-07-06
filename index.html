@@ -1507,6 +1507,7 @@
   // già presenti nel basemap CARTO. Tutto in try/catch: se il basemap
   // non ha i dati, il sito continua identico a prima.
   let has3D = false;
+  let flatBuildingIds = [];
   function add3DBuildings() {
     try {
       const layers = map.getStyle().layers || [];
@@ -1526,11 +1527,12 @@
         map.setLight({ anchor: 'viewport', color: '#ffffff', intensity: 0.55, position: [1.2, 200, 40] });
       } catch (eL) {}
 
-      // Nascondo i footprint piatti beige del basemap: sotto agli edifici
-      // 3D creano un effetto "sporco" e tolgono contrasto.
+      // Mi segno i footprint piatti del basemap: in 2D restano visibili
+      // (mappa normale), in 3D li nascondo per far posto ai palazzi.
+      flatBuildingIds = [];
       for (const l of layers) {
         if (l.type === 'fill' && l['source-layer'] && /building/i.test(l['source-layer'])) {
-          try { map.setLayoutProperty(l.id, 'visibility', 'none'); } catch (eV) {}
+          flatBuildingIds.push(l.id);
         }
       }
 
@@ -1543,6 +1545,7 @@
         source: srcId,
         'source-layer': srcLayer,
         minzoom: 14,
+        layout: { visibility: 'none' },
         paint: {
           // Colore in base all'altezza: edifici bassi caldi e chiari,
           // grattacieli freddi grigio-azzurri → la città "si legge" subito
@@ -1577,10 +1580,21 @@
 
   // ============ TOGGLE 3D ============
   let in3D = false;
+  // Mostra/nasconde palazzi 3D e footprint piatti in modo speculare
+  function set3DVisibility(on) {
+    if (!has3D) return;
+    try {
+      map.setLayoutProperty('homjoo-3d-buildings', 'visibility', on ? 'visible' : 'none');
+      flatBuildingIds.forEach(function(id) {
+        map.setLayoutProperty(id, 'visibility', on ? 'none' : 'visible');
+      });
+    } catch (e) {}
+  }
   const btn3d = document.getElementById('toggle3d');
   if (btn3d) btn3d.addEventListener('click', function() {
     in3D = !in3D;
     btn3d.classList.toggle('on3d', in3D);
+    set3DVisibility(in3D);
     if (in3D) {
       map.flyTo({
         pitch: 62,
