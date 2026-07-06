@@ -1024,6 +1024,30 @@
   .pro-list li:last-child { border-bottom: 0; }
   .pro-list .pi { flex-shrink: 0; }
 
+  /* Ingresso animato dei pin */
+  .pin-new .pin-inner {
+    animation: pinDrop 0.5s cubic-bezier(.34,1.56,.64,1) backwards;
+    animation-delay: var(--pin-delay, 0ms);
+  }
+  @keyframes pinDrop {
+    from { transform: scale(0) translateY(-14px); opacity: 0; }
+    to   { transform: scale(1) translateY(0);     opacity: 1; }
+  }
+
+  /* Bottone vista 3D */
+  .ctrl-3d {
+    font-family: var(--font-ui);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .ctrl-3d.on3d { background: var(--ink); color: #fff; }
+
+  /* Accessibilità: meno animazioni se richiesto dal sistema */
+  @media (prefers-reduced-motion: reduce) {
+    .pin-new .pin-inner { animation: none; }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1083,6 +1107,7 @@
   <button class="ctrl-btn" id="recenter" title="Ricentra">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
   </button>
+  <button class="ctrl-btn ctrl-3d" id="toggle3d" title="Vista 3D">3D</button>
 </div>
 
 <!-- STATS (cliccabili: aprono la lista filtrata per tipo) -->
@@ -1236,10 +1261,11 @@
     map = new maplibregl.Map({
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
-      center: SYDNEY_CENTER,
-      zoom: 12.5,
-      pitch: 0,
-      bearing: 0,
+      // Partenza "da lontano" per l'intro cinematica (poi vola su Sydney)
+      center: [134.5, -26.5],
+      zoom: 3.1,
+      pitch: 35,
+      bearing: -10,
       attributionControl: { compact: true }
     });
 
@@ -1288,7 +1314,8 @@
   // (vedi spreadOverlappingPins) se il pin era sovrapposto ad altri.
   function createSinglePin(item) {
     const el = document.createElement('div');
-    el.className = 'pin ' + item.type;
+    el.className = 'pin ' + item.type + ' pin-new';
+    el.style.setProperty('--pin-delay', ((markers.length % 24) * 28) + 'ms');
     el.innerHTML =
       '<div class="pin-inner">' +
         '<span class="icon">' + (item.type === 'job' ? jobIcon() : homeIcon()) + '</span>' +
@@ -1368,11 +1395,25 @@
   }
 
   // Aggiorna i contatori in alto (Lavori / Case) in base ai dati attualmente caricati
+  // Contatore animato: il numero "conta" da quello attuale al nuovo.
+  function animateNum(el, target) {
+    const start = parseInt(el.textContent, 10) || 0;
+    if (start === target) { el.textContent = String(target).padStart(2, '0'); return; }
+    const t0 = performance.now(), dur = 900;
+    function tick(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(start + (target - start) * ease)).padStart(2, '0');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
   function updateCounts() {
     const jobCount  = data.filter(d => d.type === 'job').length;
     const homeCount = data.filter(d => d.type === 'home').length;
-    document.getElementById('jobCount').textContent  = String(jobCount).padStart(2, '0');
-    document.getElementById('homeCount').textContent = String(homeCount).padStart(2, '0');
+    animateNum(document.getElementById('jobCount'), jobCount);
+    animateNum(document.getElementById('homeCount'), homeCount);
   }
 
   // Carica le case dal file /dati/case.json (file curato manualmente da Ale).
@@ -1435,7 +1476,86 @@
     updateCounts();        // i contatori partono da "00"
     loadHomes();           // fetch /dati/case.json
     loadJobs();            // fetch /api/jobs
+    add3DBuildings();      // edifici 3D (se il basemap li supporta)
+    startIntro();          // volo cinematico su Sydney
   }
+
+  // ============ INTRO CINEMATICA ============
+  // All'apertura la mappa "vola" dall'Australia intera fino a Sydney.
+  // Se l'utente ha chiesto meno animazioni (accessibilità), salto il volo.
+  function startIntro() {
+    const riduci = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (riduci) {
+      map.jumpTo({ center: SYDNEY_CENTER, zoom: 12.5, pitch: 0, bearing: 0 });
+      return;
+    }
+    setTimeout(function() {
+      map.flyTo({
+        center: SYDNEY_CENTER,
+        zoom: 12.5,
+        pitch: 0,
+        bearing: 0,
+        duration: 3400,
+        curve: 1.4,
+        essential: true
+      });
+    }, 350);
+  }
+
+  // ============ EDIFICI 3D ============
+  // Aggiunge un layer "fill-extrusion" usando i footprint degli edifici
+  // già presenti nel basemap CARTO. Tutto in try/catch: se il basemap
+  // non ha i dati, il sito continua identico a prima.
+  let has3D = false;
+  function add3DBuildings() {
+    try {
+      const layers = map.getStyle().layers || [];
+      let srcId = null, srcLayer = null, beforeId = null;
+      for (const l of layers) {
+        if (!srcLayer && l['source-layer'] && /building/i.test(l['source-layer'])) {
+          srcId = l.source;
+          srcLayer = l['source-layer'];
+        }
+        if (!beforeId && l.type === 'symbol') beforeId = l.id;
+      }
+      if (!srcId) return;
+      map.addLayer({
+        id: 'homjoo-3d-buildings',
+        type: 'fill-extrusion',
+        source: srcId,
+        'source-layer': srcLayer,
+        minzoom: 14,
+        paint: {
+          'fill-extrusion-color': '#dedbd3',
+          'fill-extrusion-height': ['coalesce', ['get', 'render_height'], ['get', 'height'], 12],
+          'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], ['get', 'min_height'], 0],
+          'fill-extrusion-opacity': 0.75
+        }
+      }, beforeId);
+      has3D = true;
+    } catch (e) {
+      console.warn('Edifici 3D non disponibili:', e);
+    }
+  }
+
+  // ============ TOGGLE 3D ============
+  let in3D = false;
+  const btn3d = document.getElementById('toggle3d');
+  if (btn3d) btn3d.addEventListener('click', function() {
+    in3D = !in3D;
+    btn3d.classList.toggle('on3d', in3D);
+    if (in3D) {
+      map.flyTo({
+        pitch: 58,
+        bearing: -15,
+        zoom: Math.max(map.getZoom(), 15.3),
+        duration: 1400,
+        essential: true
+      });
+    } else {
+      map.flyTo({ pitch: 0, bearing: 0, duration: 1000, essential: true });
+    }
+  });
 
   if (map.loaded()) {
     onMapReady();

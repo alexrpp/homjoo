@@ -107,6 +107,16 @@ Sito **aggregatore** (no scraping) di **lavori + case** per expat che si trasfer
 - ✅ Bottone "Passa a Pro": ora apre il modal "Pro in arrivo" (alert email, statistiche stipendi, nuove città) che spinge alla registrazione — primo passo Fase 3b
 - Backup: `index.backup-pwd.html`, `index.backup-polish.html`
 
+### Aggiornamento 02/07/2026 — upgrade "senior dev" (grafica dinamica)
+
+- ✅ Intro cinematica: all'apertura la mappa vola dall'Australia intera fino a Sydney (3,4s, rispetta prefers-reduced-motion)
+- ✅ Edifici 3D veri: layer fill-extrusion sui footprint del basemap CARTO (visibili da zoom 14, in try/catch: se il basemap non li ha il sito resta identico)
+- ✅ Bottone "3D" nei controlli mappa: inclina la vista a 58° e zooma sui palazzi; secondo click torna 2D
+- ✅ Pin con animazione d'ingresso a molla (scala 0→1 con rimbalzo, ritardo a cascata)
+- ✅ Contatori lavori/case animati (contano da 0 al numero reale con easing)
+- Backup: index.backup-3d.html
+- Test automatici passati (layer 3D, intro, toggle, sintassi)
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
