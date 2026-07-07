@@ -1357,16 +1357,26 @@
     // 2) Per ogni gruppo con piu di 1 elemento, dispongo a cerchio
     Object.values(groups).forEach(group => {
       if (group.length <= 1) return;
-      // Raggio del cerchio in gradi: ~0.0003 gradi lat ≈ 33 metri.
-      // Per la lng correggo col cos(lat) cosi il cerchio resta circolare.
-      const baseLat   = group[0].lat;
-      const radiusLat = 0.0003;
-      const radiusLng = 0.0003 / Math.cos(baseLat * Math.PI / 180);
-      group.forEach((item, i) => {
-        const angle = (2 * Math.PI * i) / group.length;
-        item._displayLng = item.lng + radiusLng * Math.cos(angle);
-        item._displayLat = item.lat + radiusLat * Math.sin(angle);
-      });
+      // Disposizione ad ANELLI concentrici: 6 pin sul primo anello,
+      // 12 sul secondo, 18 sul terzo… Il raggio cresce con l'anello
+      // (~70m, 140m, 210m) cosi anche 20+ pin restano tutti leggibili.
+      const baseLat = group[0].lat;
+      const cosLat  = Math.cos(baseLat * Math.PI / 180);
+      let placed = 0, ring = 0;
+      while (placed < group.length) {
+        const capienza = 6 * (ring + 1);
+        const inRing   = Math.min(capienza, group.length - placed);
+        const rLat     = 0.00065 * (ring + 1);
+        const rLng     = rLat / cosLat;
+        for (let k = 0; k < inRing; k++) {
+          const item  = group[placed + k];
+          const angle = (2 * Math.PI * k) / inRing + ring * 0.5;
+          item._displayLng = item.lng + rLng * Math.cos(angle);
+          item._displayLat = item.lat + rLat * Math.sin(angle);
+        }
+        placed += inRing;
+        ring++;
+      }
     });
   }
 

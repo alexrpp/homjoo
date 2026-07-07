@@ -117,6 +117,15 @@ Sito **aggregatore** (no scraping) di **lavori + case** per expat che si trasfer
 - Backup: index.backup-3d.html
 - Test automatici passati (layer 3D, intro, toggle, sintassi)
 
+### Aggiornamento 02/07/2026 — verso 50 lavori + 50 case (Fase 2b operativa)
+
+- ✅ 2D/3D separati: mappa normale in 2D, palazzi con altezze solo premendo il bottone 3D
+- ✅ Spread pin a anelli concentrici (6/12/18 per anello, raggio crescente): i lavori Adzuna con coordinate di zona non si impilano più
+- ✅ api/jobs.js: 2 pagine Adzuna in parallelo con dedup (~50 lavori geolocalizzati), cache CDN a 30 min per stare nei limiti gratuiti
+- ✅ Creato `aggiungi-case.html` (solo locale, in .gitignore): tool a 3 passi con cui Ale aggiunge case senza toccare JSON — apre dati/case.json, modulo con 36 quartieri precompilati (coordinate automatiche + jitter ~150m), scarica il nuovo case.json da rimettere in dati/
+- Piano concordato: Ale raccoglie ~10 case/giorno da Flatmates/Facebook/Gumtree (titolo riscritto, link alla fonte, NO foto copiate) fino a 50; poi strategia di lancio
+- Mappa stile Google: spiegato che è proprietaria; restiamo su CARTO Voyager (alternativa gratuita più simile)
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

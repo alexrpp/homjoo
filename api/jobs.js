@@ -36,15 +36,24 @@ export default async function handler(req, res) {
       'content-type':   'application/json'
     });
 
-    const url = `https://api.adzuna.com/v1/api/jobs/au/search/1?${params.toString()}`;
-    const adzunaRes = await fetch(url);
-
-    if (!adzunaRes.ok) {
-      const txt = await adzunaRes.text();
-      throw new Error(`Adzuna ${adzunaRes.status}: ${txt.slice(0, 200)}`);
+    // Due pagine in parallelo (50+50) per avere ~50 lavori CON coordinate
+    // dopo il filtro (molti annunci Adzuna non hanno lat/lng).
+    const urls = [1, 2].map(p => `https://api.adzuna.com/v1/api/jobs/au/search/${p}?${params.toString()}`);
+    const responses = await Promise.all(urls.map(u => fetch(u)));
+    const okRes = responses.filter(r => r.ok);
+    if (okRes.length === 0) {
+      const txt = await responses[0].text();
+      throw new Error(`Adzuna ${responses[0].status}: ${txt.slice(0, 200)}`);
     }
-
-    const data = await adzunaRes.json();
+    const pages = await Promise.all(okRes.map(r => r.json()));
+    // Unisco le pagine ed elimino eventuali duplicati (stesso id)
+    const seen = new Set();
+    const data = { results: [] };
+    for (const pg of pages) {
+      for (const j of (pg.results || [])) {
+        if (!seen.has(j.id)) { seen.add(j.id); data.results.push(j); }
+      }
+    }
 
     // Trasformo il formato di Adzuna nel formato che usa la mappa.
     // Tengo solo i lavori che hanno latitudine/longitudine valide,
@@ -102,7 +111,7 @@ export default async function handler(req, res) {
 
     // CACHE: la CDN di Vercel tiene la risposta in cache 10 minuti.
     // Cosi' non bruciamo le 1000 chiamate gratuite/mese e il sito e' veloce.
-    res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=1200');
+    res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=3600');
 
     return res.status(200).json({
       jobs:    jobs,
