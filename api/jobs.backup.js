@@ -58,9 +58,8 @@ export default async function handler(req, res) {
     // Trasformo il formato di Adzuna nel formato che usa la mappa.
     // Tengo solo i lavori che hanno latitudine/longitudine valide,
     // altrimenti non riusciamo a metterli sulla mappa.
-    // Tengo TUTTI i lavori: quelli senza coordinate hanno lng/lat null
-    // e il sito li mostra in lista con l'etichetta "posizione non specificata".
     const jobs = (data.results || [])
+      .filter(j => typeof j.latitude === 'number' && typeof j.longitude === 'number')
       .map(j => {
         // Stima: se min/max sono presenti uso la media, sennò il min
         let salary = null;
@@ -94,8 +93,8 @@ export default async function handler(req, res) {
           company: (j.company && j.company.display_name) || 'Azienda non specificata',
           price:   salary,
           unit:    unit,
-          lng:     typeof j.longitude === 'number' ? j.longitude : null,
-          lat:     typeof j.latitude  === 'number' ? j.latitude  : null,
+          lng:     j.longitude,
+          lat:     j.latitude,
           desc:    desc || 'Nessuna descrizione disponibile.',
           meta: {
             'Tipo':       tipo,

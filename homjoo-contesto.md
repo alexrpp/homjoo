@@ -126,6 +126,16 @@ Sito **aggregatore** (no scraping) di **lavori + case** per expat che si trasfer
 - Piano concordato: Ale raccoglie ~10 case/giorno da Flatmates/Facebook/Gumtree (titolo riscritto, link alla fonte, NO foto copiate) fino a 50; poi strategia di lancio
 - Mappa stile Google: spiegato che è proprietaria; restiamo su CARTO Voyager (alternativa gratuita più simile)
 
+### Aggiornamento 02/07/2026 — pin di zona "onesti" (idea di Ale)
+
+Ale ha notato che distribuire ad anelli i lavori con coordinate di zona crea posizioni finte. Nuovo design:
+- ✅ Annunci con la STESSA coordinata (zona Adzuna) → UN "pin di zona" con conteggio ("5 lavori" + etichetta arancione "ZONA", bordo tratteggiato); click → apre il pannello-lista con quegli annunci
+- ✅ Nel pannello dettaglio: badge "≈ posizione di zona" (ambra) per gli annunci raggruppati, "posizione non specificata" per quelli senza coordinate
+- ✅ api/jobs.js non scarta più i lavori senza lat/lng: ora hanno lng/lat null e compaiono in lista/ricerca/contatori (più inventario verso i 50)
+- ✅ Guardie sui flyTo per item senza coordinate (lista e ricerca aprono solo il dettaglio)
+- ✅ Rimossa la vecchia funzione spreadOverlappingPins (anelli)
+- Backup: index.backup-zone.html, api/jobs.backup.js
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

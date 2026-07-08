@@ -1048,6 +1048,33 @@
     .pin-new .pin-inner { animation: none; }
   }
 
+  /* Pin di zona (più annunci con la stessa coordinata approssimata) */
+  .pin-area-inner { padding: 7px 10px 7px 7px; }
+  .pin-area-inner .area-badge {
+    background: #fff4e5;
+    color: #b45309;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    padding: 3px 8px;
+  }
+  .pin.area .pin-inner { border: 1.5px dashed rgba(10,10,10,0.25); }
+
+  /* Badge trasparenza posizione nel pannello dettaglio */
+  .approx-badge {
+    display: inline-block;
+    background: #fff4e5;
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 100px;
+    padding: 3px 9px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1342,42 +1369,65 @@
   // e si sovrappongono. Qui, per ogni gruppo di pin con coordinate identiche
   // (precisione ~10 metri), li dispongo a cerchio attorno al punto originale
   // con raggio di ~30-40 metri, cosi sono tutti visibili e cliccabili.
-  function spreadOverlappingPins(items) {
-    // 1) Raggruppo per coordinata (4 cifre decimali = ~11 metri)
+  function groupItemsByCoord(items) {
+    // Raggruppa gli annunci per coordinata (4 decimali ≈ 11 metri).
+    // Adzuna spesso dà la coordinata della ZONA, non dell'indirizzo:
+    // invece di inventare posizioni finte, i gruppi diventano un unico
+    // "pin di zona" con il conteggio. Gli annunci senza coordinate
+    // finiscono in una lista separata (visibili da lista e ricerca).
     const groups = {};
+    const senzaPosizione = [];
     items.forEach(item => {
-      // Reset eventuale spread precedente
       item._displayLng = null;
       item._displayLat = null;
+      item._approx = false;
+      if (typeof item.lng !== 'number' || typeof item.lat !== 'number') {
+        item._noPos = true;
+        senzaPosizione.push(item);
+        return;
+      }
+      item._noPos = false;
       const key = item.lng.toFixed(4) + ',' + item.lat.toFixed(4);
       if (!groups[key]) groups[key] = [];
       groups[key].push(item);
     });
+    return { gruppi: Object.values(groups), senzaPosizione };
+  }
 
-    // 2) Per ogni gruppo con piu di 1 elemento, dispongo a cerchio
-    Object.values(groups).forEach(group => {
-      if (group.length <= 1) return;
-      // Disposizione ad ANELLI concentrici: 6 pin sul primo anello,
-      // 12 sul secondo, 18 sul terzo… Il raggio cresce con l'anello
-      // (~70m, 140m, 210m) cosi anche 20+ pin restano tutti leggibili.
-      const baseLat = group[0].lat;
-      const cosLat  = Math.cos(baseLat * Math.PI / 180);
-      let placed = 0, ring = 0;
-      while (placed < group.length) {
-        const capienza = 6 * (ring + 1);
-        const inRing   = Math.min(capienza, group.length - placed);
-        const rLat     = 0.00065 * (ring + 1);
-        const rLng     = rLat / cosLat;
-        for (let k = 0; k < inRing; k++) {
-          const item  = group[placed + k];
-          const angle = (2 * Math.PI * k) / inRing + ring * 0.5;
-          item._displayLng = item.lng + rLng * Math.cos(angle);
-          item._displayLat = item.lat + rLat * Math.sin(angle);
-        }
-        placed += inRing;
-        ring++;
-      }
+  // Pin di zona: un solo pin con il numero di annunci. Cliccandolo si apre
+  // la lista di quegli annunci. Niente posizioni inventate.
+  function createAreaPin(group) {
+    const soloLavori = group.every(x => x.type === 'job');
+    const soloCase   = group.every(x => x.type === 'home');
+    const tipoClasse = soloLavori ? 'job' : (soloCase ? 'home' : 'job');
+    const etichetta  = soloLavori ? 'lavori' : (soloCase ? 'case' : 'annunci');
+
+    const el = document.createElement('div');
+    el.className = 'pin area ' + tipoClasse + ' pin-new';
+    el.style.setProperty('--pin-delay', ((markers.length % 24) * 28) + 'ms');
+    el.innerHTML =
+      '<div class="pin-inner pin-area-inner">' +
+        '<span class="icon">' + (soloCase ? homeIcon() : jobIcon()) + '</span>' +
+        '<span>' + group.length + ' ' + etichetta + '</span>' +
+        '<span class="area-badge">zona</span>' +
+      '</div>';
+
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openList(group, group.length + ' ' + etichetta + ' in questa zona');
     });
+
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat([group[0].lng, group[0].lat])
+      .addTo(map);
+
+    // le coordinate di volo per gli item del gruppo restano quelle del pin
+    group.forEach(item => {
+      item._displayLng = group[0].lng;
+      item._displayLat = group[0].lat;
+    });
+
+    markers.push({ marker: marker, el: el, item: null, group: group });
   }
 
   // Pulisce tutti i markers dalla mappa e li ricrea in base al filtro corrente.
@@ -1397,11 +1447,18 @@
       ? data
       : data.filter(d => d.type === currentFilter);
 
-    // 3) Sposta i pin sovrapposti cosi sono tutti visibili
-    spreadOverlappingPins(visible);
-
-    // 4) Crea un pin per ogni item (senza clustering)
-    visible.forEach(createSinglePin);
+    // 3) Raggruppa: coordinate uniche → pin singolo;
+    //    coordinate identiche (zona) → UN pin di zona con conteggio;
+    //    senza coordinate → solo in lista/ricerca, non sulla mappa.
+    const res = groupItemsByCoord(visible);
+    res.gruppi.forEach(function(g) {
+      if (g.length === 1) {
+        createSinglePin(g[0]);
+      } else {
+        g.forEach(function(it) { it._approx = true; });
+        createAreaPin(g);
+      }
+    });
   }
 
   // Aggiorna i contatori in alto (Lavori / Case) in base ai dati attualmente caricati
@@ -1639,6 +1696,12 @@
     document.getElementById('panelTitle').textContent = item.title;
     document.getElementById('panelSub').innerHTML =
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> ' + item.company;
+    // Trasparenza con l'utente: se la posizione è di zona o assente, lo dico.
+    if (item._noPos) {
+      document.getElementById('panelSub').innerHTML += ' <span class="approx-badge">posizione non specificata</span>';
+    } else if (item._approx) {
+      document.getElementById('panelSub').innerHTML += ' <span class="approx-badge">≈ posizione di zona</span>';
+    }
     // Stessa logica della lista: evito duplicati tipo "$475/sett /sett".
     let priceHTML;
     if (item.price == null) {
@@ -1871,6 +1934,11 @@
 
         row.addEventListener('click', function() {
           // Stessa logica del click sulla lista a sinistra
+          if (typeof item.lng !== 'number' || typeof item.lat !== 'number') {
+            closeSearch();
+            openPanel(item, null);
+            return;
+          }
           const flyLng = item._displayLng != null ? item._displayLng : item.lng;
           const flyLat = item._displayLat != null ? item._displayLat : item.lat;
           map.flyTo({
@@ -2012,8 +2080,11 @@
           // apro il pannello dettaglio. Cerco il marker corrispondente per
           // marcarlo come "active".
           closeList();
-          // Uso le coordinate di visualizzazione (post-spread) cosi il volo
-          // centra esattamente il pin che vedi sulla mappa.
+          // Se l'annuncio non ha coordinate, apro solo il dettaglio.
+          if (typeof item.lng !== 'number' || typeof item.lat !== 'number') {
+            openPanel(item, null);
+            return;
+          }
           const flyLng = item._displayLng != null ? item._displayLng : item.lng;
           const flyLat = item._displayLat != null ? item._displayLat : item.lat;
           map.flyTo({
