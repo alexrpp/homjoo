@@ -22,7 +22,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -45,7 +45,7 @@
     --radius-sm: 10px;
     --radius-lg: 22px;
     --font-display: 'Fraunces', Georgia, serif;
-    --font-ui: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,7 +93,7 @@
   }
 
   .brand {
-    font-family: 'Nunito', 'Geist', sans-serif;
+    font-family: 'Nunito', 'Inter', sans-serif;
     font-weight: 800;
     font-size: 23px;
     letter-spacing: -0.02em;
@@ -129,13 +129,19 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 14px;
-    background: transparent;
+    padding: 10px 16px;
+    background: rgba(10,10,10,0.045);
+    border: 1px solid transparent;
     border-radius: 100px;
-    transition: background 0.2s;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
 
-  .search:hover { background: rgba(10,10,10,0.03); }
+  .search:hover { background: rgba(10,10,10,0.07); }
+  .search:focus-within {
+    background: #fff;
+    border-color: var(--line);
+    box-shadow: 0 2px 10px rgba(10,10,10,0.07);
+  }
   .search svg { flex-shrink: 0; color: var(--ink-faint); }
 
   .search input {
@@ -265,25 +271,24 @@
   .btn-pro {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    background: var(--ink);
+    padding: 10px 20px;
+    background: var(--accent);
     color: white;
     border: 0;
     border-radius: 100px;
     font-family: var(--font-ui);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     cursor: pointer;
-    transition: transform 0.15s, background 0.2s;
+    box-shadow: 0 2px 8px rgba(255,90,60,0.28);
+    transition: transform 0.15s, filter 0.2s, box-shadow 0.2s;
   }
 
-  .btn-pro:hover { background: #1a1a1a; transform: scale(1.02); }
-  .btn-pro::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
+  .btn-pro:hover {
+    filter: brightness(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 4px 14px rgba(255,90,60,0.36);
   }
 
   /* FILTRI */
@@ -1112,7 +1117,9 @@
     position: fixed;
     top: 84px;
     left: 50%;
-    transform: translateX(-50%) translateY(-70px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-24px);
     z-index: 30;
     display: flex;
     align-items: center;
@@ -1127,7 +1134,8 @@
     transition: transform .3s cubic-bezier(.34,1.56,.64,1);
     max-width: calc(100vw - 24px);
   }
-  .pair-chip.show { transform: translateX(-50%) translateY(0); }
+  .pair-chip.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .pair-chip { transition: opacity .25s ease, transform .3s cubic-bezier(.34,1.56,.64,1); }
   .pair-chip button {
     background: rgba(255,255,255,.16);
     color: #fff;
@@ -1228,35 +1236,37 @@
   }
   .menu-btn:hover { background: var(--accent-soft); }
   .menu-pop {
-    position: fixed;
-    top: 76px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
     z-index: 40;
-    width: min(280px, calc(100vw - 32px));
-    background: rgba(255,255,255,0.94);
+    width: 224px;
+    background: rgba(255,255,255,0.96);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
+    border-radius: 18px;
     box-shadow: var(--shadow-lg);
-    padding: 8px;
+    padding: 7px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .18s, transform .18s;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top right;
+    transition: opacity .16s ease, transform .16s ease;
   }
-  .menu-pop.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .menu-pop.open { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
   .menu-pop a {
     display: block;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 14.5px;
+    padding: 11px 14px;
+    border-radius: 11px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--ink);
     text-decoration: none;
     transition: background .12s;
   }
-  .menu-pop a:hover { background: var(--accent-soft); }
+  .menu-pop a:hover { background: rgba(10,10,10,0.05); }
+  .menu-sep { height: 1px; background: var(--line); margin: 6px 10px; }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -1293,22 +1303,21 @@
       </button>
       <div class="search-dropdown" id="searchDropdown"></div>
     </div>
-    <span class="city-pill">📍 Sydney</span>
+    <span class="city-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Sydney</span>
   </div>
   <button class="btn-auth" id="authBtn"><span class="auth-dot"></span><span id="authBtnText">Accedi</span></button>
   <button class="btn-pro">Passa a Pro</button>
   <button class="menu-btn" id="menuBtn" aria-label="Menu" title="Menu">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
   </button>
-</div>
-
-<!-- MENU DI NAVIGAZIONE -->
-<div class="menu-pop" id="menuPop">
-  <a href="come-funziona.html">🧭 Come funziona</a>
-  <a href="faq.html">💬 FAQ</a>
-  <a href="chi-siamo.html">👋 Chi siamo</a>
-  <a href="privacy.html">🔒 Privacy</a>
-  <a href="mailto:alessandro.vannoli@gmail.com">✉️ Contattaci</a>
+  <div class="menu-pop" id="menuPop">
+    <a href="come-funziona.html">Come funziona</a>
+    <a href="faq.html">Domande frequenti</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <div class="menu-sep"></div>
+    <a href="privacy.html">Privacy</a>
+    <a href="mailto:alessandro.vannoli@gmail.com">Contattaci</a>
+  </div>
 </div>
 
 <!-- FILTRI -->

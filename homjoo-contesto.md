@@ -177,6 +177,16 @@ homjoo non è più solo la mappa: ora è un sito completo.
 
 **Prossimi passi quando Ale torna**: pubblicare col .bat, poi raccolta 50 case, poi lancio.
 
+### Aggiornamento 02/07/2026 — restyling "serio" (feedback di Ale)
+
+- 🐛 Chip "Scegli una casa" appariva all'apertura del sito: era nascosta spostandola in alto di soli 70px (ne servivano di più) → ora nascosta con opacity 0 + pointer-events none. Per questo "Annulla" sembrava rotto
+- 🐛 Menu ☰: era ancorato al centro dello schermo (rettangolo bianco fuori posto) → ora è DENTRO la topbar, ancorato al bottone in alto a destra, con animazione scale da origine top-right
+- ✅ "Passa a Pro" ridisegnato: pieno arancione #ff5a3c con ombra colorata, NIENTE pallino rosso (rimosso anche dal CTA delle pagine)
+- ✅ Emoji rimosse ovunque dall'interfaccia: menu (testo pulito + separatore), brand pagine ("homjoo." con punto arancio), footer, card (ora icone SVG a linea), city-pill ("Sydney" con pin SVG). Restano solo nei favicon
+- ✅ Barra di ricerca più definita: sfondo grigio leggero, bianco + bordo + ombra su focus
+- ✅ Font UI: da Geist a **Inter** su tutto il sito (mappa + pagine); Fraunces resta per i titoli, Nunito per il logo
+- Backup: index.backup-polish2.html
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
