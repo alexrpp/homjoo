@@ -209,6 +209,14 @@ homjoo non è più solo la mappa: ora è un sito completo.
 - Nota: ✕ e ✓ restano (simboli tipografici, non emoji)
 - Backup: index.backup-pro-icons.html
 
+### Aggiornamento 02/07/2026 — QA completo dopo bug segnalato da Ale
+
+- 🐛 Scheda distanza che non si toglieva: stessa classe di bug della chip — era "nascosta" spingendola giù di 140px ma col bottone "Rimuovi misura" era diventata più alta di 140px, quindi un pezzo restava sempre visibile. Fix: opacity 0 + pointer-events none
+- 🔍 Audit automatico di TUTTI gli elementi mostra/nascondi → trovato e blindato anche auth-toast (poteva spuntare con messaggi su 2 righe) e il toast di aggiungi-case.html
+- 🐛 Trovato con i test un bug latente nel login: race condition tra getSession e onAuthStateChange (la risposta vecchia poteva sovrascrivere il login appena fatto) → fix con flag eventoRicevuto
+- ✅ Regressione completa: 22 test (misura con X/Rimuovi/Esc/Annulla, seconda misura senza ricaricare, pin di zona, menu, benvenuto, Pro, login+logout, CSS stati nascosti) → TUTTI PASSATI
+- Backup: index.backup-qa.html
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
