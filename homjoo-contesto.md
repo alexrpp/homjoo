@@ -229,6 +229,16 @@ Flusso definitivo per le case (funziona!): Ale naviga Flatmates/Gumtree e incoll
 - Domanda di Ale sui link di pagina-risultati: risposto NO (sarebbe scraping automatico); il flusso resta 'lui sceglie i singoli annunci, click destro → copia link'
 - Il tool aggiungi-case.html resta come piano B
 
+### Aggiornamento 02/07/2026 — SHORTLIST "Salvati" (ispirata da Flatmates, richiesta da Ale)
+
+- ✅ Bottone cuore in topbar con contatore arancio (nascosto quando 0) → apre il pannello-lista con "I tuoi annunci salvati"
+- ✅ Nel pannello dettaglio di ogni annuncio: bottone "Salva annuncio" / "Salvato — tocca per rimuovere" (cuore SVG, si colora d'arancio da salvato)
+- ✅ Salvo una FOTOGRAFIA completa dell'annuncio in localStorage (homjoo_salvati): i salvati sopravvivono anche se il feed Adzuna cambia
+- ✅ Dalla lista salvati: click → vola sul punto e riapre il dettaglio; si può rimuovere da lì
+- Decisione strategica discussa: centro MESSAGGI stile Flatmates = NO (siamo aggregatore, la controparte non è su homjoo; se ne riparla solo se i proprietari pubblicheranno direttamente)
+- Futuro: sincronizzare i salvati con l'account Supabase (tabella preferiti) per averli su più dispositivi — buona feature Pro
+- Testato: salva/rimuovi, contatore, persistenza, lista, riapertura dettaglio
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
