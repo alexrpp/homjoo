@@ -136,6 +136,14 @@ Ale ha notato che distribuire ad anelli i lavori con coordinate di zona crea pos
 - ✅ Rimossa la vecchia funzione spreadOverlappingPins (anelli)
 - Backup: index.backup-zone.html, api/jobs.backup.js
 
+### Aggiornamento 02/07/2026 — blocco Adzuna da IP esteri + piano B
+
+- Scoperto: il sito adzuna.com.au risponde "too many requests" ad Ale (IP italiano) su OGNI pagina, anche la homepage — è la loro protezione anti-bot verso traffico estero/ripetuto, NON un bug di homjoo (il link usato è il redirect_url ufficiale dell'API)
+- Rilevante per il target: molti utenti homjoo pianificano il trasferimento dall'Europa, quindi potrebbero incontrare lo stesso blocco
+- ✅ Piano B aggiunto: nel pannello dettaglio dei lavori, sotto "Candidati su Adzuna", c'è il link "Il link non si apre? Cerca questo annuncio su Google ↗" (ricerca: "titolo" azienda Sydney job) — funziona da qualsiasi paese e trova lo stesso annuncio su Seek/LinkedIn/Jora
+- Per le case il link non appare (hanno già la fonte propria)
+- Testato: visibile sui lavori, nascosto sulle case, URL corretto
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

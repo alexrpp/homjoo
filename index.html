@@ -1075,6 +1075,18 @@
     vertical-align: middle;
   }
 
+  /* Link di riserva sotto il bottone Candidati */
+  .panel-alt {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .panel-alt:hover { color: var(--ink); text-decoration: underline; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1189,6 +1201,7 @@
     <div class="panel-meta" id="panelMeta"></div>
     <p class="panel-desc" id="panelDesc"></p>
     <button class="panel-cta" id="panelCta"></button>
+    <a class="panel-alt" id="panelAlt" target="_blank" rel="noopener noreferrer" style="display:none"></a>
     <p class="panel-source" id="panelSource"></p>
   </div>
 </div>
@@ -1756,6 +1769,18 @@
     cta.onclick = function() {
       if (item.url) window.open(item.url, '_blank', 'noopener,noreferrer');
     };
+    // Piano B per chi naviga da fuori Australia: il sito di Adzuna a volte
+    // blocca gli IP esteri, quindi offro una ricerca Google dello stesso
+    // annuncio (lo trova su Seek, LinkedIn, Jora, ecc.).
+    const altLink = document.getElementById('panelAlt');
+    if (item.type === 'job') {
+      altLink.style.display = 'block';
+      altLink.href = 'https://www.google.com/search?q=' +
+        encodeURIComponent('"' + item.title + '" ' + (item.company && item.company !== 'Azienda non specificata' ? item.company : '') + ' Sydney job');
+      altLink.textContent = 'Il link non si apre? Cerca questo annuncio su Google ↗';
+    } else {
+      altLink.style.display = 'none';
+    }
     cta.style.cursor = item.url ? 'pointer' : 'not-allowed';
     cta.style.opacity = item.url ? '1' : '0.55';
 
