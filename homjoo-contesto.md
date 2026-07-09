@@ -187,6 +187,13 @@ homjoo non è più solo la mappa: ora è un sito completo.
 - ✅ Font UI: da Geist a **Inter** su tutto il sito (mappa + pagine); Fraunces resta per i titoli, Nunito per il logo
 - Backup: index.backup-polish2.html
 
+### Aggiornamento 02/07/2026 — ☰ dentro la barra + schermata di benvenuto
+
+- 🐛 Il bottone ☰ era nel codice dentro la topbar ma la pillola (720px fissi) traboccava e lo mostrava FUORI dal rettangolo bianco → topbar allargata a 840px + barra di ricerca comprimibile (min-width:0)
+- ✅ Benvenuto alla prima visita (domanda di Ale "va bene aprire direttamente sulla mappa?"): card in vetro sopra la mappa con brand, titolo Fraunces "Il lavoro e la casa. Una sola mappa.", pitch, bottoni "Esplora Sydney" e "Come funziona". Si vede UNA volta sola (localStorage homjoo_welcome_v1), poi mai più. Il volo cinematico gira dietro la card
+- Testato: prima visita mostra, seconda no, click fuori chiude
+- Backup: index.backup-welcome.html
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
