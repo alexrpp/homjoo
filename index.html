@@ -1199,6 +1199,21 @@
   }
   .pair-card-note { font-size: 11px; color: var(--ink-faint); }
 
+  .pair-card-clear {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid var(--line);
+    border-radius: 100px;
+    background: var(--bg);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .pair-card-clear:hover { background: var(--accent-soft); border-color: var(--accent); color: #c2371d; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1342,6 +1357,7 @@
   <div class="pair-card-dist" id="pairCardDist"></div>
   <div class="pair-card-times" id="pairCardTimes"></div>
   <div class="pair-card-note">Distanza in linea d'aria · tempi indicativi</div>
+  <button class="pair-card-clear" id="pairCardClear">✕ Rimuovi misura</button>
 </div>
 
 <!-- MODAL "PRO IN ARRIVO" -->
@@ -1874,8 +1890,16 @@
       } else {
         map.getSource('homjoo-pair').setData(line);
       }
-      map.fitBounds(new maplibregl.LngLatBounds(from, to),
-        { padding: { top: 130, bottom: 170, left: 80, right: 80 }, duration: 1100 });
+      // Costruisco il rettangolo con extend(): con due punti in qualsiasi
+      // ordine il risultato è sempre corretto (prima poteva "invertirsi"
+      // e la mappa zoomava fino a vedere tutta l'Australia).
+      const bounds = new maplibregl.LngLatBounds(from, from);
+      bounds.extend(to);
+      map.fitBounds(bounds, {
+        padding: { top: 130, bottom: 190, left: 80, right: 80 },
+        duration: 1100,
+        maxZoom: 15
+      });
     } catch (e) { console.warn('Linea abbinamento non disegnata:', e); }
 
     const km = haversineKm(a.lat, a.lng, b.lat, b.lng);
@@ -1900,6 +1924,7 @@
 
   document.getElementById('pairChipCancel').addEventListener('click', cancelPair);
   document.getElementById('pairCardClose').addEventListener('click', clearPairResult);
+  document.getElementById('pairCardClear').addEventListener('click', clearPairResult);
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') { cancelPair(); clearPairResult(); }
   });
@@ -2006,8 +2031,11 @@
     } else {
       pairBtn.style.display = 'none';
     }
-    cta.style.cursor = item.url ? 'pointer' : 'not-allowed';
-    cta.style.opacity = item.url ? '1' : '0.55';
+    // Se l'annuncio non ha un link, il bottone sparisce del tutto
+    // (prima restava visibile ma non cliccabile: sembrava rotto).
+    cta.style.display = item.url ? '' : 'none';
+    cta.style.cursor = 'pointer';
+    cta.style.opacity = '1';
 
     panel.classList.add('open');
 

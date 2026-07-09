@@ -153,6 +153,14 @@ Ale ha notato che distribuire ad anelli i lavori con coordinate di zona crea pos
 - Nota per il futuro (Pro?): tempi reali coi mezzi richiederebbero un'API di routing (Google/Mapbox a pagamento, OSRM self-host) — per ora linea d'aria onesta
 - Backup: index.backup-pair.html
 
+### Aggiornamento 02/07/2026 — fix misura distanza (bug segnalati da Ale)
+
+- 🐛 CAUSA VERA dei due problemi: i bounds dello zoom erano costruiti con LngLatBounds(a,b) che si "inverte" se il primo punto è a est del secondo → la mappa zoomava fino a tutta l'Australia e sembrava che il secondo annuncio non venisse selezionato
+- ✅ Fix: bounds con extend() (sempre corretti) + maxZoom 15 → lo zoom resta su Sydney
+- ✅ Bottone "✕ Rimuovi misura" ben visibile nella scheda risultato (oltre alla ✕ e a Esc); si può rimisurare subito senza ricaricare
+- ✅ Case senza link: il bottone "Vedi su …" ora sparisce invece di restare visibile-ma-morto (sembrava rotto); le case aggiunte col tool con il link funzionano normalmente
+- ✅ Testato l'intero percorso casa → gruppo di lavori → lavoro dalla lista, in entrambe le direzioni geografiche, misura ripetuta senza ricaricare
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
