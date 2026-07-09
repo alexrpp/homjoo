@@ -239,6 +239,15 @@ Flusso definitivo per le case (funziona!): Ale naviga Flatmates/Gumtree e incoll
 - Futuro: sincronizzare i salvati con l'account Supabase (tabella preferiti) per averli su più dispositivi — buona feature Pro
 - Testato: salva/rimuovi, contatore, persistenza, lista, riapertura dettaglio
 
+### Aggiornamento 02/07/2026 — il cuore richiede la registrazione (idea di Ale)
+
+Meccanica di crescita: salvare un annuncio richiede l'account GRATUITO (non Pro).
+- ✅ Ospite clicca "Salva annuncio" o il cuore in topbar → si apre la registrazione con messaggio dedicato: "Crea un account gratuito per salvare gli annunci che ti piacciono e ritrovarli quando torni."
+- ✅ Da loggato tutto funziona come prima (salva/rimuovi/lista)
+- Tecnica: lo script auth espone window.homjooUser e window.homjooChiediRegistrazione(motivo); la mappa li usa per il gate
+- Funnel così definito: mappa libera → salvataggio = registrazione gratis (email!) → in futuro Pro €5 = sync multi-dispositivo, alert email, ecc.
+- Testato: gate ospite (bottone e cuore), messaggio, salvataggio post-login
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

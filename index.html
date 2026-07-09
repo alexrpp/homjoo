@@ -2191,6 +2191,13 @@
     b.classList.toggle('saved', salvato);
     b.innerHTML = HEART_SVG + '<span>' + (salvato ? 'Salvato — tocca per rimuovere' : 'Salva annuncio') + '</span>';
     b.onclick = function() {
+      // Salvare richiede un account (gratuito): è il motivo per registrarsi
+      if (!window.homjooUser) {
+        if (window.homjooChiediRegistrazione) {
+          window.homjooChiediRegistrazione('Crea un account gratuito per salvare gli annunci che ti piacciono e ritrovarli quando torni.');
+        }
+        return;
+      }
       if (eSalvato(item.id)) {
         salvati = salvati.filter(function(f) { return f.id !== item.id; });
       } else {
@@ -2201,6 +2208,12 @@
     };
   }
   document.getElementById('favBtn').addEventListener('click', function() {
+    if (!window.homjooUser) {
+      if (window.homjooChiediRegistrazione) {
+        window.homjooChiediRegistrazione('Crea un account gratuito per salvare gli annunci che ti piacciono e ritrovarli quando torni.');
+      }
+      return;
+    }
     openList(salvati.slice(), salvati.length ? 'I tuoi annunci salvati' : 'Nessun annuncio salvato');
   });
   aggiornaContatoreSalvati();
@@ -2747,6 +2760,7 @@
 
   function updateUI(user) {
     currentUser = user;
+    window.homjooUser = user || null; // visibile alla mappa (per il gate dei salvati)
     if (user) {
       authBtn.classList.add('logged');
       authBtnText.textContent = displayName(user);
@@ -2775,6 +2789,15 @@
   }
 
   function openModal() { setMode('login'); overlay.classList.add('open'); $('authEmail').focus(); }
+
+  // Chiamata dalla mappa quando un ospite prova a salvare un annuncio:
+  // apre la registrazione con un messaggio che spiega il perché.
+  window.homjooChiediRegistrazione = function(motivo) {
+    setMode('signup');
+    if (motivo) $('authSub').textContent = motivo;
+    overlay.classList.add('open');
+    $('authEmail').focus();
+  };
   function closeModal() { overlay.classList.remove('open'); hideMsg(); }
 
   // Benvenuto: solo alla prima visita (poi ricordato nel browser)
