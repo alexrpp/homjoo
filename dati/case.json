@@ -71,7 +71,7 @@
       "company": "Appartamento intero",
       "price": 580,
       "unit": "AUD/sett",
-      "lng": 151.1810,
+      "lng": 151.181,
       "lat": -33.8965,
       "desc": "Bilocale in tipica casa terrazzata vittoriana. Quartiere artistico, pieno di caffè e locali.",
       "meta": {
@@ -89,7 +89,7 @@
       "company": "Casa condivisa, 3 inquilini",
       "price": 350,
       "unit": "AUD/sett",
-      "lng": 151.1870,
+      "lng": 151.187,
       "lat": -33.8798,
       "desc": "Vicino all'Università di Sydney, perfetto per studenti. Giardino comune, gatto residente friendly.",
       "meta": {
@@ -108,7 +108,7 @@
       "price": 690,
       "unit": "AUD/sett",
       "lng": 151.1925,
-      "lat": -33.9090,
+      "lat": -33.909,
       "desc": "Loft industriale convertito, soffitti alti, mattoni a vista. Quartiere in trasformazione, tanti caffè nuovi.",
       "meta": {
         "Tipo": "Loft",
@@ -125,7 +125,7 @@
       "company": "Casa condivisa, 4 inquilini",
       "price": 410,
       "unit": "AUD/sett",
-      "lng": 151.2840,
+      "lng": 151.284,
       "lat": -33.7967,
       "desc": "A 8 minuti a piedi dalla spiaggia di Manly. Ferry diretto al CBD ogni 30 min. Stile surf/beach.",
       "meta": {
@@ -172,6 +172,25 @@
       },
       "source": "Flatmates",
       "url": "https://flatmates.com.au/studio-sydney-burwood-2134-P1607861"
+    },
+    {
+      "id": "h10",
+      "title": "Stanza privata con bagno — North Ryde",
+      "company": "Casa condivisa (solo ragazze)",
+      "price": 400,
+      "unit": "AUD/sett",
+      "lng": 151.1236,
+      "lat": -33.7972,
+      "desc": "Stanza luminosa e ampia con bagno privato in casa nuova e tranquilla, completamente arredata (letto queen, scrivania, armadio). Bus per Wynyard in 26 min, metro per Central in 24 min, Macquarie Centre e università a pochi minuti. Solo ragazze. Disponibile dal 17 agosto.",
+      "meta": {
+        "Camere": "1 privata",
+        "Bagno": "Privato (ensuite)",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi",
+        "Bond": "$800"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-north-ryde-2113-P1429067"
     }
   ]
 }
