@@ -194,6 +194,13 @@ homjoo non è più solo la mappa: ora è un sito completo.
 - Testato: prima visita mostra, seconda no, click fuori chiude
 - Backup: index.backup-welcome.html
 
+### Aggiornamento 02/07/2026 — kit di lancio pronto
+
+- ✅ Domanda cookie di Ale: risposto che NON serve il banner (nessun tracciamento, solo storage tecnico per login/benvenuto; già dichiarato in privacy.html). Se un giorno vorrà statistiche → strumenti cookieless (es. Vercel Analytics)
+- ✅ `og-image.png` (1200x630, generata con PIL nello stile del brand) + meta og:image/twitter:card su TUTTE le pagine → anteprime belle su Facebook/WhatsApp/Reddit
+- ✅ `LANCIO.md`: post pronti (FB ita, FB eng, Reddit), regole anti-spam, ordine dei gruppi, cosa misurare, checklist tecnica pre-post
+- Strategia confermata: niente nuove funzioni finché non ci sono 30-50 case. Ale raccoglie case col tool → poi lancio con LANCIO.md
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
