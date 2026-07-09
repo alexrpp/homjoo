@@ -286,6 +286,101 @@
       },
       "source": "Flatmates",
       "url": "https://flatmates.com.au/share-house-sydney-glebe-2037-P1884043"
+    },
+    {
+      "id": "h16",
+      "title": "Stanza in casa spaziosa con sala cinema — Ryde",
+      "company": "Casa condivisa, 3 coinquilini",
+      "price": 370,
+      "unit": "AUD/sett",
+      "lng": 151.1058,
+      "lat": -33.8115,
+      "desc": "Stanza arredata (letto queen, aria condizionata, armadio a muro) in grande casa in mattoni con sala cinema privata, giardino per BBQ e internet ultraveloce. Bus per il CBD di fronte casa, 8 minuti dalla stazione di Meadowbank. Bollette tutte incluse. Coppie benvenute (+$90/sett).",
+      "meta": {
+        "Camere": "1 (queen)",
+        "Bagno": "Condiviso (2+WC)",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi",
+        "Bond": "$1.110"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-ryde-2112-P1983133"
+    },
+    {
+      "id": "h17",
+      "title": "Stanza economica vicino a Guildford — zona Parramatta",
+      "company": "Casa condivisa, 2 camere totali",
+      "price": 280,
+      "unit": "AUD/sett",
+      "lng": 150.9948,
+      "lat": -33.8478,
+      "desc": "Stanza grande e arredata (letto queen, scrivania, armadio a specchio) in casa con solo un altro inquilino. 10-15 minuti a piedi dalla stazione di Guildford, poi 5 minuti di treno per Parramatta. Bollette escluse (~$15-20/sett). Anche per coppie ($290 totali).",
+      "meta": {
+        "Camere": "1 (queen)",
+        "Bagno": "Condiviso (2)",
+        "Bills": "Esclusi (~$15-20)",
+        "Min stay": "6 mesi",
+        "Bond": "$840"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-parramatta-2150-P1982127"
+    },
+    {
+      "id": "h18",
+      "title": "Monolocale nuovo tutto incluso — South Granville",
+      "company": "Monolocale / Studio",
+      "price": 400,
+      "unit": "AUD/sett",
+      "lng": 151.0118,
+      "lat": -33.8618,
+      "desc": "Studio moderno appena costruito con cucina attrezzata (elettrodomestici europei), lavatrice-asciugatrice in unità, smart TV 40\" e armadio a muro. Tutte le bollette e internet NBN veloce inclusi. A 2 minuti a piedi dai mezzi. Contratto flessibile da 3 a 12 mesi, anche coppie.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$800"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-south-granville-2142-P1638575"
+    },
+    {
+      "id": "h19",
+      "title": "Stanza a 5 minuti dalla spiaggia — Dee Why",
+      "company": "Appartamento condiviso con 1 persona",
+      "price": 475,
+      "unit": "AUD/sett",
+      "lng": 151.2852,
+      "lat": -33.7528,
+      "desc": "Stanza arredata con letto queen e armadio a muro in appartamento di 2 camere condiviso con una sola professionista. A 5 minuti a piedi dalla spiaggia di Dee Why, negozi e bus. Parcheggio nel cortile, bollette e internet inclusi. Casa tranquilla: no fumo, no feste, no coppie.",
+      "meta": {
+        "Camere": "1 (queen)",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$950"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-dee-why-2099-P1874048"
+    },
+    {
+      "id": "h20",
+      "title": "Monolocale vicino alla spiaggia — Bronte",
+      "company": "Monolocale / Studio",
+      "price": 650,
+      "unit": "AUD/sett",
+      "lng": 151.2618,
+      "lat": -33.9042,
+      "desc": "Studio arredato e luminoso in uno dei quartieri sulla spiaggia più ambiti di Sydney: mare, caffè e mezzi a pochi passi. Cucina funzionale, lavanderia in loco, un solo pagamento settimanale che copre tutto (luce, acqua, gas, internet illimitato). Disponibile dal 22 luglio, anche coppie.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$1.300"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-bronte-2024-P1966799"
     }
   ]
 }
