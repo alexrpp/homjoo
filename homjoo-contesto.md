@@ -217,6 +217,15 @@ homjoo non è più solo la mappa: ora è un sito completo.
 - ✅ Regressione completa: 22 test (misura con X/Rimuovi/Esc/Annulla, seconda misura senza ricaricare, pin di zona, menu, benvenuto, Pro, login+logout, CSS stati nascosti) → TUTTI PASSATI
 - Backup: index.backup-qa.html
 
+### Aggiornamento 02/07/2026 — NUOVO FLUSSO CASE: Ale manda i link, io le aggiungo
+
+Flusso definitivo per le case (funziona!): Ale naviga Flatmates/Gumtree e incolla in chat i link (anche 5-10 alla volta) → io leggo le pagine con web_fetch, riscrivo titolo+descrizione in italiano, e scrivo direttamente in dati/case.json → Ale fa solo il doppio clic sul .bat.
+- Regole: descrizioni SEMPRE riscritte (mai copiate), link alla fonte sempre presente, foto MAI copiate, coordinate per quartiere con jitter
+- Niente scraping in massa: solo i link che Ale sceglie e manda a mano
+- ✅ Aggiunte oggi: h10 North Ryde $400 · h11 Pyrmont $625 · h12 Crows Nest $310 · h13 Sydney CBD $500 · h14 Mascot $600 · h15 Glebe $385 (tutte Flatmates, con url)
+- SIAMO A 15 CASE (obiettivo 50) — mancano ~35
+- Il tool aggiungi-case.html resta come piano B
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

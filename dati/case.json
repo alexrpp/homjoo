@@ -191,6 +191,101 @@
       },
       "source": "Flatmates",
       "url": "https://flatmates.com.au/share-house-sydney-north-ryde-2113-P1429067"
+    },
+    {
+      "id": "h11",
+      "title": "Suite matrimoniale con bagno privato — Pyrmont",
+      "company": "Appartamento condiviso",
+      "price": 625,
+      "unit": "AUD/sett",
+      "lng": 151.1948,
+      "lat": -33.8702,
+      "desc": "Camera master con letto king e bagno privato in appartamento stile warehouse nel palazzo M Central. Parcheggio sicuro, lavanderia, rooftop con giardino e BBQ. A due passi da Darling Harbour e Barangaroo. Si vive con una coppia di professionisti. Disponibile dal 5 agosto.",
+      "meta": {
+        "Camere": "1 master (king)",
+        "Bagno": "Privato (ensuite)",
+        "Bills": "Esclusi (~$150/trim.)",
+        "Min stay": "6 mesi",
+        "Bond": "$2.500"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-pyrmont-2009-P1811653"
+    },
+    {
+      "id": "h12",
+      "title": "Stanza economica vicino a St Leonards — Crows Nest",
+      "company": "Casa condivisa, 4 inquilini",
+      "price": 310,
+      "unit": "AUD/sett",
+      "lng": 151.2008,
+      "lat": -33.8262,
+      "desc": "Stanza singola arredata (letto doppio, scrivania grande, TV) in casa molto tranquilla su vicolo interno. 600 metri dalla stazione di St Leonards, negozi di Crows Nest di fronte. Coinquilini professionisti di lungo periodo. Data d'ingresso flessibile.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "2 mesi",
+        "Bond": "$640"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-crows-nest-2065-P145094"
+    },
+    {
+      "id": "h13",
+      "title": "Stanza con bagno in pieno centro — Sydney CBD",
+      "company": "Appartamento condiviso",
+      "price": 500,
+      "unit": "AUD/sett",
+      "lng": 151.2062,
+      "lat": -33.8738,
+      "desc": "Stanza privata con bagno proprio a due passi da Town Hall: tutto raggiungibile in 3 minuti. Letto queen, angolo cottura, arredata. Bollette e internet inclusi. Disponibile subito, anche per coppie.",
+      "meta": {
+        "Camere": "1 privata (queen)",
+        "Bagno": "Proprio",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi",
+        "Bond": "$2.000"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-2000-P1432188"
+    },
+    {
+      "id": "h14",
+      "title": "Stanza con bagno a 4 min dalla metro — Mascot",
+      "company": "Appartamento condiviso",
+      "price": 600,
+      "unit": "AUD/sett",
+      "lng": 151.1938,
+      "lat": -33.9242,
+      "desc": "Stanza privata con serratura e bagno privato, letto queen nuovo. A 4 minuti a piedi dalla stazione di Mascot, comodissima per l'aeroporto. Cucina attrezzata, elettricità e internet veloce inclusi. Disponibile subito, durata flessibile.",
+      "meta": {
+        "Camere": "1 privata (queen)",
+        "Bagno": "Privato (ensuite)",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$1.200"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-mascot-2020-P1882572"
+    },
+    {
+      "id": "h15",
+      "title": "Due stanze in terrace vicino a USYD — Glebe",
+      "company": "Casa condivisa, studenti e giovani professionisti",
+      "price": 385,
+      "unit": "AUD/sett",
+      "lng": 151.1874,
+      "lat": -33.8778,
+      "desc": "Due stanze ampie e luminose ($385 e $395) in elegante casa terrace con soffitti alti, a pochi minuti da USYD, Broadway e light rail. Cucina completa, lavanderia interna, giardino. Tutto incluso nel prezzo. Arredate o no, a scelta. Disponibili dal 12 e 28 luglio.",
+      "meta": {
+        "Camere": "2 disponibili (doppie)",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$770-790"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-glebe-2037-P1884043"
     }
   ]
 }
