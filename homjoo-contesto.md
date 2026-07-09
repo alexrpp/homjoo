@@ -144,6 +144,15 @@ Ale ha notato che distribuire ad anelli i lavori con coordinate di zona crea pos
 - Per le case il link non appare (hanno già la fonte propria)
 - Testato: visibile sui lavori, nascosto sulle case, URL corretto
 
+### Aggiornamento 02/07/2026 — FEATURE DISTANZA CASA-LAVORO (la killer feature)
+
+- ✅ Nel pannello di ogni annuncio (con coordinate) c'è il bottone "📏 Quanto dista da una casa?/da un lavoro?"
+- ✅ Flusso: click sul bottone → chip nera in alto "Ora clicca una casa/un lavoro sulla mappa" (con Annulla) → click sull'annuncio dell'altro tipo → linea tratteggiata sulla mappa + zoom sui due punti + scheda in basso con distanza in linea d'aria e tempi stimati 🚶🚴🚗
+- ✅ Distanza con formula haversine (verificata: Quay→Bondi = 7,0 km ✓); tempi: 12/4/2,5 min per km, dichiarati "indicativi"
+- ✅ Esc o ✕ chiude tutto e svuota la linea; funziona anche scegliendo dalla lista/ricerca; nascosto per annunci senza coordinate
+- Nota per il futuro (Pro?): tempi reali coi mezzi richiederebbero un'API di routing (Google/Mapbox a pagamento, OSRM self-host) — per ora linea d'aria onesta
+- Backup: index.backup-pair.html
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

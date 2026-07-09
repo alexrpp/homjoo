@@ -1087,6 +1087,118 @@
   }
   .panel-alt:hover { color: var(--ink); text-decoration: underline; }
 
+  /* ===== Abbinamento casa-lavoro ===== */
+  .panel-pair {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 100px;
+    background: var(--bg);
+    font-family: var(--font-ui);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background .15s, border-color .15s;
+  }
+  .panel-pair:hover { background: var(--accent-soft); border-color: var(--accent); }
+
+  .pair-chip {
+    position: fixed;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-70px);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 100px;
+    padding: 11px 18px;
+    font-size: 13.5px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+    max-width: calc(100vw - 24px);
+  }
+  .pair-chip.show { transform: translateX(-50%) translateY(0); }
+  .pair-chip button {
+    background: rgba(255,255,255,.16);
+    color: #fff;
+    border: 0;
+    border-radius: 100px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    white-space: nowrap;
+  }
+  .pair-chip button:hover { background: rgba(255,255,255,.28); }
+
+  .pair-card {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(140px);
+    z-index: 30;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 18px 22px;
+    width: min(420px, calc(100vw - 24px));
+    text-align: center;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .pair-card.show { transform: translateX(-50%) translateY(0); }
+  .pair-card-x {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--bg);
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .pair-card-titles {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 6px;
+    padding: 0 16px;
+  }
+  .pair-card-dist {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .pair-card-times {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0 6px;
+  }
+  .pair-card-times span {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .pair-card-note { font-size: 11px; color: var(--ink-faint); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1202,6 +1314,7 @@
     <p class="panel-desc" id="panelDesc"></p>
     <button class="panel-cta" id="panelCta"></button>
     <a class="panel-alt" id="panelAlt" target="_blank" rel="noopener noreferrer" style="display:none"></a>
+    <button class="panel-pair" id="panelPair" style="display:none"></button>
     <p class="panel-source" id="panelSource"></p>
   </div>
 </div>
@@ -1216,6 +1329,19 @@
     <p>La mappa ha bisogno di internet per caricare i tile. Verifica la tua connessione e ricarica la pagina.</p>
     <button onclick="location.reload()">Riprova</button>
   </div>
+</div>
+
+<!-- ABBINAMENTO CASA-LAVORO -->
+<div class="pair-chip" id="pairChip">
+  <span id="pairChipText">Scegli una casa sulla mappa</span>
+  <button id="pairChipCancel">✕ Annulla</button>
+</div>
+<div class="pair-card" id="pairCard">
+  <button class="pair-card-x" id="pairCardClose" aria-label="Chiudi">✕</button>
+  <div class="pair-card-titles" id="pairCardTitles"></div>
+  <div class="pair-card-dist" id="pairCardDist"></div>
+  <div class="pair-card-times" id="pairCardTimes"></div>
+  <div class="pair-card-note">Distanza in linea d'aria · tempi indicativi</div>
 </div>
 
 <!-- MODAL "PRO IN ARRIVO" -->
@@ -1694,12 +1820,103 @@
     map.on('load', onMapReady);
   }
 
+  // ============ ABBINAMENTO CASA-LAVORO ============
+  // L'utente apre un annuncio, preme "Quanto dista da...?" e poi clicca
+  // un annuncio dell'altro tipo: disegno la linea e mostro distanza/tempi.
+  let pairFrom = null;
+
+  function haversineKm(lat1, lng1, lat2, lng2) {
+    const R = 6371, rad = Math.PI / 180;
+    const dLat = (lat2 - lat1) * rad, dLng = (lng2 - lng1) * rad;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1*rad) * Math.cos(lat2*rad) *
+              Math.sin(dLng/2) * Math.sin(dLng/2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function startPair(item) {
+    pairFrom = item;
+    closePanel();
+    closeList();
+    const cerca = item.type === 'job' ? 'una casa' : 'un lavoro';
+    document.getElementById('pairChipText').textContent = 'Ora clicca ' + cerca + ' sulla mappa';
+    document.getElementById('pairChip').classList.add('show');
+  }
+
+  function cancelPair() {
+    pairFrom = null;
+    document.getElementById('pairChip').classList.remove('show');
+  }
+
+  function clearPairResult() {
+    document.getElementById('pairCard').classList.remove('show');
+    try {
+      const src = map.getSource('homjoo-pair');
+      if (src) src.setData({ type: 'FeatureCollection', features: [] });
+    } catch (e) {}
+  }
+
+  function completePair(a, b) {
+    cancelPair();
+    const job  = a.type === 'job'  ? a : b;
+    const home = a.type === 'home' ? a : b;
+    const from = [a.lng, a.lat], to = [b.lng, b.lat];
+    const line = { type: 'Feature', geometry: { type: 'LineString', coordinates: [from, to] } };
+    try {
+      if (!map.getSource('homjoo-pair')) {
+        map.addSource('homjoo-pair', { type: 'geojson', data: line });
+        map.addLayer({
+          id: 'homjoo-pair-line',
+          type: 'line',
+          source: 'homjoo-pair',
+          paint: { 'line-color': '#0a0a0a', 'line-width': 2.5, 'line-dasharray': [2, 2] }
+        });
+      } else {
+        map.getSource('homjoo-pair').setData(line);
+      }
+      map.fitBounds(new maplibregl.LngLatBounds(from, to),
+        { padding: { top: 130, bottom: 170, left: 80, right: 80 }, duration: 1100 });
+    } catch (e) { console.warn('Linea abbinamento non disegnata:', e); }
+
+    const km = haversineKm(a.lat, a.lng, b.lat, b.lng);
+    const distTxt = km < 1 ? Math.round(km * 1000) + ' m' : km.toFixed(1).replace('.', ',') + ' km';
+    const mins = function(perKm) {
+      const m = Math.max(1, Math.round(km * perKm));
+      return m >= 60 ? Math.floor(m/60) + ' h ' + (m%60) + ' min' : m + ' min';
+    };
+    document.getElementById('pairCardTitles').innerHTML =
+      '💼 ' + escHtml(job.title) + '<br>🏠 ' + escHtml(home.title);
+    document.getElementById('pairCardDist').textContent = distTxt;
+    document.getElementById('pairCardTimes').innerHTML =
+      '<span>🚶 ' + mins(12) + '</span><span>🚴 ' + mins(4) + '</span><span>🚗 ~' + mins(2.5) + '</span>';
+    document.getElementById('pairCard').classList.add('show');
+  }
+
+  function escHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  document.getElementById('pairChipCancel').addEventListener('click', cancelPair);
+  document.getElementById('pairCardClose').addEventListener('click', clearPairResult);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { cancelPair(); clearPairResult(); }
+  });
+
   // ============ PANNELLO DETTAGLIO ============
   const panel = document.getElementById('panel');
   const panelClose = document.getElementById('panelClose');
   let activeEl = null;
 
   function openPanel(item, el) {
+    // Modalità abbinamento: se sto scegliendo il secondo annuncio e questo
+    // è del tipo opposto (e ha coordinate), completo l'abbinamento.
+    if (pairFrom && item.type !== pairFrom.type &&
+        typeof item.lng === 'number' && typeof pairFrom.lng === 'number') {
+      completePair(pairFrom, item);
+      return;
+    }
     if (activeEl) activeEl.classList.remove('active');
     // el può essere null se l'item viene aperto da un cluster
     // (non c'è un pin singolo da marcare come "active")
@@ -1780,6 +1997,14 @@
       altLink.textContent = 'Il link non si apre? Cerca questo annuncio su Google ↗';
     } else {
       altLink.style.display = 'none';
+    }
+    const pairBtn = document.getElementById('panelPair');
+    if (typeof item.lng === 'number') {
+      pairBtn.style.display = 'flex';
+      pairBtn.textContent = '📏 ' + (item.type === 'job' ? 'Quanto dista da una casa?' : 'Quanto dista da un lavoro?');
+      pairBtn.onclick = function() { startPair(item); };
+    } else {
+      pairBtn.style.display = 'none';
     }
     cta.style.cursor = item.url ? 'pointer' : 'not-allowed';
     cta.style.opacity = item.url ? '1' : '0.55';
