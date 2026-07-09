@@ -26,7 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -49,7 +49,7 @@
     --radius-sm: 10px;
     --radius-lg: 22px;
     --font-display: 'Fraunces', Georgia, serif;
-    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,7 +97,7 @@
   }
 
   .brand {
-    font-family: 'Nunito', 'Inter', sans-serif;
+    font-family: 'Nunito', 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
     font-size: 23px;
     letter-spacing: -0.02em;
@@ -1025,7 +1025,15 @@
   }
 
   /* Modal "Pro in arrivo" */
-  .pro-star { font-size: 34px; margin-bottom: 6px; }
+  .pro-star {
+    width: 52px; height: 52px;
+    border-radius: 16px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .pro-list .pi { color: var(--ink-soft); display: flex; padding-top: 2px; }
   .pro-list { list-style: none; margin: 4px 0 16px; padding: 0; }
   .pro-list li {
     display: flex; gap: 10px; align-items: flex-start;
@@ -1527,13 +1535,13 @@
     <button class="auth-close" id="proClose" aria-label="Chiudi">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
-    <div class="pro-star">⭐</div>
+    <div class="pro-star"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg></div>
     <h2 class="auth-title">homjoo Pro sta arrivando</h2>
     <p class="auth-sub">Stiamo preparando il piano Pro a 5&nbsp;€/mese. Cosa avrai:</p>
     <ul class="pro-list">
-      <li><span class="pi">✉️</span><span><b>Alert via email</b> — ti scriviamo noi quando esce un lavoro o una casa adatta a te</span></li>
-      <li><span class="pi">📊</span><span><b>Statistiche stipendi</b> — quanto si guadagna davvero, ruolo per ruolo</span></li>
-      <li><span class="pi">🌏</span><span><b>Nuove città</b> — accesso in anteprima oltre Sydney</span></li>
+      <li><span class="pi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span><b>Alert via email</b> — ti scriviamo noi quando esce un lavoro o una casa adatta a te</span></li>
+      <li><span class="pi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg></span><span><b>Statistiche stipendi</b> — quanto si guadagna davvero, ruolo per ruolo</span></li>
+      <li><span class="pi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></span><span><b>Nuove città</b> — accesso in anteprima oltre Sydney</span></li>
     </ul>
     <p class="auth-sub" id="proNote"></p>
     <button class="auth-submit" id="proCta">Registrati gratis per essere avvisato</button>
@@ -2070,10 +2078,11 @@
       return m >= 60 ? Math.floor(m/60) + ' h ' + (m%60) + ' min' : m + ' min';
     };
     document.getElementById('pairCardTitles').innerHTML =
-      '💼 ' + escHtml(job.title) + '<br>🏠 ' + escHtml(home.title);
+      '<b style="color:var(--job)">Lavoro</b> · ' + escHtml(job.title) +
+      '<br><b style="color:var(--home)">Casa</b> · ' + escHtml(home.title);
     document.getElementById('pairCardDist').textContent = distTxt;
     document.getElementById('pairCardTimes').innerHTML =
-      '<span>🚶 ' + mins(12) + '</span><span>🚴 ' + mins(4) + '</span><span>🚗 ~' + mins(2.5) + '</span>';
+      '<span>A piedi ' + mins(12) + '</span><span>In bici ' + mins(4) + '</span><span>In auto ~' + mins(2.5) + '</span>';
     document.getElementById('pairCard').classList.add('show');
   }
 
@@ -2143,18 +2152,23 @@
     // in alto al pannello. Altrimenti fallback al gradient colorato.
     // Il gradient resta anche come "backup" sotto la foto, cosi' se la foto
     // non carica (link rotto, hotlink bloccato) l'utente vede comunque il colore.
-    const fallbackGradient = item.type === 'job'
-      ? 'linear-gradient(135deg, #16a34a, #0e7d35)'
-      : 'linear-gradient(135deg, #1f6feb, #0d4ec9)';
+    // Testata del pannello: se non c'è una foto, sfondo neutro elegante
+    // con l'icona del tipo in filigrana (niente sfumature vistose).
+    const wmJob  = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-opacity='0.22' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2'/%3E%3Cpath d='M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'/%3E%3C/svg%3E\")";
+    const wmHome = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 24 24' fill='none' stroke='%231f6feb' stroke-opacity='0.22' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpath d='M9 22V12h6v10'/%3E%3C/svg%3E\")";
+    const flatBg = item.type === 'job' ? '#eef5ef' : '#eef3fc';
     if (item.image) {
-      img.style.background         = fallbackGradient;
-      img.style.backgroundImage    = 'url("' + item.image + '"), ' + fallbackGradient;
+      img.style.background         = flatBg;
+      img.style.backgroundImage    = 'url("' + item.image + '")';
       img.style.backgroundSize     = 'cover';
       img.style.backgroundPosition = 'center';
       img.style.backgroundRepeat   = 'no-repeat';
     } else {
-      img.style.backgroundImage = 'none';
-      img.style.background      = fallbackGradient;
+      img.style.background         = flatBg;
+      img.style.backgroundImage    = item.type === 'job' ? wmJob : wmHome;
+      img.style.backgroundSize     = '96px';
+      img.style.backgroundPosition = 'center';
+      img.style.backgroundRepeat   = 'no-repeat';
     }
 
     const metaEl = document.getElementById('panelMeta');
@@ -2187,7 +2201,7 @@
     const pairBtn = document.getElementById('panelPair');
     if (typeof item.lng === 'number') {
       pairBtn.style.display = 'flex';
-      pairBtn.textContent = '📏 ' + (item.type === 'job' ? 'Quanto dista da una casa?' : 'Quanto dista da un lavoro?');
+      pairBtn.textContent = item.type === 'job' ? 'Quanto dista da una casa?' : 'Quanto dista da un lavoro?';
       pairBtn.onclick = function() { startPair(item); };
     } else {
       pairBtn.style.display = 'none';
@@ -2695,7 +2709,7 @@
     if (currentUser) {
       // Logout diretto con conferma
       if (window.confirm('Vuoi uscire dal tuo account?')) {
-        supa.auth.signOut().then(function() { toast('Sei uscito. A presto! 👋'); });
+        supa.auth.signOut().then(function() { toast('Sei uscito. A presto!'); });
       }
     } else {
       openModal();
@@ -2718,7 +2732,7 @@
   var proOverlay = $('proOverlay');
   function openPro() {
     if (currentUser) {
-      $('proNote').textContent = 'Sei già registrato: ti avviseremo via email appena il Pro sarà pronto. 🎉';
+      $('proNote').textContent = 'Sei già registrato: ti avviseremo via email appena il Pro sarà pronto.';
       $('proCta').style.display = 'none';
     } else {
       $('proNote').textContent = 'Registrati gratis: chi ha un account sarà avvisato per primo (e avrà uno sconto).';
@@ -2800,7 +2814,7 @@
           showMsg('✓ Quasi fatto! Ti abbiamo inviato una email: clicca il link per confermare l\'account, poi torna qui e accedi.', true);
         } else {
           closeModal();
-          toast('Benvenuto su homjoo! 🎉');
+          toast('Benvenuto su homjoo!');
         }
       });
     } else {
@@ -2810,7 +2824,7 @@
           showMsg(traduci(res.error.message), false);
         } else {
           closeModal();
-          toast('Bentornato! 👋');
+          toast('Bentornato!');
         }
       });
     }

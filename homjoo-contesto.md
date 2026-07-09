@@ -201,6 +201,14 @@ homjoo non è più solo la mappa: ora è un sito completo.
 - ✅ `LANCIO.md`: post pronti (FB ita, FB eng, Reddit), regole anti-spam, ordine dei gruppi, cosa misurare, checklist tecnica pre-post
 - Strategia confermata: niente nuove funzioni finché non ci sono 30-50 case. Ale raccoglie case col tool → poi lancio con LANCIO.md
 
+### Aggiornamento 02/07/2026 — pulizia finale emoji + font + testate pannello
+
+- ✅ TUTTE le emoji rimosse dall'interfaccia (censimento con regex, residuo: nessuna). Modal Pro: stella e icone ✉️📊🌏 → SVG a linea in riquadro arancio; scheda distanza: "Lavoro ·/Casa ·" colorati e "A piedi/In bici/In auto"; bottone misura senza righello; toast puliti
+- ✅ Testate del pannello dettaglio: via i gradienti verdi/blu vistosi → sfondo neutro tenue con icona del tipo in filigrana (SVG data-URI, opacità 22%). Con foto: la foto
+- ✅ Font UI: da Inter a **Plus Jakarta Sans** su tutto il sito (mappa, 4 pagine, pagine.css). Fraunces resta per i titoli, Nunito per il logo
+- Nota: ✕ e ✓ restano (simboli tipografici, non emoji)
+- Backup: index.backup-pro-icons.html
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
