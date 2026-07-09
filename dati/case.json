@@ -381,6 +381,101 @@
       },
       "source": "Flatmates",
       "url": "https://flatmates.com.au/studio-sydney-bronte-2024-P1966799"
+    },
+    {
+      "id": "h21",
+      "title": "Monolocale nuovo con balcone — Auburn",
+      "company": "Monolocale / Studio",
+      "price": 580,
+      "unit": "AUD/sett",
+      "lng": 151.0325,
+      "lat": -33.8488,
+      "desc": "Studio appena costruito con finiture in marmo, cucina con elettrodomestici europei, lavanderia interna, aria condizionata canalizzata e balcone privato con vista skyline. Edificio con sicurezza 24h. A 2 minuti a piedi dalla stazione di Auburn, 10 minuti di treno da Parramatta. Tutte le bollette incluse, contratto 3-12 mesi.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$1.160"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-auburn-2144-P1590226"
+    },
+    {
+      "id": "h22",
+      "title": "Stanza con vista oceano — North Bondi",
+      "company": "Appartamento condiviso con 1 persona",
+      "price": 690,
+      "unit": "AUD/sett",
+      "lng": 151.2825,
+      "lat": -33.8845,
+      "desc": "Stanza con vista sull'oceano in appartamento direttamente sulla spiaggia di Bondi, balcone con panorama. Si condivide con un dottorando appassionato di vita sana e outdoor, disponibile ad aiutarti ad ambientarti in Australia. Bollette incluse. No coppie.",
+      "meta": {
+        "Camere": "1 privata",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$2.720"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-north-bondi-2026-P1568282"
+    },
+    {
+      "id": "h23",
+      "title": "Stanza con bagno in grattacielo con piscina — Haymarket",
+      "company": "Appartamento condiviso con una coppia",
+      "price": 650,
+      "unit": "AUD/sett",
+      "lng": 151.2042,
+      "lat": -33.8792,
+      "desc": "Stanza privata con bagno proprio al 22° piano di un edificio ristrutturato con concierge 24h, piscina riscaldata, spa, sauna e palestra. Nel cuore del CBD: Central e Town Hall a pochi minuti a piedi, light rail a 1 minuto. Si vive con una coppia di professionisti tranquilli. Bollette incluse, anche coppie.",
+      "meta": {
+        "Camere": "1 privata (queen)",
+        "Bagno": "Proprio",
+        "Bills": "Inclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$2.600"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-haymarket-2000-P1187587"
+    },
+    {
+      "id": "h24",
+      "title": "Due stanze luminose vicino alla stazione — Kogarah",
+      "company": "Appartamento condiviso, ambiente accogliente",
+      "price": 380,
+      "unit": "AUD/sett",
+      "lng": 151.1328,
+      "lat": -33.9632,
+      "desc": "Due stanze arredate ($380 e $420) in appartamento luminoso e accogliente, a 4-5 minuti a piedi dalla stazione di Kogarah con treni frequenti per il centro. Spiaggia di Brighton-Le-Sands a 15-20 minuti a piedi. Coinquilini socievoli e rispettosi. Permanenza minima di solo 1 mese — perfetto per chi arriva.",
+      "meta": {
+        "Camere": "2 disponibili",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "1 mese",
+        "Bond": "$380-500"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-kogarah-2217-P1980528"
+    },
+    {
+      "id": "h25",
+      "title": "Stanza per studenti con balcone vicino a UNSW — Kingsford",
+      "company": "Townhouse per studenti",
+      "price": 350,
+      "unit": "AUD/sett",
+      "lng": 151.2272,
+      "lat": -33.9238,
+      "desc": "Stanza arredata con balcone privato in townhouse moderna a pochi minuti da UNSW, una traversa da Anzac Parade. Lenzuola nuove a ogni ingresso, lavanderia in casa, coinquilini tutti studenti di lungo periodo. Contratto standard NSW, bollette e internet inclusi.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "6 mesi",
+        "Bond": "$1.400"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/student-accommodation-sydney-kingsford-2032-P875775"
     }
   ]
 }

@@ -224,7 +224,9 @@ Flusso definitivo per le case (funziona!): Ale naviga Flatmates/Gumtree e incoll
 - Niente scraping in massa: solo i link che Ale sceglie e manda a mano
 - ✅ Aggiunte oggi: h10 North Ryde $400 · h11 Pyrmont $625 · h12 Crows Nest $310 · h13 Sydney CBD $500 · h14 Mascot $600 · h15 Glebe $385 (tutte Flatmates, con url)
 - Secondo giro: h16 Ryde $370 · h17 Guildford/Parramatta $280 · h18 South Granville studio $400 · h19 Dee Why $475 · h20 Bronte studio $650
-- SIAMO A 20 CASE (obiettivo 50) — mancano ~30
+- Terzo giro: h21 Auburn studio $580 · h22 North Bondi $690 · h23 Haymarket $650 · h24 Kogarah $380 (min 1 mese!) · h25 Kingsford studenti $350
+- SIAMO A 25 CASE (obiettivo 50) — metà strada!
+- Domanda di Ale sui link di pagina-risultati: risposto NO (sarebbe scraping automatico); il flusso resta 'lui sceglie i singoli annunci, click destro → copia link'
 - Il tool aggiungi-case.html resta come piano B
 
 ### Fase 3a — Stato avanzamento (18/05/2026)
