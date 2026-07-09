@@ -161,6 +161,22 @@ Ale ha notato che distribuire ad anelli i lavori con coordinate di zona crea pos
 - ✅ Case senza link: il bottone "Vedi su …" ora sparisce invece di restare visibile-ma-morto (sembrava rotto); le case aggiunte col tool con il link funzionano normalmente
 - ✅ Testato l'intero percorso casa → gruppo di lavori → lavoro dalla lista, in entrambe le direzioni geografiche, misura ripetuta senza ricaricare
 
+### Aggiornamento 02/07/2026 — SITO MULTI-PAGINA ("rivoluzione" chiesta da Ale)
+
+homjoo non è più solo la mappa: ora è un sito completo.
+- ✅ `pagine.css` — design system condiviso delle pagine di contenuto (stessi token della mappa: Fraunces/Geist/Nunito, arancio #ff5a3c)
+- ✅ `come-funziona.html` — 3 passi + sezione fiducia (lavori veri, onestà posizioni, case selezionate) + CTA
+- ✅ `faq.html` — 10 domande con accordion animato (piani, dati, blocco Adzuna estero, pubblicare una casa via email, ecc.)
+- ✅ `chi-siamo.html` — storia del progetto (onesta: progetto indipendente, niente team inventati), principi, roadmap pubblica
+- ✅ `privacy.html` — privacy in parole semplici (Supabase, nessun tracking, terze parti, diritti)
+- ✅ Navbar a pillola condivisa (glass, link attivo evidenziato, CTA "Apri la mappa"), footer condiviso con contatti
+- ✅ Animazioni fade-up allo scroll (IntersectionObserver, rispetta prefers-reduced-motion)
+- ✅ index.html: bottone ☰ in topbar con menu a tendina verso le pagine (chiude con click fuori/Esc)
+- ✅ Testato tutto: parsing pagine, link incrociati, accordion, menu — nessun errore
+- Backup: index.backup-menu.html
+
+**Prossimi passi quando Ale torna**: pubblicare col .bat, poi raccolta 50 case, poi lancio.
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi siamo — homjoo</title>
+<meta name="description" content="homjoo è un progetto indipendente che unisce lavori e case sulla stessa mappa. Città pilota: Sydney.">
+<meta property="og:title" content="Chi siamo — homjoo">
+<meta property="og:description" content="homjoo è un progetto indipendente che unisce lavori e case sulla stessa mappa. Città pilota: Sydney.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Geist:wght@400;500;600;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pagine.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">📍 homjoo</a>
+  <div class="nav-links">
+    <a href="come-funziona.html">Come funziona</a>
+    <a href="faq.html">FAQ</a>
+    <a href="chi-siamo.html" class="active">Chi siamo</a>
+  </div>
+  <a class="nav-cta" href="index.html">Apri la mappa</a>
+</nav>
+
+<header class="hero">
+  <span class="kicker">Chi siamo</span>
+  <h1>Cambiare vita non dovrebbe<br>richiedere venti schede aperte.</h1>
+  <p>homjoo nasce da una frustrazione semplice: chi vuole trasferirsi all'estero cerca il lavoro su un sito, la casa su un altro, e prova a incastrarli su una mappa mentale. Noi li abbiamo messi sulla stessa mappa vera.</p>
+</header>
+
+<div class="wrap">
+  <div class="section fade-up">
+    <h2>La storia</h2>
+    <p>homjoo è un progetto <b>indipendente</b>, nato in Italia e cresciuto un pezzo alla volta: prima la mappa, poi i lavori veri in tempo reale, poi la misura della distanza casa-lavoro. Nessun grande gruppo dietro, nessun investitore da accontentare — solo l'idea che pianificare un trasferimento debba essere emozionante, non stressante.</p>
+    <p>Abbiamo scelto <b>Sydney</b> come città pilota perché è una delle mete più sognate da chi riparte da zero: clima, lavoro, oceano. Quando homjoo funzionerà alla perfezione qui, arriveranno le prossime città.</p>
+  </div>
+
+  <div class="section fade-up">
+    <h2>I nostri principi</h2>
+    <div class="grid">
+      <div class="card"><div class="ico orange">🤝</div><h3>Onestà sui dati</h3><p>Se una posizione è approssimativa te lo diciamo. Se un annuncio non è nostro, ti portiamo alla fonte originale. Niente trucchi per sembrare più grandi.</p></div>
+      <div class="card"><div class="ico green">🆓</div><h3>Gratis per iniziare</h3><p>Cercare una nuova vita è già abbastanza costoso. La mappa resterà sempre gratuita; il Pro aggiungerà comodità, non toglierà l'essenziale.</p></div>
+      <div class="card"><div class="ico blue">🧭</div><h3>Una decisione, non due</h3><p>Lavoro e casa si scelgono insieme. Tutto quello che costruiamo — dalla mappa alla misura delle distanze — parte da qui.</p></div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <h2>Dove stiamo andando</h2>
+    <p>La roadmap è pubblica e semplice: più case verificate a Sydney, poi il piano <b>Pro</b> con alert email e statistiche sugli stipendi, poi nuove città. Se vuoi dire la tua, <a href="mailto:alessandro.vannoli@gmail.com" style="color:var(--accent);font-weight:600">scrivici</a>: homjoo cresce anche coi consigli di chi lo usa.</p>
+  </div>
+
+  <div class="cta-box fade-up">
+    <h2>Facciamo un giro insieme?</h2>
+    <p>La mappa di Sydney ti aspetta: lavori veri, case selezionate, distanze oneste.</p>
+    <a href="index.html">Apri la mappa</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <div class="col">
+      <b>📍 homjoo</b>
+      <span>Lavori e case a Sydney,<br>su una sola mappa.</span>
+    </div>
+    <div class="col">
+      <a href="index.html">Mappa</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="faq.html">FAQ</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+    </div>
+    <div class="col">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:alessandro.vannoli@gmail.com">Contattaci</a>
+      <span>Lavori via <a href="https://www.adzuna.com.au" target="_blank" rel="noopener">Adzuna</a> (API ufficiale)</span>
+    </div>
+    <div class="col">
+      <span>© 2026 homjoo</span>
+      <span>Fatto con ❤️ per chi cambia vita</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Animazioni di ingresso al scroll + accordion FAQ
+(function() {
+  'use strict';
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.parentElement;
+      var a = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o) {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = '0px';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

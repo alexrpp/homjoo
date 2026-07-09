@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come funziona homjoo — lavori e case su una mappa</title>
+<meta name="description" content="Esplora lavori veri e case a Sydney, misura la distanza casa-lavoro e candidati: ecco come funziona homjoo.">
+<meta property="og:title" content="Come funziona homjoo — lavori e case su una mappa">
+<meta property="og:description" content="Esplora lavori veri e case a Sydney, misura la distanza casa-lavoro e candidati: ecco come funziona homjoo.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Geist:wght@400;500;600;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pagine.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">📍 homjoo</a>
+  <div class="nav-links">
+    <a href="come-funziona.html" class="active">Come funziona</a>
+    <a href="faq.html">FAQ</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+  </div>
+  <a class="nav-cta" href="index.html">Apri la mappa</a>
+</nav>
+
+<header class="hero">
+  <span class="kicker">Come funziona</span>
+  <h1>Trasferirsi è due ricerche.<br>Noi le abbiamo unite.</h1>
+  <p>Nessuno accetta un lavoro senza sapere dove vivrà, o una casa senza sapere dove lavorerà. homjoo mette le due cose sulla stessa mappa.</p>
+</header>
+
+<div class="wrap">
+  <div class="section fade-up">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Esplora la mappa di Sydney</h3>
+        <p>I pin <b style="color:var(--job)">verdi</b> sono offerte di lavoro reali, aggiornate dalla rete Adzuna. I pin <b style="color:var(--home)">blu</b> sono case e stanze in affitto selezionate una a una. Filtri, cerchi per quartiere, e con il bottone 3D vedi persino i palazzi.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Misura la distanza casa-lavoro</h3>
+        <p>La funzione che non trovi da nessun'altra parte: apri un annuncio, premi <b>“📏 Quanto dista?”</b> e clicca un annuncio dell'altro tipo. La mappa disegna la linea e ti dice distanza e tempi stimati a piedi, in bici e in auto. Così scopri PRIMA di partire se quella vita funziona.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Candidati o contatta</h3>
+        <p>Per i lavori vai all'annuncio originale con un click e ti candidi lì. Per le case trovi il link alla fonte (Flatmates, Facebook, Gumtree…) e contatti direttamente chi affitta. homjoo non si mette in mezzo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <h2>Perché fidarsi dei nostri pin</h2>
+    <div class="grid">
+      <div class="card"><div class="ico green">💼</div><h3>Lavori veri</h3><p>Ogni offerta arriva dall'API ufficiale di Adzuna, che aggrega i principali portali australiani. Niente annunci inventati.</p></div>
+      <div class="card"><div class="ico orange">≈</div><h3>Onestà sulle posizioni</h3><p>Quando un annuncio ha solo la coordinata di zona, te lo diciamo con l'etichetta “posizione di zona” invece di fingere precisione.</p></div>
+      <div class="card"><div class="ico blue">🏠</div><h3>Case selezionate</h3><p>Le case vengono aggiunte manualmente, con il link all'annuncio originale. Qualità prima della quantità.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-box fade-up">
+    <h2>Pronto a vedere la tua nuova vita?</h2>
+    <p>La mappa è gratuita. Crea un account per salvare i tuoi preferiti ed essere avvisato delle novità.</p>
+    <a href="index.html">Apri la mappa di Sydney</a>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <div class="col">
+      <b>📍 homjoo</b>
+      <span>Lavori e case a Sydney,<br>su una sola mappa.</span>
+    </div>
+    <div class="col">
+      <a href="index.html">Mappa</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="faq.html">FAQ</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+    </div>
+    <div class="col">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:alessandro.vannoli@gmail.com">Contattaci</a>
+      <span>Lavori via <a href="https://www.adzuna.com.au" target="_blank" rel="noopener">Adzuna</a> (API ufficiale)</span>
+    </div>
+    <div class="col">
+      <span>© 2026 homjoo</span>
+      <span>Fatto con ❤️ per chi cambia vita</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Animazioni di ingresso al scroll + accordion FAQ
+(function() {
+  'use strict';
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.parentElement;
+      var a = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o) {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = '0px';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

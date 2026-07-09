@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — homjoo</title>
+<meta name="description" content="Come homjoo tratta i tuoi dati: in parole semplici, senza legalese.">
+<meta property="og:title" content="Privacy — homjoo">
+<meta property="og:description" content="Come homjoo tratta i tuoi dati: in parole semplici, senza legalese.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Geist:wght@400;500;600;700&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pagine.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="index.html">📍 homjoo</a>
+  <div class="nav-links">
+    <a href="come-funziona.html">Come funziona</a>
+    <a href="faq.html">FAQ</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+  </div>
+  <a class="nav-cta" href="index.html">Apri la mappa</a>
+</nav>
+
+<header class="hero">
+  <span class="kicker">Privacy</span>
+  <h1>La tua privacy, in parole semplici</h1>
+  <p>Niente legalese incomprensibile: ecco esattamente quali dati tratta homjoo e perché.</p>
+</header>
+
+<div class="wrap">
+  <div class="section fade-up">
+    <h2>Cosa raccogliamo</h2>
+    <p><b>Account (facoltativo).</b> Se ti registri salviamo nome, email e password (protetta e gestita da <a href="https://supabase.com" target="_blank" rel="noopener" style="color:var(--accent)">Supabase</a>, che la conserva in forma cifrata: noi non la vediamo mai). Usiamo l'email solo per la conferma dell'account e, in futuro e solo se vorrai, per gli avvisi del piano Pro.</p>
+    <p><b>Nessun tracciamento pubblicitario.</b> homjoo non usa cookie di profilazione, non vende dati e non mostra pubblicità.</p>
+  </div>
+  <div class="section fade-up">
+    <h2>Servizi di terze parti</h2>
+    <p>Per funzionare, il sito carica contenuti da alcuni fornitori: <b>CARTO/OpenStreetMap</b> (le mappe), <b>Adzuna</b> (le offerte di lavoro), <b>Google Fonts</b> (i caratteri), <b>Supabase</b> (gli account) e <b>Vercel</b> (l'hosting). Quando visiti il sito, questi servizi possono vedere il tuo indirizzo IP come qualsiasi sito che visiti, secondo le loro rispettive privacy policy.</p>
+  </div>
+  <div class="section fade-up">
+    <h2>I tuoi diritti</h2>
+    <p>Puoi chiedere in qualsiasi momento la cancellazione del tuo account e dei dati associati scrivendo a <a href="mailto:alessandro.vannoli@gmail.com" style="color:var(--accent);font-weight:600">alessandro.vannoli@gmail.com</a>. Rispondiamo, davvero.</p>
+    <p style="font-size:13px;color:var(--ink-faint)">Ultimo aggiornamento: luglio 2026.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <div class="col">
+      <b>📍 homjoo</b>
+      <span>Lavori e case a Sydney,<br>su una sola mappa.</span>
+    </div>
+    <div class="col">
+      <a href="index.html">Mappa</a>
+      <a href="come-funziona.html">Come funziona</a>
+      <a href="faq.html">FAQ</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+    </div>
+    <div class="col">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:alessandro.vannoli@gmail.com">Contattaci</a>
+      <span>Lavori via <a href="https://www.adzuna.com.au" target="_blank" rel="noopener">Adzuna</a> (API ufficiale)</span>
+    </div>
+    <div class="col">
+      <span>© 2026 homjoo</span>
+      <span>Fatto con ❤️ per chi cambia vita</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Animazioni di ingresso al scroll + accordion FAQ
+(function() {
+  'use strict';
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.parentElement;
+      var a = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o) {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = '0px';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

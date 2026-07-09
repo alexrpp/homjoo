@@ -1214,6 +1214,50 @@
   }
   .pair-card-clear:hover { background: var(--accent-soft); border-color: var(--accent); color: #c2371d; }
 
+  /* Menu di navigazione (pagine del sito) */
+  .menu-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+  .menu-btn:hover { background: var(--accent-soft); }
+  .menu-pop {
+    position: fixed;
+    top: 76px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    z-index: 40;
+    width: min(280px, calc(100vw - 32px));
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s, transform .18s;
+  }
+  .menu-pop.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .menu-pop a {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background .12s;
+  }
+  .menu-pop a:hover { background: var(--accent-soft); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1253,6 +1297,18 @@
   </div>
   <button class="btn-auth" id="authBtn"><span class="auth-dot"></span><span id="authBtnText">Accedi</span></button>
   <button class="btn-pro">Passa a Pro</button>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" title="Menu">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</div>
+
+<!-- MENU DI NAVIGAZIONE -->
+<div class="menu-pop" id="menuPop">
+  <a href="come-funziona.html">🧭 Come funziona</a>
+  <a href="faq.html">💬 FAQ</a>
+  <a href="chi-siamo.html">👋 Chi siamo</a>
+  <a href="privacy.html">🔒 Privacy</a>
+  <a href="mailto:alessandro.vannoli@gmail.com">✉️ Contattaci</a>
 </div>
 
 <!-- FILTRI -->
@@ -2493,6 +2549,21 @@
 
   function openModal() { setMode('login'); overlay.classList.add('open'); $('authEmail').focus(); }
   function closeModal() { overlay.classList.remove('open'); hideMsg(); }
+
+  // Menu di navigazione verso le pagine del sito
+  var menuBtn = $('menuBtn'), menuPop = $('menuPop');
+  if (menuBtn && menuPop) {
+    menuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuPop.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!menuPop.contains(e.target)) menuPop.classList.remove('open');
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') menuPop.classList.remove('open');
+    });
+  }
 
   authBtn.addEventListener('click', function() {
     if (!supa) {
