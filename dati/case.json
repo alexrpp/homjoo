@@ -476,6 +476,196 @@
       },
       "source": "Flatmates",
       "url": "https://flatmates.com.au/student-accommodation-sydney-kingsford-2032-P875775"
+    },
+    {
+      "id": "h26",
+      "title": "Monolocale nuovo vicino a Granville — Harris Park",
+      "company": "Monolocale / Studio",
+      "price": 480,
+      "unit": "AUD/sett",
+      "lng": 151.0092,
+      "lat": -33.8232,
+      "desc": "Studio quasi nuovo con bagno privato, angolo cottura con frigo e microonde, aria condizionata e armadio a muro. A pochi passi dalla stazione di Granville. Bollette escluse, parcheggio a $25/sett. Anche per coppie.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Esclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$960"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-harris-park-2150-P1677933"
+    },
+    {
+      "id": "h27",
+      "title": "Tre stanze a 15 minuti dalla spiaggia — Bondi",
+      "company": "Casa condivisa, ventenni",
+      "price": 300,
+      "unit": "AUD/sett",
+      "lng": 151.2652,
+      "lat": -33.8928,
+      "desc": "Tre stanze ampie e soleggiate ($300, $350 e $385) in casa condivisa con giovani professionisti e studenti. 15 minuti a piedi da Bondi Beach, vicino a Bondi Junction per treni e negozi. Grande giardino con zona coperta. Tutto incluso nel prezzo.",
+      "meta": {
+        "Camere": "3 disponibili (doppie)",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$600-770"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-bondi-2026-P1901507"
+    },
+    {
+      "id": "h28",
+      "title": "Monolocale con bagno e cucina privati — Glebe",
+      "company": "Monolocale / Studio",
+      "price": 500,
+      "unit": "AUD/sett",
+      "lng": 151.1848,
+      "lat": -33.8808,
+      "desc": "Studio luminoso e indipendente in strada tranquilla nel cuore di Glebe: bagno e cucina tutti tuoi, più accesso a salotto comune, lavanderia e giardino recintato. 5 minuti dall'Università di Sydney, 10 da Broadway e dalla light rail. Tutto incluso. Dal 13 luglio, anche coppie.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$1.000"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-glebe-2037-P1764024"
+    },
+    {
+      "id": "h29",
+      "title": "Appartamento intero con 1 camera — Enmore",
+      "company": "Appartamento intero",
+      "price": 600,
+      "unit": "AUD/sett",
+      "lng": 151.1712,
+      "lat": -33.8992,
+      "desc": "Bilocale tutto tuo in strada tranquilla a due passi dalla vivace Enmore Road: camera, salotto con divano e smart TV, cucina completa, lavatrice e asciugatrice. 11 minuti a piedi dalle stazioni di Stanmore o Newtown. Bollette e internet inclusi, contratto 3-12 mesi, anche coppie.",
+      "meta": {
+        "Camere": "1 (appartamento intero)",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$2.400"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/1-bed-sydney-enmore-2042-P1669352"
+    },
+    {
+      "id": "h30",
+      "title": "Monolocale nuovo con cortile privato — Strathfield",
+      "company": "Monolocale / Studio",
+      "price": 575,
+      "unit": "AUD/sett",
+      "lng": 151.0928,
+      "lat": -33.8732,
+      "desc": "Studio appena costruito con finiture in marmo, cucina con elettrodomestici europei, lavanderia interna, aria condizionata e cortile privato. A 5 minuti a piedi dalla stazione di Strathfield: 13 minuti di treno espresso da Central, 10 da Parramatta. Tutto incluso. Dal 20 luglio.",
+      "meta": {
+        "Camere": "Studio",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$2.300"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-strathfield-2135-P1721917"
+    },
+    {
+      "id": "h31",
+      "title": "Quattro stanze davanti al parco — Camperdown",
+      "company": "Casa condivisa, studenti e giovani professionisti",
+      "price": 295,
+      "unit": "AUD/sett",
+      "lng": 151.1768,
+      "lat": -33.8892,
+      "desc": "Quattro stanze arredate (da $295 a $385, una con bagno privato) proprio di fronte a Camperdown Park. 10 minuti a piedi dall'Università di Sydney e dall'ospedale RPA. Coinquilini ventenni socievoli e tranquilli. Tutte le bollette incluse, contratto flessibile 3-12 mesi.",
+      "meta": {
+        "Camere": "4 disponibili",
+        "Bagno": "Condiviso (1 ensuite)",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$590-770"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-camperdown-2050-P1835871"
+    },
+    {
+      "id": "h32",
+      "title": "Stanza con balcone privato — Kingsford",
+      "company": "Casa condivisa, giovani professionisti",
+      "price": 340,
+      "unit": "AUD/sett",
+      "lng": 151.2298,
+      "lat": -33.9252,
+      "desc": "Stanza singola grande con balcone privato in casa di 7 camere abitata da giovani professionisti. Pulizie settimanali incluse nel prezzo, internet illimitato, bollette comprese. Disponibile subito.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$1.120"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-kingsford-2032-P1121520"
+    },
+    {
+      "id": "h33",
+      "title": "Sei stanze in casa premium — Turramurra",
+      "company": "Casa condivisa, North Shore",
+      "price": 350,
+      "unit": "AUD/sett",
+      "lng": 151.1288,
+      "lat": -33.7338,
+      "desc": "Sei stanze arredate (da $350 a $450, una con bagno privato per coppie) in grande casa curata nel verde dell'Upper North Shore. Stazione di Turramurra a 450 metri: 15 minuti di treno da Chatswood. Pulizie due volte a settimana, bollette e Wi-Fi inclusi.",
+      "meta": {
+        "Camere": "6 disponibili",
+        "Bagno": "Condiviso (1 ensuite)",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi",
+        "Bond": "3 settimane"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-turramurra-2074-P1967336"
+    },
+    {
+      "id": "h34",
+      "title": "Le più economiche: stanze da $250 — Lewisham",
+      "company": "Casa condivisa, ventenni",
+      "price": 250,
+      "unit": "AUD/sett",
+      "lng": 151.1492,
+      "lat": -33.8962,
+      "desc": "Due stanze luminose ($250 e $295) in casa grande dell'Inner West, a 10 minuti a piedi dalla stazione di Lewisham e dalla light rail. Cucina con due frigo e lavastoviglie, internet NBN100 velocissimo, pulizie professionali incluse. Tutto compreso nel prezzo.",
+      "meta": {
+        "Camere": "2 disponibili",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$500-590"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-lewisham-2049-P1640659"
+    },
+    {
+      "id": "h35",
+      "title": "Posto letto economico in pieno centro — Haymarket",
+      "company": "Stanza condivisa (solo ragazzi)",
+      "price": 305,
+      "unit": "AUD/sett",
+      "lng": 151.2068,
+      "lat": -33.8772,
+      "desc": "Posto letto in stanza condivisa nel cuore del CBD, a 3 minuti dalla stazione Museum: la soluzione più economica per vivere in centro. Palazzo con palestra, piscina e jacuzzi. Gestito da un'agenzia con contratto regolare. Solo ragazzi, minimo 4 mesi (+$55 di spese amministrative).",
+      "meta": {
+        "Camere": "Posto letto condiviso",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "4 mesi",
+        "Bond": "2 settimane"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-haymarket-2000-P1694743"
     }
   ]
 }
