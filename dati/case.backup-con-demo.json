@@ -12,6 +12,150 @@
   ],
   "case": [
     {
+      "id": "h1",
+      "title": "Stanza singola — Surry Hills",
+      "company": "Casa condivisa, 4 inquilini",
+      "price": 380,
+      "unit": "AUD/sett",
+      "lng": 151.2155,
+      "lat": -33.8862,
+      "desc": "Stanza luminosa in casa condivisa con altri 3 expat. Wi-Fi, lavatrice, 5 min dalla metro Central.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi"
+      },
+      "source": "Flatmates",
+      "url": null
+    },
+    {
+      "id": "h2",
+      "title": "Studio moderno — CBD",
+      "company": "Appartamento intero",
+      "price": 620,
+      "unit": "AUD/sett",
+      "lng": 151.2085,
+      "lat": -33.8706,
+      "desc": "Studio al 18° piano con vista parziale Opera House. Ammobiliato. Palestra e piscina nel building.",
+      "meta": {
+        "Tipo": "Studio",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "6 mesi"
+      },
+      "source": "Domain",
+      "url": null
+    },
+    {
+      "id": "h3",
+      "title": "Stanza doppia — Bondi Junction",
+      "company": "Casa condivisa, 5 inquilini",
+      "price": 320,
+      "unit": "AUD/sett",
+      "lng": 151.2552,
+      "lat": -33.8928,
+      "desc": "Stanza doppia ideale per coppie. Casa internazionale, atmosfera giovane. 10 min a piedi dalla spiaggia.",
+      "meta": {
+        "Camere": "1 doppia",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "2 mesi"
+      },
+      "source": "Flatmates",
+      "url": null
+    },
+    {
+      "id": "h4",
+      "title": "Bilocale — Newtown",
+      "company": "Appartamento intero",
+      "price": 580,
+      "unit": "AUD/sett",
+      "lng": 151.181,
+      "lat": -33.8965,
+      "desc": "Bilocale in tipica casa terrazzata vittoriana. Quartiere artistico, pieno di caffè e locali.",
+      "meta": {
+        "Camere": "1 da letto",
+        "Mobili": "Parziale",
+        "Bills": "Esclusi",
+        "Min stay": "12 mesi"
+      },
+      "source": "Domain",
+      "url": null
+    },
+    {
+      "id": "h5",
+      "title": "Stanza singola — Glebe",
+      "company": "Casa condivisa, 3 inquilini",
+      "price": 350,
+      "unit": "AUD/sett",
+      "lng": 151.187,
+      "lat": -33.8798,
+      "desc": "Vicino all'Università di Sydney, perfetto per studenti. Giardino comune, gatto residente friendly.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi"
+      },
+      "source": "Flatmates",
+      "url": null
+    },
+    {
+      "id": "h6",
+      "title": "Loft — Alexandria",
+      "company": "Appartamento intero",
+      "price": 690,
+      "unit": "AUD/sett",
+      "lng": 151.1925,
+      "lat": -33.909,
+      "desc": "Loft industriale convertito, soffitti alti, mattoni a vista. Quartiere in trasformazione, tanti caffè nuovi.",
+      "meta": {
+        "Tipo": "Loft",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "6 mesi"
+      },
+      "source": "Domain",
+      "url": null
+    },
+    {
+      "id": "h7",
+      "title": "Stanza singola — Manly",
+      "company": "Casa condivisa, 4 inquilini",
+      "price": 410,
+      "unit": "AUD/sett",
+      "lng": 151.284,
+      "lat": -33.7967,
+      "desc": "A 8 minuti a piedi dalla spiaggia di Manly. Ferry diretto al CBD ogni 30 min. Stile surf/beach.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Privato",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi"
+      },
+      "source": "Flatmates",
+      "url": null
+    },
+    {
+      "id": "h8",
+      "title": "Stanza in appartamento — Chippendale",
+      "company": "Casa condivisa, 2 inquilini",
+      "price": 360,
+      "unit": "AUD/sett",
+      "lng": 151.1987,
+      "lat": -33.8861,
+      "desc": "Appartamento moderno con due ragazze italiane. Vicino Central Park, palestra in edificio, sicuro.",
+      "meta": {
+        "Camere": "1 singola",
+        "Bagno": "Condiviso",
+        "Bills": "Inclusi",
+        "Min stay": "4 mesi"
+      },
+      "source": "Spotahome",
+      "url": null
+    },
+    {
       "id": "h9",
       "title": "Studio mobiliato — Burwood",
       "company": "Studio mono-locale ammobiliato",
