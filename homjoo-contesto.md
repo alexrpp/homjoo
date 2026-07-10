@@ -227,7 +227,10 @@ Flusso definitivo per le case (funziona!): Ale naviga Flatmates/Gumtree e incoll
 - Terzo giro: h21 Auburn studio $580 · h22 North Bondi $690 · h23 Haymarket $650 · h24 Kogarah $380 (min 1 mese!) · h25 Kingsford studenti $350
 - Quarto giro (il grande): h26 Harris Park studio $480 · h27 Bondi 3 stanze da $300 · h28 Glebe studio $500 · h29 Enmore APPARTAMENTO INTERO $600 · h30 Strathfield studio $575 · h31 Camperdown 4 stanze da $295 · h32 Kingsford $340 · h33 Turramurra 6 stanze da $350 · h34 Lewisham da $250 (le più economiche) · h35 Haymarket posto letto $305
 - Ale ha notato che ad alcune case mancava il bottone "Vedi su Flatmates" → erano le 8 case DEMO di maggio senza url (il bottone si nasconde senza link). RIMOSSE: ora il sito è 100% annunci veri (backup: dati/case.backup-con-demo.json)
-- SIAMO A 27 CASE VERE (obiettivo 50) — mancano ~23
+- NUOVO OBIETTIVO di Ale: 100 case entro domenica (~25 link/giorno col flusso link-in-chat)
+- Manutenzione concordata: ogni 1-2 settimane Ale scrive "controlla le case" → io verifico tutti i link e rimuovo le case affittate/scadute
+- Aggiunto campo "aggiunta" (data inserimento) a ogni casa in case.json per sapere quali ricontrollare prima (il sito ignora i campi extra, nessun impatto)
+- SIAMO A 27 CASE VERE
 - NOTA: realestate.com.au NON si può leggere (dominio bloccato per il fetch) → per quei link Ale deve copiare/incollare il testo della pagina (Ctrl+A, Ctrl+C) in chat
 - Domanda di Ale sui link di pagina-risultati: risposto NO (sarebbe scraping automatico); il flusso resta 'lui sceglie i singoli annunci, click destro → copia link'
 - Il tool aggiungi-case.html resta come piano B
@@ -250,6 +253,14 @@ Meccanica di crescita: salvare un annuncio richiede l'account GRATUITO (non Pro)
 - Tecnica: lo script auth espone window.homjooUser e window.homjooChiediRegistrazione(motivo); la mappa li usa per il gate
 - Funnel così definito: mappa libera → salvataggio = registrazione gratis (email!) → in futuro Pro €5 = sync multi-dispositivo, alert email, ecc.
 - Testato: gate ospite (bottone e cuore), messaggio, salvataggio post-login
+
+### DECISIONE MONETIZZAZIONE 10/07/2026 (sostituisce il "Pro €5/mese")
+
+Modello scelto da Ale col mio consiglio: **Pass homjoo — €15 UNA TANTUM per 3 mesi**, NO rinnovo automatico (su Stripe: one-time payment, non subscription). Motivo: homjoo è un prodotto "da trasloco" (si usa 2-3 mesi), l'abbonamento ricorrente genera churn e rabbia; il pass a scadenza naturale è più onesto e incassa di più per utente.
+- Dentro il Pass: alert email, salvati sincronizzati, statistiche stipendi, città nuove in anteprima
+- Al lancio: tutto gratis; eventualmente test "Pass a vita primi 50 iscritti €9,90"
+- Fonti di ricavo future complementari: annunci "in evidenza" per proprietari (~AU$20-30/30gg) + affiliazioni kit trasferimento (assicurazioni expat, Wise, SIM)
+- ✅ Aggiornati modal Pro (index.html) e FAQ col nuovo modello
 
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
