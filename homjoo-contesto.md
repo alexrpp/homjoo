@@ -262,6 +262,15 @@ Modello scelto da Ale col mio consiglio: **Pass homjoo — €15 UNA TANTUM per 
 - Fonti di ricavo future complementari: annunci "in evidenza" per proprietari (~AU$20-30/30gg) + affiliazioni kit trasferimento (assicurazioni expat, Wise, SIM)
 - ✅ Aggiornati modal Pro (index.html) e FAQ col nuovo modello
 
+### Aggiornamento 10/07/2026 — PACCHETTO SEO COMPLETO
+
+- ✅ sitemap.xml (5 pagine con priorità) + robots.txt (blocca /dati e /api, punta alla sitemap)
+- ✅ Canonical + og:site_name su tutte le pagine
+- ✅ JSON-LD: WebSite+Organization sulla home; FAQPage con le 10 domande su faq.html (candidata ai rich results di Google)
+- ✅ Titoli/description riscritti su keyword italiane: "trasferirsi a Sydney", "lavoro e casa a Sydney" (home title 57 caratteri)
+- ✅ SEO.md nella cartella: guida per Ale — DEVE registrare il sito su Google Search Console (metodo Tag HTML: mi incolla il meta tag e glielo inserisco) e inviare sitemap.xml
+- Note strategiche in SEO.md: dominio custom consigliato, SEO vera = contenuti (guide su Sydney) dopo il lancio
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

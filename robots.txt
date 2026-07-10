@@ -1,0 +1,7 @@
+# homjoo — robots.txt
+User-agent: *
+Allow: /
+Disallow: /dati/
+Disallow: /api/
+
+Sitemap: https://homjoo.vercel.app/sitemap.xml
