@@ -271,6 +271,17 @@ Modello scelto da Ale col mio consiglio: **Pass homjoo — €15 UNA TANTUM per 
 - ✅ SEO.md nella cartella: guida per Ale — DEVE registrare il sito su Google Search Console (metodo Tag HTML: mi incolla il meta tag e glielo inserisco) e inviare sitemap.xml
 - Note strategiche in SEO.md: dominio custom consigliato, SEO vera = contenuti (guide su Sydney) dopo il lancio
 
+### DECISIONE 10/07/2026 — "Anteprima 48h col Pass" (evoluzione dell'idea di Ale)
+
+Ale proponeva: parte degli annunci bloccata dietro pagamento. Problemi spiegati: (1) gli annunci sono pubblici alla fonte → pagare per vederli = sensazione di truffa; (2) case.json è un file pubblico → blocco client-side è finto.
+Versione approvata: **ACCESSO ANTICIPATO 48H** — le case appena inserite sono riservate al Pass per 48h (pin grigio col lucchetto per i free: "sblocca in anticipo"), poi diventano gratis per tutti. Onesto (si paga la velocità, non l'informazione) e vero valore a Sydney dove le stanze vanno via in ore.
+Architettura tecnica (Fase 4, DOPO il lancio):
+- Tabella Supabase `case_premium` con RLS: SELECT consentita solo a utenti presenti in tabella `pass` (user_id, expires_at)
+- Stripe one-time payment €15 → attivazione (v1 manuale: Ale inserisce l'email del pagante nella tabella pass; poi webhook)
+- Il sito, se loggato con Pass, interroga Supabase e aggiunge i pin premium; dopo 48h la casa migra nel case.json pubblico
+- Campo "aggiunta" già presente su ogni casa (preparato oggi)
+DECISIONE DI ALE: lancio domenica TUTTO GRATIS, sistema Pass costruito nelle ~2 settimane successive con utenti veri.
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:
