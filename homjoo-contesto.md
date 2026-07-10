@@ -282,6 +282,17 @@ Architettura tecnica (Fase 4, DOPO il lancio):
 - Campo "aggiunta" già presente su ogni casa (preparato oggi)
 DECISIONE DI ALE: lancio domenica TUTTO GRATIS, sistema Pass costruito nelle ~2 settimane successive con utenti veri.
 
+### Aggiornamento 10/07/2026 — STRUTTURA PASS 48H INSTALLATA (spenta)
+
+Tutto pronto nel codice, comportamento del sito INVARIATO fino all'attivazione:
+- ✅ PASS_CONFIG in index.html: { attivo: false, oreAnteprima: 48 } — l'interruttore
+- ✅ Badge arancio "Nuovo" sui pin delle case inserite nelle ultime 48h (QUESTO è già attivo — usa il campo "aggiunta")
+- ✅ Motore dormiente caricaCasePremium(): con flag attivo, chi ha il Pass legge la tabella Supabase 'case_anteprima'; chi non ce l'ha vede i pin grigi col lucchetto (dal teaser pubblico) che cliccati aprono il modal del Pass
+- ✅ Auth script: window.homjooSupa esposto + verificaPass() che controlla la tabella 'pass' (fallisce in silenzio finché non esiste)
+- ✅ PASS-SETUP.sql nella cartella: crea tabelle pass + case_anteprima con RLS + vista teaser, con istruzioni per attivare un Pass manualmente dopo pagamento Stripe
+- Testato: badge Nuovo funziona, zero chiamate premium e zero pin bloccati a flag spento
+COME SI ATTIVA (dopo il lancio): 1) eseguire PASS-SETUP.sql su Supabase; 2) creare Payment Link Stripe €15 one-time; 3) PASS_CONFIG.attivo=true e pubblicare; 4) nuove case → tabella case_anteprima invece di case.json, dopo 48h migrare in case.json
+
 ### Fase 3a — Stato avanzamento (18/05/2026)
 
 **Fatto**:

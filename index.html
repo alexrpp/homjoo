@@ -1419,6 +1419,28 @@
   .panel-fav svg { flex-shrink: 0; }
   .panel-fav.saved svg { fill: var(--accent); stroke: var(--accent); }
 
+  /* Badge "Nuovo" sulle case delle ultime 48h */
+  .pin-new-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    padding: 3px 7px;
+    margin-left: 2px;
+  }
+
+  /* Pin bloccato (anteprima Pass, per chi non ha il Pass) */
+  .pin.locked .pin-inner {
+    background: #f1f0ec;
+    color: var(--ink-faint);
+    border: 1.5px dashed rgba(10,10,10,0.22);
+  }
+  .pin.locked .pin-inner .icon { background: var(--ink-faint); }
+  .pin.locked:hover .pin-inner { border-color: var(--accent); color: var(--ink); }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .topbar { width: calc(100vw - 16px); top: 8px; padding: 6px 6px 6px 14px; }
@@ -1671,6 +1693,23 @@
 
   const SYDNEY_CENTER = [151.2093, -33.8688];
 
+  // ============ CONFIGURAZIONE PASS (anteprima 48h) ============
+  // STRUTTURA PRONTA MA SPENTA: quando il sistema di pagamento sarà
+  // attivo, basterà mettere attivo:true (e creare le tabelle Supabase
+  // con lo script PASS-SETUP.sql). Finché è false, il sito si comporta
+  // esattamente come oggi.
+  const PASS_CONFIG = {
+    attivo: false,        // <-- interruttore generale
+    oreAnteprima: 48      // le case nuove restano riservate al Pass per queste ore
+  };
+
+  // Una casa è "nuova" se inserita nelle ultime 48 ore (campo "aggiunta")
+  function eNuova(item) {
+    if (!item.aggiunta) return false;
+    const eta = Date.now() - new Date(item.aggiunta + 'T00:00:00').getTime();
+    return eta >= 0 && eta < PASS_CONFIG.oreAnteprima * 3600 * 1000;
+  }
+
   // ============ INIZIALIZZAZIONE MAPPA ============
   let map;
   try {
@@ -1732,10 +1771,12 @@
     const el = document.createElement('div');
     el.className = 'pin ' + item.type + ' pin-new';
     el.style.setProperty('--pin-delay', ((markers.length % 24) * 28) + 'ms');
+    const badgeNuovo = (item.type === 'home' && eNuova(item))
+      ? '<span class="pin-new-badge">Nuovo</span>' : '';
     el.innerHTML =
       '<div class="pin-inner">' +
         '<span class="icon">' + (item.type === 'job' ? jobIcon() : homeIcon()) + '</span>' +
-        '<span>' + formatPrice(item) + '</span>' +
+        '<span>' + formatPrice(item) + '</span>' + badgeNuovo +
       '</div>';
 
     el.addEventListener('click', function(e) {
@@ -1932,6 +1973,7 @@
     updateCounts();        // i contatori partono da "00"
     loadHomes();           // fetch /dati/case.json
     loadJobs();            // fetch /api/jobs
+    setTimeout(caricaCasePremium, 800); // case in anteprima Pass (dormiente)
     add3DBuildings();      // edifici 3D (se il basemap li supporta)
     startIntro();          // volo cinematico su Sydney
   }
@@ -2163,6 +2205,60 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') { cancelPair(); clearPairResult(); }
   });
+
+  // ============ MOTORE PASS (dormiente finché PASS_CONFIG.attivo=false) ============
+  // Come funzionerà: le case appena inserite NON andranno in case.json ma
+  // nella tabella Supabase 'case_anteprima' (protetta da RLS: la leggono
+  // solo gli utenti col Pass). Una tabella pubblica 'case_anteprima_teaser'
+  // espone solo zona+prezzo: per chi non ha il Pass diventano pin grigi
+  // col lucchetto che invitano all'acquisto. Dopo 48h Ale sposta la casa
+  // nel case.json pubblico (o lo farà uno script).
+  async function caricaCasePremium() {
+    if (!PASS_CONFIG.attivo) return;
+    const supa = window.homjooSupa;
+    if (!supa) return;
+    try {
+      if (window.homjooHasPass) {
+        // Utente col Pass: dettagli completi
+        const { data: righe, error } = await supa.from('case_anteprima').select('*');
+        if (error || !righe) return;
+        righe.forEach(function(r) {
+          data.push({
+            id: 'prem_' + r.id, type: 'home', title: r.title, company: r.company,
+            price: r.price, unit: r.unit || 'AUD/sett', lng: r.lng, lat: r.lat,
+            desc: r.desc, meta: r.meta || {}, source: r.source, url: r.url,
+            aggiunta: r.aggiunta, _premium: true
+          });
+        });
+      } else {
+        // Senza Pass: solo il teaser (zona + prezzo) come pin bloccati
+        const { data: righe, error } = await supa.from('case_anteprima_teaser').select('*');
+        if (error || !righe) return;
+        righe.forEach(function(r) { creaPinBloccato(r); });
+      }
+      updateCounts();
+      rebuildMap();
+    } catch (e) { console.warn('Case premium non disponibili:', e); }
+  }
+
+  function creaPinBloccato(r) {
+    const el = document.createElement('div');
+    el.className = 'pin home locked';
+    el.innerHTML =
+      '<div class="pin-inner">' +
+        '<span class="icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>' +
+        '<span>Anteprima Pass</span>' +
+      '</div>';
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Apre il modal del Pass: il pin bloccato è il venditore migliore
+      const btn = document.querySelector('.btn-pro');
+      if (btn) btn.click();
+    });
+    const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      .setLngLat([r.lng, r.lat]).addTo(map);
+    markers.push({ marker: marker, el: el, item: null });
+  }
 
   // ============ SALVATI (SHORTLIST) ============
   // Gli annunci salvati vivono nel browser dell'utente (localStorage).
@@ -2754,6 +2850,20 @@
   // Client Supabase (solo se SDK caricato e key configurata)
   if (window.supabase && SUPABASE_KEY.indexOf('sb_') === 0) {
     supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    window.homjooSupa = supa; // usato dal motore Pass della mappa
+  }
+
+  // Verifica se l'utente ha un Pass attivo (tabella 'pass' su Supabase).
+  // Finché la tabella non esiste, fallisce in silenzio: nessun effetto.
+  window.homjooHasPass = false;
+  async function verificaPass(user) {
+    if (!supa || !user) { window.homjooHasPass = false; return; }
+    try {
+      const { data, error } = await supa.from('pass')
+        .select('expires_at').eq('user_id', user.id)
+        .gte('expires_at', new Date().toISOString()).limit(1);
+      window.homjooHasPass = !error && data && data.length > 0;
+    } catch (e) { window.homjooHasPass = false; }
   }
 
   function displayName(user) {
@@ -2764,6 +2874,7 @@
   function updateUI(user) {
     currentUser = user;
     window.homjooUser = user || null; // visibile alla mappa (per il gate dei salvati)
+    verificaPass(user); // controlla il Pass (dormiente finché la tabella non esiste)
     if (user) {
       authBtn.classList.add('logged');
       authBtnText.textContent = displayName(user);
