@@ -40,7 +40,10 @@ rem --- 3. Nome e email per le modifiche (solo se mancanti) ---
 git config user.name >nul 2>nul || git config user.name "alexrpp"
 git config user.email >nul 2>nul || git config user.email "alessandro.vannoli@gmail.com"
 
-rem --- 4. Prepara e invia le modifiche ---
+rem --- 4. Rimuovi dal repository eventuali file privati gia' caricati ---
+git rm -r --cached --ignore-unmatch homjoo-contesto.md brief-replit.md LANCIO.md SEO.md PASS-SETUP.sql aggiungi-case.html api/jobs.backup.js dati/case.backup-con-demo.json >nul 2>nul
+
+rem --- 5. Prepara e invia le modifiche ---
 git add -A
 git diff --cached --quiet
 if errorlevel 1 (

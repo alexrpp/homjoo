@@ -1,5 +1,15 @@
+# --- File privati: NON pubblicare mai ---
+homjoo-contesto.md
+brief-replit.md
+LANCIO.md
+SEO.md
+PASS-SETUP.sql
+aggiungi-case.html
+
+# --- Backup e file temporanei ---
 index.backup-*.html
+api/jobs.backup.js
+dati/case.backup-*.json
 *.bak
 Thumbs.db
 desktop.ini
-aggiungi-case.html
