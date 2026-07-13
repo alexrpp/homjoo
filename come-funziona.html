@@ -72,6 +72,37 @@
     </div>
   </div>
 
+  <div class="section fade-up">
+    <h2>Il costo dell'attesa</h2>
+    <p>Cercare casa e lavoro da lontano ha un costo nascosto: ogni giorno in più tra alloggi temporanei e stipendi non incassati pesa sul budget. Fatti due conti.</p>
+    <div class="calc">
+      <div class="calc-riga">
+        <label for="calcGiorni">Quanti giorni pensi di metterci a sistemarti?</label>
+        <div class="calc-slider">
+          <input type="range" id="calcGiorni" min="7" max="60" value="21" step="1">
+          <span class="calc-giorni" id="calcGiorniVal">21 giorni</span>
+        </div>
+      </div>
+      <div class="calc-riga">
+        <label for="calcAlloggio">Dove dormi nel frattempo?</label>
+        <select id="calcAlloggio">
+          <option value="55">Ostello (~AU$55 a notte)</option>
+          <option value="115">Stanza temporanea / Airbnb (~AU$115 a notte)</option>
+          <option value="0">Da amici o parenti (AU$0)</option>
+        </select>
+      </div>
+      <div class="calc-riga calc-check">
+        <label><input type="checkbox" id="calcStipendio" checked> Nel frattempo non sto ancora lavorando <span>(~AU$210 al giorno di stipendio medio non incassato)</span></label>
+      </div>
+      <div class="calc-out">
+        <div class="calc-tot-label">Costo stimato della ricerca</div>
+        <div class="calc-tot" id="calcTot">AU$ 0</div>
+        <div class="calc-nota" id="calcNota"></div>
+      </div>
+      <p class="calc-fonte">Stime medie per Sydney, puramente indicative. Il punto è uno: ogni giorno risparmiato vale molto più di quanto costa qualsiasi strumento che ti aiuti a trovare prima.</p>
+    </div>
+  </div>
+
   <div class="cta-box fade-up">
     <h2>Pronto a vedere la tua nuova vita?</h2>
     <p>La mappa è gratuita. Crea un account per salvare i tuoi preferiti ed essere avvisato delle novità.</p>
@@ -111,6 +142,34 @@
     entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  // Calcolatore "Il costo dell'attesa"
+  var giorni = document.getElementById('calcGiorni');
+  if (giorni) {
+    var alloggio = document.getElementById('calcAlloggio');
+    var stipendio = document.getElementById('calcStipendio');
+    var out = document.getElementById('calcTot');
+    var nota = document.getElementById('calcNota');
+    var gv = document.getElementById('calcGiorniVal');
+    function ricalcola() {
+      var g = parseInt(giorni.value, 10);
+      var costo = g * parseInt(alloggio.value, 10) + (stipendio.checked ? g * 210 : 0);
+      gv.textContent = g + ' giorni';
+      out.textContent = 'AU$ ' + costo.toLocaleString('it-IT');
+      if (costo === 0) {
+        nota.textContent = 'Ospitalità gratis e stipendio già in tasca: sei nella situazione perfetta. Ma il tempo resta prezioso — e homjoo te ne fa risparmiare parecchio.';
+      } else {
+        var alGiorno = Math.round(costo / g);
+        nota.textContent = 'Circa AU$ ' + alGiorno.toLocaleString('it-IT') +
+          ' al giorno. Trovare casa e lavoro anche solo 3 giorni prima vale ~AU$ ' +
+          (alGiorno * 3).toLocaleString('it-IT') + ' — il Pass homjoo costa meno di mezza notte in ostello.';
+      }
+    }
+    giorni.addEventListener('input', ricalcola);
+    alloggio.addEventListener('change', ricalcola);
+    stipendio.addEventListener('change', ricalcola);
+    ricalcola();
+  }
 
   document.querySelectorAll('.faq-q').forEach(function(q) {
     q.addEventListener('click', function() {

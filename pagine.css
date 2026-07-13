@@ -292,3 +292,64 @@ footer {
   .nav-links a { padding: 8px 10px; font-size: 12.5px; }
   .hero { padding-top: 120px; }
 }
+
+/* ---------- CALCOLATORE COSTO DELL'ATTESA ---------- */
+.calc {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px;
+  box-shadow: var(--shadow-md);
+  margin-top: 20px;
+}
+.calc-riga { margin-bottom: 18px; }
+.calc-riga > label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 8px; }
+.calc-slider { display: flex; align-items: center; gap: 16px; }
+.calc-slider input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent);
+  height: 6px;
+  cursor: pointer;
+}
+.calc-giorni {
+  min-width: 84px;
+  text-align: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13.5px;
+  border-radius: 100px;
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+.calc select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  background: var(--bg);
+  outline: none;
+}
+.calc-check label { font-size: 13.5px; font-weight: 500; display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
+.calc-check input { accent-color: var(--accent); margin-top: 3px; }
+.calc-check span { color: var(--ink-faint); font-size: 12.5px; }
+.calc-out {
+  text-align: center;
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 22px;
+  margin: 6px 0 14px;
+}
+.calc-tot-label { font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); }
+.calc-tot {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(34px, 6vw, 46px);
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  margin: 6px 0;
+}
+.calc-nota { font-size: 13.5px; color: var(--ink-soft); max-width: 480px; margin: 0 auto; line-height: 1.5; }
+.calc-fonte { font-size: 12px !important; color: var(--ink-faint) !important; margin: 0 !important; }
