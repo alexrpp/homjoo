@@ -549,6 +549,160 @@
       "source": "Flatmates",
       "url": "https://flatmates.com.au/share-house-sydney-haymarket-2000-P1694743",
       "aggiunta": "2026-07-10"
+    },
+    {
+      "id": "h36",
+      "title": "Bilocale arredato al 26° piano con vista città — Sydney CBD",
+      "company": "Appartamento intero, 1 camera",
+      "price": 1000,
+      "unit": "AUD/sett",
+      "lng": 151.2047,
+      "lat": -33.8681,
+      "desc": "Appartamento di una camera completamente arredato al 26° piano di un moderno palazzo di Clarence Street: vetrate dal pavimento al soffitto con vista spettacolare sulla città, cucina a vista con piano gas e forno Miele, angolo studio, balcone e palestra nel palazzo. Wynyard e Barangaroo a pochi passi. Disponibile dal 3 agosto.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "1 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Bond": "$4.000"
+      },
+      "source": "Domain",
+      "url": "https://www.domain.com.au/2602-161-clarence-street-sydney-nsw-2000-17685967",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h37",
+      "title": "Monolocale moderno con balcone — Sydney CBD (Kent St)",
+      "company": "Monolocale / Studio intero",
+      "price": 750,
+      "unit": "AUD/sett",
+      "lng": 151.2043,
+      "lat": -33.8703,
+      "desc": "Studio contemporaneo nel cuore del CBD: soggiorno open-plan che si apre su balcone privato, cucina di design con piano gas, bagno moderno con lavatrice e asciugatrice, aria condizionata. Palazzo con portineria 24h, piscina esterna e solarium. Darling Harbour e Hyde Park a due passi. Disponibile subito.",
+      "meta": {
+        "Tipo": "Studio intero",
+        "Camere": "Studio + 1 bagno",
+        "Bills": "Esclusi",
+        "Extra": "Piscina, concierge 24h"
+      },
+      "source": "Rent.com.au",
+      "url": "https://www.rent.com.au/property/202-355-kent-st-sydney-nsw-2000-6431541",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h38",
+      "title": "Bilocale arredato appena ristrutturato — Sydney CBD (King St)",
+      "company": "Appartamento intero, 1 camera",
+      "price": 850,
+      "unit": "AUD/sett",
+      "lng": 151.2055,
+      "lat": -33.8686,
+      "desc": "Appartamento di una camera ai Savoy Apartments, luminoso e appena ristrutturato: pavimenti in legno nuovi, cucina con piani in pietra, camera con armadio a muro e accesso diretto al balcone esposto a nord con vista città. Lavanderia interna, ascensore, citofono di sicurezza. Wynyard e la light rail di George Street a pochi minuti a piedi. Dal 17 luglio.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "1 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Bond": "$3.400"
+      },
+      "source": "Rent.com.au",
+      "url": "https://www.rent.com.au/property/611-31-43-king-st-sydney-nsw-2000-6431241",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h39",
+      "title": "Villetta con una camera e cortile privato — Kirrawee",
+      "company": "Casa intera in stile villa",
+      "price": 2730,
+      "unit": "AUD/mese",
+      "lng": 151.0755,
+      "lat": -34.0355,
+      "desc": "Casetta moderna in stile villa, perfetta per chi cerca tranquillità: open-plan luminoso, camera con armadio a muro, cucina moderna, aria condizionata in camera e soggiorno, cortile privato recintato e posto auto coperto. A 300 metri dalla stazione di Kirrawee, dai caffè e dal centro commerciale South Village, nel sud di Sydney vicino al Royal National Park.",
+      "meta": {
+        "Tipo": "Casa intera",
+        "Camere": "1 + 1 bagno",
+        "Bills": "Esclusi",
+        "Disponibile": "Subito"
+      },
+      "source": "Rentola",
+      "url": "https://rentola.com.au/listings/kirrawee-434a-president-avenue-pb88f17",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h40",
+      "title": "Suite alle Lumiere Residences con piscine e cinema — Sydney CBD",
+      "company": "Appartamento in torre di lusso",
+      "price": 3683,
+      "unit": "AUD/mese",
+      "lng": 151.2071,
+      "lat": -33.8757,
+      "desc": "Suite di circa 45 m² nella prestigiosa torre Lumiere di Bathurst Street: angolo cottura con piano gas e lavastoviglie, bagno con lavatrice-asciugatrice, aria condizionata canalizzata e grande armadio a muro. Il Club Lumiere offre piscina coperta da 50 metri e scoperta da 20, sauna, spa, palestra e due cinema privati. Parcheggio opzionale a $70/settimana.",
+      "meta": {
+        "Tipo": "Suite / Studio",
+        "Camere": "1 + 1 bagno",
+        "Bills": "Esclusi",
+        "Extra": "2 piscine, spa, cinema"
+      },
+      "source": "Rentola",
+      "url": "https://rentola.com.au/listings/unfurnished-apartment-at-lumiere-residences-p637105",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h41",
+      "title": "Townhouse con 4 camere da dividere — Kingswood",
+      "company": "Casa intera, zona Penrith",
+      "price": 3033,
+      "unit": "AUD/mese",
+      "lng": 150.7215,
+      "lat": -33.7625,
+      "desc": "Townhouse moderna con quattro camere: la principale con cabina armadio e bagno privato, le altre con armadi a muro. Living open-plan, cucina con lavastoviglie, aria condizionata canalizzata, giardino recintato e garage con accesso interno. Vicino a scuole, negozi e mezzi, comoda per la Western Sydney University e Penrith. Ottima da dividere tra più persone.",
+      "meta": {
+        "Tipo": "Townhouse intera",
+        "Camere": "4 + 2 bagni",
+        "Bills": "Esclusi",
+        "Extra": "Garage, giardino"
+      },
+      "source": "Rentola",
+      "url": "https://rentola.com.au/listings/3-100-great-western-hwy-kingswood-nsw-2747-p7da5eb",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h42",
+      "title": "Granny flat nuova con giardino — Hornsby",
+      "company": "Dependance indipendente",
+      "price": 2470,
+      "unit": "AUD/mese",
+      "lng": 151.0895,
+      "lat": -33.6935,
+      "desc": "Dependance appena costruita, saresti il primo ad abitarci: camera con armadio a muro, bagno moderno, living open-plan luminoso con aria condizionata, terrazzino in legno e prato. Strada tranquilla senza uscita nell'Upper North Shore, a 7 minuti d'auto dalla stazione e dal centro commerciale di Hornsby.",
+      "meta": {
+        "Tipo": "Granny flat",
+        "Camere": "1 + 1 bagno",
+        "Bills": "Esclusi",
+        "Extra": "Nuova costruzione"
+      },
+      "source": "Rentola",
+      "url": "https://rentola.com.au/listings/hornsby-2-62b-manor-road-p108795",
+      "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h43",
+      "title": "Trilocale con doppio posto auto — Homebush",
+      "company": "Appartamento intero, 2 camere",
+      "price": 3445,
+      "unit": "AUD/mese",
+      "lng": 151.0865,
+      "lat": -33.8645,
+      "desc": "Appartamento d'angolo al terzo piano di un palazzo boutique: due camere con armadi a muro e aria condizionata (la principale con bagno privato), cucina con piani in pietra, gas e lavastoviglie, balcone a tutta lunghezza esposto a nord con vista sul verde. Due posti auto coperti e box deposito. Zona residenziale tranquilla vicino alla stazione di Homebush.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Bills": "Esclusi",
+        "Extra": "2 posti auto, deposito"
+      },
+      "source": "Rentola",
+      "url": "https://rentola.com.au/listings/inspect-tuesday-july-7-at-5-30pm-register-now-p27b96f",
+      "aggiunta": "2026-07-14"
     }
   ]
 }
