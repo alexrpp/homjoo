@@ -36,9 +36,9 @@ export default async function handler(req, res) {
       'content-type':   'application/json'
     });
 
-    // Due pagine in parallelo (50+50) per avere ~50 lavori CON coordinate
-    // dopo il filtro (molti annunci Adzuna non hanno lat/lng).
-    const urls = [1, 2].map(p => `https://api.adzuna.com/v1/api/jobs/au/search/${p}?${params.toString()}`);
+    // Tre pagine in parallelo (50+50+50) per arrivare a ~100 lavori UNICI
+    // dopo il dedup (Adzuna a volte ripete annunci tra pagine vicine).
+    const urls = [1, 2, 3].map(p => `https://api.adzuna.com/v1/api/jobs/au/search/${p}?${params.toString()}`);
     const responses = await Promise.all(urls.map(u => fetch(u)));
     const okRes = responses.filter(r => r.ok);
     if (okRes.length === 0) {
@@ -54,6 +54,8 @@ export default async function handler(req, res) {
         if (!seen.has(j.id)) { seen.add(j.id); data.results.push(j); }
       }
     }
+    // Tengo al massimo 100 lavori: abbastanza scelta senza appesantire la mappa
+    data.results = data.results.slice(0, 100);
 
     // Trasformo il formato di Adzuna nel formato che usa la mappa.
     // Tengo solo i lavori che hanno latitudine/longitudine valide,
