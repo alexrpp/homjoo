@@ -703,6 +703,48 @@
       "source": "Rentola",
       "url": "https://rentola.com.au/listings/inspect-tuesday-july-7-at-5-30pm-register-now-p27b96f",
       "aggiunta": "2026-07-14"
+    },
+    {
+      "id": "h44",
+      "title": "Trilocale arredato a 3 minuti dalla stazione — Burwood",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1400,
+      "unit": "AUD/sett",
+      "lng": 151.1046,
+      "lat": -33.8786,
+      "desc": "Appartamento intero completamente arredato in Wilga Street: due camere, due bagni, aria condizionata canalizzata e posto auto sicuro (a pagamento). Posizione imbattibile nel cuore dell'Inner West: stazione di Burwood a 3-5 minuti a piedi (13 minuti di treno dal CBD), Westfield, Woolworths e decine di ristoranti sotto casa. Pronto da subito, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "9-12 mesi",
+        "Bond": "$5.200"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-burwood-2134-P1935510",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h45",
+      "title": "Trilocale Meriton con piscina e palestra — Waterloo",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1410,
+      "unit": "AUD/sett",
+      "lng": 151.2087,
+      "lat": -33.8997,
+      "desc": "Appartamento arredato all'8° piano di un palazzo Meriton su South Dowling Street: due camere, due bagni, aria condizionata, palestra e piscina nel palazzo, posto auto a pagamento. Zona Waterloo, comoda per il CBD e Green Square. Contratto preferito 9-12 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "9-12 mesi",
+        "Bond": "$5.640"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-waterloo-2017-P1928659",
+      "aggiunta": "2026-07-15"
     }
   ]
 }
