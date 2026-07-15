@@ -892,6 +892,233 @@
       "source": "Flatmates",
       "url": "https://flatmates.com.au/whole-property-sydney-mascot-2020-P1949405",
       "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h53",
+      "title": "Trilocale vicino a parco e Southpoint — Hillsdale",
+      "company": "Appartamento intero, anche brevi periodi",
+      "price": 1000,
+      "unit": "AUD/sett",
+      "lng": 151.2278,
+      "lat": -33.9506,
+      "desc": "Appartamento intero con due camere e due bagni, perfetto anche per soggiorni brevi (da 1 settimana a 2 mesi). Southpoint con Woolworths, ALDI e farmacia a 4 minuti a piedi, Heffron Park con piscine e palestra di fronte, Maroubra Beach a pochi minuti d'auto, UNSW a un quarto d'ora. Disponibile subito, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Bills": "Esclusi",
+        "Min stay": "1 sett - 2 mesi",
+        "Bond": "$4.000"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-hillsdale-2036-P1976616",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h54",
+      "title": "Trilocale con due bagni e ascensore — Waterloo",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1150,
+      "unit": "AUD/sett",
+      "lng": 151.2064,
+      "lat": -33.8986,
+      "desc": "Appartamento intero in zona Waterloo, a due passi da Danks Street e dai suoi caffè: due camere, due bagni, ascensore e posto auto. Green Square e i bus per il centro vicini, East Village per la spesa, comodo per UNSW, UTS e USYD. Contratti da 3 a 12 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Bills": "Esclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$4.600"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-waterloo-2017-P1961427",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h55",
+      "title": "Trilocale con piscina a 8 minuti da Green Square — Alexandria",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1110,
+      "unit": "AUD/sett",
+      "lng": 151.1976,
+      "lat": -33.9036,
+      "desc": "Appartamento con due camere e due bagni in Wyndham Street: palazzo con piscina, palestra e cortile. Stazione di Green Square (linea aeroporto) a 8 minuti a piedi, Sydney Park e il celebre caffè The Grounds of Alexandria a due passi. Possibile pacchetto tutte-bollette a $200/settimana. Da 6 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Bills": "Esclusi (pacchetto opz.)",
+        "Min stay": "6-12 mesi",
+        "Bond": "$4.440"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-alexandria-2015-P1976641",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h56",
+      "title": "Trilocale vicino a Westfield — Eastgardens",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1150,
+      "unit": "AUD/sett",
+      "lng": 151.2243,
+      "lat": -33.9457,
+      "desc": "Appartamento con due camere, due bagni, ascensore e posto auto vicino a Westfield Eastgardens: supermercati, negozi e ristoranti a portata di mano. Spiagge di Maroubra e Coogee a pochi minuti, bus per UNSW e il centro. $1.150/settimana senza mobili o $1.250 arredato. Da 3 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "A scelta (+$100/sett)",
+        "Bills": "Esclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$4.600"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-eastgardens-2036-P1961626",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h57",
+      "title": "Trilocale a due passi da East Village — Waterloo",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1100,
+      "unit": "AUD/sett",
+      "lng": 151.2054,
+      "lat": -33.9004,
+      "desc": "Appartamento con due camere, ascensore e posto auto nel cuore di Waterloo: East Village, supermercati e palestre vicinissimi, Gunyama Park con piscina olimpionica a due passi. Comodo per il CBD, l'aeroporto e le università. $1.100/settimana senza mobili o $1.150 arredato. Da 3 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "A scelta (+$50/sett)",
+        "Bills": "Esclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$4.400"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-waterloo-2017-P1961642",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h58",
+      "title": "Trilocale arredato con acqua e internet inclusi — Ultimo",
+      "company": "Appartamento intero, 2-4 persone",
+      "price": 1330,
+      "unit": "AUD/sett",
+      "lng": 151.1973,
+      "lat": -33.8789,
+      "desc": "Appartamento completamente arredato con due camere e due bagni, ideale da dividere in 2-4 persone: acqua e internet inclusi nel prezzo, paghi solo la luce. Palazzo con ascensore a 7 minuti a piedi dal Broadway Shopping Centre, vicino a UTS e Central. Permanenza minima di solo 1 mese. Disponibile subito.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "Sì",
+        "Bills": "Acqua+internet incl.",
+        "Min stay": "1 mese",
+        "Bond": "$3.990"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-ultimo-2007-P1964754",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h59",
+      "title": "Trilocale arredato con aria condizionata — Ultimo",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1220,
+      "unit": "AUD/sett",
+      "lng": 151.1991,
+      "lat": -33.8798,
+      "desc": "Appartamento arredato con due camere nel quartiere delle università: aria condizionata a parete, acqua e internet illimitato inclusi (paghi solo la luce). Ultimo è a due passi da UTS, TAFE e Darling Harbour. Minimo 6 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Acqua+internet incl.",
+        "Min stay": "6 mesi",
+        "Bond": "$4.880"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-ultimo-2007-P1972677",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h60",
+      "title": "Townhouse su 5 livelli con terrazza panoramica — Kensington",
+      "company": "Casa intera, 5 camere, bollette incluse",
+      "price": 2500,
+      "unit": "AUD/sett",
+      "lng": 151.2226,
+      "lat": -33.9106,
+      "desc": "Townhouse unica su 5 livelli esposta a nord in strada alberata: 3 camere doppie, 2 singole e 3 zone studio, 3 bagni più WC ospiti, atrio interno in vetro che porta luce ovunque, terrazza sul tetto con vista, 2 balconi, giardino e posto auto coperto. Tutte le bollette e internet inclusi. A minuti da UNSW, NIDA e Centennial Park, 6 km dal CBD. Perfetta per un gruppo. Minimo 6 mesi.",
+      "meta": {
+        "Tipo": "Townhouse intera",
+        "Camere": "5 + 3 bagni",
+        "Bills": "Inclusi",
+        "Min stay": "6 mesi",
+        "Bond": "$5.000"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-kensington-2033-P1924944",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h61",
+      "title": "Casa indipendente con vista vicino alla spiaggia — Maroubra",
+      "company": "Casa intera, bollette incluse",
+      "price": 1300,
+      "unit": "AUD/sett",
+      "lng": 151.2494,
+      "lat": -33.9386,
+      "desc": "Casa indipendente in posizione elevata tra Maroubra e South Coogee: due camere, tanta luce naturale e vista aperta fino allo skyline della città. Quartiere tranquillo vicino a scuole, parchi, sentieri costieri, negozi e la spiaggia di Maroubra. Bollette e internet inclusi, posto auto. Disponibile dal 31 agosto, anche coppie.",
+      "meta": {
+        "Tipo": "Casa intera",
+        "Camere": "2 + 1 bagno",
+        "Bills": "Inclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$2.600",
+        "Disponibile": "31 agosto"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-maroubra-2035-P1902077",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h62",
+      "title": "4 camere nel cuore di Oxford Street — Paddington",
+      "company": "Appartamento intero, bollette incluse",
+      "price": 1850,
+      "unit": "AUD/sett",
+      "lng": 151.2226,
+      "lat": -33.8846,
+      "desc": "Appartamento di 4 camere e 2 bagni proprio su Oxford Street, sopra un negozio di design: contratto nuovo, non arredato. Boutique, caffè e ospedale St Vincent a pochi passi, Darlinghurst e il CBD raggiungibili a piedi. Bollette e internet inclusi nel prezzo — raro per una casa di queste dimensioni in questa zona. Da 6 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "4 + 2 bagni",
+        "Mobili": "No",
+        "Bills": "Inclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$3.700"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-paddington-2021-P1975486",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h63",
+      "title": "Base per le prime settimane a 5 min dal ferry — Manly",
+      "company": "Appartamento intero, breve periodo",
+      "price": 1000,
+      "unit": "AUD/sett",
+      "lng": 151.2856,
+      "lat": -33.7976,
+      "desc": "Appartamento intero al piano terra per soggiorni brevi (1 settimana - 1 mese): fino a 4 posti letto (queen, king e divano letto queen), cucina attrezzata, tutte le bollette e internet illimitato inclusi. Ferry per l'Opera House a 5 minuti a piedi, spiaggia e vita di Manly sotto casa. Perfetto come base d'arrivo appena atterri a Sydney. Prezzo trattabile.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Inclusi",
+        "Min stay": "1 sett - 1 mese",
+        "Bond": "$1.000"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-manly-2095-P1900535",
+      "aggiunta": "2026-07-15"
     }
   ]
 }
