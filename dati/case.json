@@ -745,6 +745,153 @@
       "source": "Flatmates",
       "url": "https://flatmates.com.au/whole-property-sydney-waterloo-2017-P1928659",
       "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h46",
+      "title": "Trilocale con balcone a $900 — Wentworth Point",
+      "company": "Appartamento intero, 2 camere",
+      "price": 900,
+      "unit": "AUD/sett",
+      "lng": 151.0757,
+      "lat": -33.8285,
+      "desc": "Appartamento intero al 3° piano (senza ascensore) su The Piazza: due camere ben separate e insonorizzate, due bagni, camera principale esposta a nord con balcone collegato al soggiorno, aria condizionata centralizzata, TV inclusa e secondo balcone. Complesso tranquillo con caffè e mini-market interni; bus per la stazione di Rhodes (T9, 20 minuti da Redfern). Il miglior prezzo per un appartamento intero in zona. Anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$3.600"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-wentworth-point-2127-P1925485",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h47",
+      "title": "Trilocale vicino a UTS e Darling Harbour — Ultimo",
+      "company": "Appartamento intero, 2 camere",
+      "price": 995,
+      "unit": "AUD/sett",
+      "lng": 151.1986,
+      "lat": -33.8806,
+      "desc": "Appartamento di due camere al 3° piano in Jones Street, nel cuore di Ultimo: a pochi minuti a piedi da UTS, Darling Harbour e Central. $995/settimana senza mobili o $1.040 arredato (con servizio consegna/ritiro mobili una tantum $760). Posto auto a pagamento disponibile. Contratti flessibili da 3 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "A scelta (+$45/sett)",
+        "Bills": "Esclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$3.980"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-ultimo-2007-P1932524",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h48",
+      "title": "Trilocale arredato al 20° piano — Zetland",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1245,
+      "unit": "AUD/sett",
+      "lng": 151.2077,
+      "lat": -33.9063,
+      "desc": "Appartamento arredato al 20° piano esposto a nord in Ebsworth Street: due camere, bagno, aria condizionata e tanta luce. Zetland è una delle zone nuove più comode di Sydney: Green Square a pochi minuti, East Village per la spesa. Contratti da 3 a 12 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$4.980"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-zetland-2017-P1942252",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h49",
+      "title": "Trilocale con due bagni vicino alla stazione — Burwood",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1030,
+      "unit": "AUD/sett",
+      "lng": 151.1032,
+      "lat": -33.8759,
+      "desc": "Appartamento in George Street: due camere (principale con bagno privato), pavimenti in legno, cucina a gas, grande soggiorno e balcone privato. Stazione e centri commerciali di Burwood a due passi. $1.030/settimana senza mobili o $1.060 arredato (servizio mobili una tantum $760); posto auto assegnato a $20/settimana. Da 6 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "A scelta (+$30/sett)",
+        "Bills": "Esclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "$4.120"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-burwood-2134-P1946271",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h50",
+      "title": "Trilocale con Coles sotto casa — Zetland",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1155,
+      "unit": "AUD/sett",
+      "lng": 151.2096,
+      "lat": -33.9081,
+      "desc": "Appartamento al 3° piano in Gadigal Avenue: due camere, bagno, aria condizionata in camera principale e balcone esposto a ovest. Comodità massima: Coles e ristoranti direttamente sotto casa. $1.155/settimana senza mobili o $1.200 arredato (servizio mobili una tantum $760). Contratti flessibili da 2 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "A scelta (+$45/sett)",
+        "Bills": "Esclusi",
+        "Min stay": "2-12 mesi",
+        "Bond": "$4.620"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-zetland-2017-P1950618",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h51",
+      "title": "Trilocale ai piani alti con vista, piscina e palestra — Eastgardens",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1360,
+      "unit": "AUD/sett",
+      "lng": 151.2257,
+      "lat": -33.9442,
+      "desc": "Appartamento arredato ai piani alti con vista sulla città: due camere con armadi a muro, due bagni moderni, lavanderia interna con asciugatrice, aria condizionata, citofono di sicurezza, palestra e piscina gratuite nel complesso. Ristoranti e supermercati asiatici sotto casa, Westfield Eastgardens a 5 minuti a piedi, UNSW a 20 minuti di bus diretto. Contratto 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 2 bagni",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "12 mesi",
+        "Bond": "$5.400"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-eastgardens-2036-P1917620",
+      "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h52",
+      "title": "Trilocale arredato con palestra — Mascot",
+      "company": "Appartamento intero, 2 camere",
+      "price": 1200,
+      "unit": "AUD/sett",
+      "lng": 151.1887,
+      "lat": -33.9237,
+      "desc": "Appartamento completamente arredato in Muller Lane: due camere, bagno, aria condizionata e palestra nel palazzo. Mascot è comodissima per l'aeroporto e ben collegata al centro con la stazione a pochi minuti. Contratti da 3 a 12 mesi, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "2 + 1 bagno",
+        "Mobili": "Sì",
+        "Bills": "Esclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$4.800"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/whole-property-sydney-mascot-2020-P1949405",
+      "aggiunta": "2026-07-15"
     }
   ]
 }
