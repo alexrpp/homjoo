@@ -1119,6 +1119,283 @@
       "source": "Flatmates",
       "url": "https://flatmates.com.au/whole-property-sydney-manly-2095-P1900535",
       "aggiunta": "2026-07-15"
+    },
+    {
+      "id": "h64",
+      "title": "Granny flat indipendente tutta per te — Auburn",
+      "company": "Granny flat, solo breve periodo",
+      "price": 400,
+      "unit": "AUD/sett",
+      "lng": 151.033,
+      "lat": -33.8493,
+      "desc": "Granny flat indipendente con ingresso privato sul lato della casa: camera, bagno, cucina, soggiorno e angolo lavanderia tutti tuoi, senza condividere nulla con nessuno. Aria condizionata, arredabile in parte su richiesta. Tutte le bollette e internet inclusi. Vicino alla stazione di Auburn e ai negozi. Solo affitto breve (~2 mesi), ideale per single o coppia appena arrivati.",
+      "meta": {
+        "Tipo": "Granny flat indipendente",
+        "Camere": "1 + 1 bagno",
+        "Bills": "Inclusi",
+        "Min stay": "~2 mesi (solo breve)",
+        "Bond": "$1.600",
+        "Disponibile": "20 luglio"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/granny-flat-sydney-auburn-2144-P1986890",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h65",
+      "title": "Studio arredato a 6 minuti dalla stazione — Burwood",
+      "company": "Studio, bollette incluse",
+      "price": 620,
+      "unit": "AUD/sett",
+      "lng": 151.1036,
+      "lat": -33.8797,
+      "desc": "Studio moderno completamente arredato con angolo cottura, armadio e lavatrice/asciugatrice interna. Tutte le bollette incluse, compreso internet NBN. A 6 minuti a piedi dalla stazione di Burwood e da Westfield, con tanti ristoranti nel raggio di 5 minuti. Contratti flessibili da 3 a 12 mesi, gestione professionale, più studi disponibili con layout diversi. Disponibile subito, anche coppie.",
+      "meta": {
+        "Tipo": "Studio",
+        "Bagno": "Privato",
+        "Mobili": "Sì",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$1.240"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-burwood-2134-P1660798",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h66",
+      "title": "Studio nuovo a 1 minuto dalla stazione — Hurlstone Park",
+      "company": "Studio, bollette incluse",
+      "price": 600,
+      "unit": "AUD/sett",
+      "lng": 151.1305,
+      "lat": -33.9095,
+      "desc": "Studio di design nuovo di zecca a 1 minuto a piedi dalla stazione di Hurlstone Park: balcone privato, aria condizionata canalizzata, cucina moderna con frigo e microonde, armadio a muro, scrivania e smart TV. Bollette e internet NBN inclusi, parcheggio sicuro nel seminterrato. Zone comuni con TV da 75 pollici, BBQ esterno, lavanderia interna e sicurezza 24h. Contratti da 3 a 12 mesi. Disponibile dal 7 agosto.",
+      "meta": {
+        "Tipo": "Studio",
+        "Bagno": "Privato",
+        "Mobili": "Sì (o senza)",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$1.200",
+        "Disponibile": "7 agosto"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-hurlstone-park-2193-P1638580",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h67",
+      "title": "Studio di design con balcone privato — Hurlstone Park",
+      "company": "Studio, bollette incluse",
+      "price": 580,
+      "unit": "AUD/sett",
+      "lng": 151.1315,
+      "lat": -33.91,
+      "desc": "Studio arredato in palazzo nuovo con ascensore, a 1 minuto dalla stazione di Hurlstone Park e 8 dalla light rail di Dulwich Hill: in 22 minuti sei a Central, USYD o UTS. Balcone privato, aria condizionata, cucina con frigo e forno, parcheggio sicuro nel seminterrato, zone comuni con maxi TV e BBQ, sicurezza 24h con CCTV. Bollette e internet inclusi. Contratti da 3 a 12 mesi. Disponibile dal 19 luglio.",
+      "meta": {
+        "Tipo": "Studio",
+        "Bagno": "Privato",
+        "Mobili": "Sì (o senza)",
+        "Bills": "Inclusi",
+        "Min stay": "3-12 mesi",
+        "Bond": "$1.160",
+        "Disponibile": "19 luglio"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/studio-sydney-hurlstone-park-2193-P1850538",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h68",
+      "title": "Due stanze in casa tutta al femminile — Darlington",
+      "company": "Stanza in condivisione, solo donne",
+      "price": 435,
+      "unit": "AUD/sett",
+      "lng": 151.195,
+      "lat": -33.889,
+      "desc": "Casa moderna e tranquilla a 5 minuti a piedi da USYD, Broadway Shopping Centre, Victoria Park e i mezzi per il centro. Due stanze arredate disponibili: una con letto queen e balcone a $435 e una con bagno privato a $480, entrambe con scrivania, armadio e serratura. Si vive con 3 studentesse socievoli e ordinate — casa solo donne. Minimo 2 mesi, disponibili subito.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Stanze": "2 disponibili ($435 e $480)",
+        "Bills": "Esclusi",
+        "Min stay": "2 mesi",
+        "Per": "Solo donne",
+        "Mobili": "Sì"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-darlington-2008-P1643915",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h69",
+      "title": "Stanza senza cauzione con bollette incluse — Drummoyne",
+      "company": "Stanza in condivisione",
+      "price": 420,
+      "unit": "AUD/sett",
+      "lng": 151.1543,
+      "lat": -33.8515,
+      "desc": "Stanza privata in appartamento spazioso con grande balcone, cucina moderna e due WC. Bollette e internet inclusi e — cosa rara — niente cauzione. A pochi passi da supermercato IGA, ristoranti, pub e bus per il centro. Si vive con Nick, project manager edile sportivo e alla mano. La stanza è senza mobili (il resto della casa è arredato). Da 6 a 12 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Bagno": "Condiviso",
+        "Mobili": "No (casa arredata)",
+        "Bills": "Inclusi",
+        "Min stay": "6-12 mesi",
+        "Bond": "Nessuno"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-drummoyne-2047-P1986557",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h70",
+      "title": "Stanza arredata a 3 minuti dalla stazione — Roseville",
+      "company": "Stanza in condivisione, solo uomini",
+      "price": 300,
+      "unit": "AUD/sett",
+      "lng": 151.1755,
+      "lat": -33.784,
+      "desc": "Stanza arredata nel verde North Shore: letto king single, cassettiera, armadio e scrivania, con grande finestra luminosa. A 3 minuti a piedi dalla stazione di Roseville (treni diretti per Chatswood e il centro) e 10 dal centro commerciale di Chatswood. Tutte le bollette, Wi-Fi veloce e lavanderia inclusi. Solo uomini, minimo 6 mesi. Disponibile subito.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Bagno": "Condiviso",
+        "Mobili": "Sì",
+        "Bills": "Inclusi",
+        "Min stay": "6 mesi",
+        "Per": "Solo uomini",
+        "Bond": "$600"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-roseville-2069-P897451",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h71",
+      "title": "Bilocale nuovo a 5 minuti dalla stazione — Summer Hill",
+      "company": "Appartamento intero, bollette incluse",
+      "price": 600,
+      "unit": "AUD/sett",
+      "lng": 151.139,
+      "lat": -33.8925,
+      "desc": "Appartamento nuovo con una camera da letto in stile moderno: cucina con elettrodomestici in acciaio (frigo e piano cottura inclusi), lavatrice e asciugatrice. Lo scegli arredato o vuoto, come preferisci. Gas, luce e internet inclusi nell'affitto. A 5 minuti a piedi dalla stazione di Summer Hill, quartiere pieno di caffè con il centro a un breve tragitto in treno. Disponibile dal 9 agosto, anche coppie.",
+      "meta": {
+        "Tipo": "Appartamento intero",
+        "Camere": "1 + 1 bagno",
+        "Mobili": "A scelta",
+        "Bills": "Inclusi",
+        "Min stay": "Flessibile",
+        "Bond": "$1.200",
+        "Disponibile": "9 agosto"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/1-bed-flat-sydney-summer-hill-2130-P1676443",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h72",
+      "title": "Stanza con letto queen in duplex nuovo — Padstow",
+      "company": "Stanza in condivisione",
+      "price": 300,
+      "unit": "AUD/sett",
+      "lng": 151.02,
+      "lat": -33.953,
+      "desc": "Stanza con letto queen, armadio a specchio e balcone in un duplex nuovo, luminoso e spazioso con tanti ambienti comuni. Strada tranquilla a 7 minuti a piedi dalla stazione di Revesby (raggiungibile anche Padstow). Altre stanze a $350 e $400 con bagno privato. Casa senza feste e senza fumo, cercano persone ordinate. Minimo 6 mesi, anche coppie. Disponibile subito.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Bagno": "Condiviso",
+        "Mobili": "No",
+        "Bills": "Esclusi",
+        "Min stay": "6 mesi",
+        "Bond": "$1.200"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-padstow-2211-P1978129",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h73",
+      "title": "Stanze economiche con bollette incluse — Strathfield",
+      "company": "Stanze in condivisione, da $220",
+      "price": 220,
+      "unit": "AUD/sett",
+      "lng": 151.089,
+      "lat": -33.869,
+      "desc": "Casa internazionale curata in Nicholson Street con 4 stanze disponibili da $220 a $285 a settimana, tutte arredate con letto, scrivania e armadio. Bollette e Wi-Fi veloce inclusi ($5/settimana per i prodotti condivisi). Due bagni puliti, cucina attrezzata, grande giardino fiorito. A 15 minuti a piedi dalla stazione di Strathfield, bus a 3-5 minuti, vicino a Burwood e Homebush. Minimo 3 mesi, perfetta per studenti.",
+      "meta": {
+        "Tipo": "Stanza privata/condivisa",
+        "Stanze": "4 (da $220 a $285)",
+        "Bills": "Inclusi",
+        "Min stay": "3 mesi",
+        "Mobili": "Sì",
+        "Disponibile": "Dal 1° agosto"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-strathfield-2135-P1796677",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h74",
+      "title": "Co-living premium con pulizie e Netflix inclusi — Rockdale",
+      "company": "Stanze in condivisione, da $575",
+      "price": 575,
+      "unit": "AUD/sett",
+      "lng": 151.138,
+      "lat": -33.9525,
+      "desc": "Co-living di alto livello gestito professionalmente (Sandstone Living): 4 stanze arredate da $575 a $800 (quella da $800 con bagno privato e balcone, per coppie), tutte con aria condizionata e serratura. Un unico pagamento settimanale copre luce, gas, acqua, Wi-Fi, Netflix e pulizie ogni due settimane. A pochi passi dalla stazione di Rockdale, dai caffè e dalla spiaggia di Brighton-Le-Sands. Da 6 a 12 mesi, per professionisti.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Stanze": "4 (da $575 a $800)",
+        "Bills": "Inclusi + Netflix",
+        "Min stay": "6-12 mesi",
+        "Mobili": "Sì",
+        "Bond": "$1.150"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-rockdale-2216-P1989125",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h75",
+      "title": "Stanza con letto matrimoniale nel verde — Roseville",
+      "company": "Stanza in condivisione",
+      "price": 325,
+      "unit": "AUD/sett",
+      "lng": 151.1845,
+      "lat": -33.786,
+      "desc": "Stanza arredata con letto matrimoniale, scrivania e armadio in casa internazionale su Archbold Road, quartiere verde e sicuro del North Shore. Bollette e Wi-Fi inclusi ($5/settimana per i prodotti condivisi), zone comuni pulite due volte a settimana. Bus a 2-3 minuti, stazione di Roseville a un quarto d'ora a piedi, una fermata da Chatswood e i suoi centri commerciali. Minimo 6 mesi, per studenti e professionisti.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Bagno": "Condiviso",
+        "Mobili": "Sì",
+        "Bills": "Inclusi",
+        "Min stay": "6 mesi",
+        "Bond": "$975"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-roseville-2069-P1848309",
+      "aggiunta": "2026-07-18"
+    },
+    {
+      "id": "h76",
+      "title": "Stanza con vista sull'Harbour Bridge — Potts Point",
+      "company": "Stanza in condivisione",
+      "price": 350,
+      "unit": "AUD/sett",
+      "lng": 151.2222,
+      "lat": -33.872,
+      "desc": "Stanza con letto matrimoniale e serratura in un bell'appartamento su Victoria Street, con vista aperta sull'Harbour Bridge e sullo skyline. Bollette e internet inclusi. Caffè, ristoranti e stazione a due passi. Si vive con James, un signore in pensione tranquillo e rispettoso che cerca un coinquilino ordinato (uomo o donna). Minimo 6 mesi. Disponibile subito.",
+      "meta": {
+        "Tipo": "Stanza privata",
+        "Bagno": "Condiviso",
+        "Mobili": "Flessibile",
+        "Bills": "Inclusi",
+        "Min stay": "6 mesi",
+        "Bond": "$700"
+      },
+      "source": "Flatmates",
+      "url": "https://flatmates.com.au/share-house-sydney-potts-point-2011-P1966849",
+      "aggiunta": "2026-07-18"
     }
   ]
 }
